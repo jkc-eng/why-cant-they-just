@@ -4482,12 +4482,9 @@ function argStep(o) {
     const col = (k, lab, pts) => `<section class="arg-col arg-${k}"><p class="arg-k">The case for</p><h4>${lab}</h4><ul>${pts.map(x => `<li>${x}</li>`).join("")}</ul></section>`;
     v.innerHTML = `<div class="arg">${col("a", o.a, o.pa)}${col("b", o.b, o.pb)}</div>
       ${o.note ? `<p class="arg-note"><b>Good to know.</b> ${o.note}</p>` : ""}
-      <div class="arg-you"><p class="arg-q">Where do you stand?</p><div class="chips" role="group" aria-label="Where do you stand?"><button class="chip" aria-pressed="false" data-s="a">${o.a}</button><button class="chip" aria-pressed="false" data-s="b">${o.b}</button><button class="chip" aria-pressed="false" data-s="n">Not sure yet</button></div><p class="arg-r" aria-live="polite"></p></div>`;
+      <div class="arg-you"><p class="arg-q">Where do you stand?</p><div class="chips" role="group" aria-label="Where do you stand?"><button class="chip" aria-pressed="false" data-s="a">${o.a}</button><button class="chip" aria-pressed="false" data-s="b">${o.b}</button><button class="chip" aria-pressed="false" data-s="n">Not sure yet</button></div></div>`;
     $$(".arg-you .chip", v).forEach(b => b.onclick = () => {
       $$(".arg-you .chip", v).forEach(x => x.setAttribute("aria-pressed", x === b)); SND.play("tap");
-      const s = b.dataset.s, other = s === "a" ? o.b : o.a;
-      $$(".arg-col", v).forEach(c => c.classList.toggle("lit", s !== "n" && !c.classList.contains("arg-" + s)));
-      $(".arg-r", v).innerHTML = s === "n" ? "Fair enough. Which single point above would be most likely to change your mind?" : `Now the hard part: make the best case for <b>“${other}”</b> in one sentence. If you can, you understand the debate.`;
     });
   } };
 }
