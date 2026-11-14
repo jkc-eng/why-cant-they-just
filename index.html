@@ -1664,6 +1664,20 @@ details.dk>p{padding:0 14px 12px}
 
 /* v27l */
 .scr-tag::before{content:none;display:none}
+
+/* v27m: film and TV vs. the record */
+.scr.film .fm-scene{margin:0}
+.scr.film .fm-q{margin:10px 0 0;font-weight:700}
+.fm-o{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.fm-b{font:inherit;font-size:.92rem;font-weight:600;color:var(--ink);background:var(--card);border:1.5px solid var(--rule);border-radius:999px;padding:8px 14px;cursor:pointer;text-align:left;min-height:40px}
+.fm-b:hover:not(:disabled){border-color:var(--ink-2)}
+.fm-b:focus-visible{outline:3px solid var(--mark);outline-offset:2px}
+.fm-b:disabled{cursor:default}
+.fm-b.right{background:#2E8B57;border-color:#2E8B57;color:#fff}
+.fm-b.wrong{border-color:var(--rep);color:var(--rep)}
+.fm-b.dim{opacity:.55}
+.fm-r{margin:10px 0 0}
+.fm-r .fm-src{display:block;margin-top:6px;font-size:.82rem;color:var(--ink-3)}
 </style>
 
 <header class="top">
@@ -6172,6 +6186,33 @@ srcHTML = function (ks) {
   const links = ks.map(k => cite(k)).join(" · ");
   return innerWidth <= 520 && ks.length > 1 ? `<details class="src src-d"><summary><span class="mono">Sources (${ks.length})</span></summary>${links}</details>` : `<footer class="src"><span class="mono">Sources</span>${links}</footer>`;
 };
+
+/* ---- v27m: film and TV vs. the record ---- */
+Object.assign(REF, {"senVPpage": {"sa": "U.S. Senate", "a": "U.S. Senate", "y": "n.d.", "t": "“Vice President of the United States (President of the Senate).” Accessed November 14, 2026.", "u": "https://www.senate.gov/artandhistory/history/common/briefing/Vice_President.htm"}, "rcBarrett": {"sa": "U.S. Senate", "a": "U.S. Senate", "y": "2020", "t": "“Roll Call Vote, 116th Congress, 2nd Session, Vote Number 224: On the Nomination (Amy Coney Barrett, of Indiana, to Be an Associate Justice of the Supreme Court of the United States).” October 26.", "u": "https://www.senate.gov/legislative/LIS/roll_call_votes/vote1162/vote_116_2_00224.htm"}, "res118a": {"sa": "Congressional Record", "a": "Congressional Record", "y": "2024", "t": "“Final Résumé of Congressional Activity: First Session of the One Hundred Eighteenth Congress.” Daily Digest, May 16, D512.", "u": "https://www.senate.gov/reference/resources/pdf/Resumes/118_1.pdf"}, "res118b": {"sa": "Congressional Record", "a": "Congressional Record", "y": "2026", "t": "“Final Résumé of Congressional Activity: Second Session of the One Hundred Eighteenth Congress.” Daily Digest, January 7, D19.", "u": "https://www.senate.gov/reference/resources/pdf/Resumes/118_2.pdf"}, "bushgore": {"s": "Bush v. Gore 2000", "r": "<em>Bush v. Gore</em>, 531 U.S. 98 (2000). Legal Information Institute, Cornell Law School. Accessed November 14, 2026.", "u": "https://www.law.cornell.edu/supremecourt/text/531/98"}});
+delete FILI.screen; delete NINE.screen;
+const FILM = [["electoral", "It has happened before", {"id": "recount", "scene": "<em>Recount</em> (HBO, 2008) dramatizes the 36-day fight over Florida’s votes in 2000. In the film, the U.S. Supreme Court has the last word.", "q": "Is that what happened?", "o": ["Yes, by five votes to four", "No, Florida’s courts decided", "No, the House chose Bush"], "a": 0, "rec": "On December 12, 2000, in <em>Bush v. Gore</em>, five justices stopped the recount. Bush kept his 537-vote lead in Florida and won the Electoral College, though Gore had more votes nationwide.", "src": ["bushgore", "fec2000"]}], ["president", "Predict what happens", {"id": "underwood", "scene": "In the Netflix series <em>House of Cards</em>, Frank Underwood becomes vice president and then president without winning a national election.", "q": "Could that really happen?", "o": ["No, the Constitution forbids it", "Yes, it happened in 1974", "Only in a national emergency"], "a": 1, "rec": "When Vice President Spiro Agnew resigned in 1973, Nixon chose Gerald Ford to replace him under the 25th Amendment, and both chambers of Congress approved. When Nixon resigned in August 1974, Ford became president. He never won a national election.", "src": ["senVPpage", "amend"]}], ["congress", "The obstacle course", {"id": "justabill", "scene": "In <em>Schoolhouse Rock!</em>’s cartoon “I’m Just a Bill” (1976), a bill waits on the Capitol steps, survives a committee and becomes a law. Generations of Americans learned lawmaking from it.", "q": "How many bills in Congress become law?", "o": ["Roughly half of them", "About one in five", "Fewer than 1 in 50"], "a": 2, "rec": "In 2023 and 2024, members of Congress introduced more than 16,000 bills. Only a few hundred became law. Most never got out of committee.", "src": ["res118a", "res118b"]}], ["congress", "The filibuster", {"id": "mrsmith", "scene": "In <em>Mr. Smith Goes to Washington</em> (1939), James Stewart plays a new senator who holds the floor against a corrupt bill until he collapses. If he stops talking, he loses the floor.", "q": "Do senators still block bills by talking?", "o": ["Yes, or they lose the floor", "No, an objection is enough", "No, it was banned in 1975"], "a": 1, "rec": "Today a senator only has to object, and ending the debate then takes 60 votes. Nobody has to keep talking. Marathon speeches still happen, mostly as protest: in April 2025 Cory Booker spoke for 25 hours and 5 minutes, the longest Senate speech on record.", "src": ["mrSmith", "sen-cloture"]}], ["court", "Appointed for life", {"id": "rbg", "scene": "The documentary <em>RBG</em> and the film <em>On the Basis of Sex</em> (both 2018) made Ruth Bader Ginsburg a pop-culture icon, “the Notorious R.B.G.” She died in office in September 2020, at 87.", "q": "How long did the Senate take to fill her seat?", "o": ["About five weeks", "About ten months", "Until after the election"], "a": 0, "rec": "Amy Coney Barrett was confirmed 52 to 48 on October 26, 2020, eight days before the election. In 2016 the Senate, also run by Republicans, never acted on Barack Obama’s nominee, Merrick Garland, who was named in March, eight months before that election.", "src": ["rbgPR", "rcBarrett", "sen-noms"]}]];
+FILM.forEach(([cid, k, f]) => { const c = CH.find(x => x.id === cid), s = c && c.steps.find(x => (x.kicker || "").startsWith(k));
+  if (!s) { console.warn("film step not found", cid, k); return; } s.film = f; f.src.forEach(k => REF_EXTRA.add(k)); });
+function filmHTML(f) {
+  return `<aside class="scr film" data-film="${f.id}"><span class="scr-tag">Film and TV vs. the record</span><p class="fm-scene">${f.scene}</p><p class="fm-q">${f.q}</p>
+    <div class="fm-o" role="group" aria-label="${f.q}">${f.o.map((x, j) => `<button type="button" class="fm-b" data-j="${j}">${x}</button>`).join("")}</div><div class="fm-r" aria-live="polite" hidden></div></aside>`;
+}
+function filmMount(box, f) {
+  const show = (j, fresh) => {
+    $$(".fm-b", box).forEach(b => { const k = +b.dataset.j; b.disabled = true; b.classList.toggle("right", k === f.a); b.classList.toggle("wrong", k === j && k !== f.a); b.classList.toggle("dim", k !== f.a && k !== j); });
+    const r = $(".fm-r", box); r.hidden = false;
+    r.innerHTML = `<b>${j === f.a ? "Correct." : "Incorrect."}</b> ${f.rec}<span class="fm-src">Sources: ${f.src.map(k => cite(k)).join(" · ")}</span>`;
+    if (fresh) SND.play(j === f.a ? "right" : "reveal");
+  };
+  $$(".fm-b", box).forEach(b => b.onclick = () => { const j = +b.dataset.j; PROG.film = PROG.film || {}; PROG.film[f.id] = j; saveProg(); show(j, true); });
+  const prev = PROG.film && PROG.film[f.id]; if (prev !== undefined && prev !== null) show(prev, false);
+}
+renderStep = (fn => function () {
+  fn();
+  if (!cur) return; const s = cur.ch.steps[cur.i], inner = $("#p-inner"); if (!s || !s.film || !inner) return;
+  const tx = $(".step-text", inner); if (!tx || $(".scr.film", tx)) return;
+  tx.insertAdjacentHTML("beforeend", filmHTML(s.film)); filmMount($(".scr.film", tx), s.film);
+})(renderStep);
 renderHome();
 route();
 </script>
