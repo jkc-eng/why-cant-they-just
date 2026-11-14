@@ -1661,6 +1661,9 @@ details.dk>p{padding:0 14px 12px}
 }
 .am-gap{margin-left:calc(7.2rem + 12px)}
 @media (max-width:900px){.am-r{grid-template-columns:5.4rem minmax(0,1fr);gap:10px;padding:3px 0}.am-y{font-size:1.05rem}.am-gap{margin-left:calc(5.4rem + 10px)}}
+
+/* v27l */
+.scr-tag::before{content:none;display:none}
 </style>
 
 <header class="top">
@@ -5312,7 +5315,7 @@ function renderStep() {
     inner.innerHTML = `<article class="step solo done-step"><div class="step-vis"></div></article>`;
   } else {
     inner.innerHTML = `<article class="step ${s.solo ? "solo" : ""}${s.cls ? " " + s.cls : ""}">
-      <div class="step-text">${s.kicker ? `<p class="kicker mono">${s.kicker}</p>` : ""}<h2>${s.title}</h2><div class="body">${s.body || ""}</div>${s.dk ? `<details class="dk"><summary><span class="dk-tag">Compare Denmark</span></summary><p>${s.dk}</p></details>` : ""}${s.screen ? `<aside class="scr"><span class="scr-tag">On screen</span><p>${s.screen}</p></aside>` : ""}</div>
+      <div class="step-text">${s.kicker ? `<p class="kicker mono">${s.kicker}</p>` : ""}<h2>${s.title}</h2><div class="body">${s.body || ""}</div>${s.dk ? `<details class="dk"><summary><span class="dk-tag">Compare Denmark</span></summary><p>${s.dk}</p></details>` : ""}${s.screen ? `<aside class="scr"><span class="scr-tag">In film and TV</span><p>${s.screen}</p></aside>` : ""}</div>
       <div class="step-vis"></div>
       ${s.sources ? srcHTML(s.sources) : ""}
     </article>`;
