@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Why Can’t They Just…?</title>
-<meta name="description" content="An interactive guide to American politics for Danish students: eight questions Danes ask, answered with things you can tap, drag or guess. By Jens Kjeldgaard-Christiansen, Aarhus University.">
+<meta name="description" content="An interactive guide to how American politics works: eight short chapters on the three branches, elections, the states and the Constitution, with things to tap, drag and guess. By Jens Kjeldgaard-Christiansen, Aarhus University.">
 <meta name="author" content="Jens Kjeldgaard-Christiansen">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Why Can’t They Just…?">
-<meta property="og:title" content="Why Can’t They Just…? American politics, explained for Danes">
-<meta property="og:description" content="An interactive guide to American politics for Danish students: eight questions Danes ask, answered with things you can tap, drag or guess. By Jens Kjeldgaard-Christiansen, Aarhus University.">
+<meta property="og:title" content="Why Can’t They Just…? How American politics works">
+<meta property="og:description" content="An interactive guide to how American politics works: eight short chapters on the three branches, elections, the states and the Constitution, with things to tap, drag and guess. By Jens Kjeldgaard-Christiansen, Aarhus University.">
 <meta property="og:url" content="https://jkc-eng.github.io/why-cant-they-just/">
 <meta property="og:image" content="https://jkc-eng.github.io/why-cant-they-just/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Why can’t they just…? Title card with a photo of Abraham Lincoln’s first inauguration at the unfinished U.S. Capitol, 1861">
+<meta property="og:image:alt" content="Why can’t they just…? Title over photos of the U.S. Capitol, the White House and the Supreme Court Building">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://jkc-eng.github.io/why-cant-they-just/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -1678,6 +1678,83 @@ details.dk>p{padding:0 14px 12px}
 .fm-b.dim{opacity:.55}
 .fm-r{margin:10px 0 0}
 .fm-r .fm-src{display:block;margin-top:6px;font-size:.82rem;color:var(--ink-3)}
+
+/* v28b: front page (shared by designs A, B, C) */
+.fp-sub{margin:12px 0 0;font-size:clamp(1.15rem,2.1vw,1.7rem);font-weight:600;line-height:1.25}
+.fp-body{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);padding-block:clamp(22px,3vw,36px) clamp(30px,4vw,52px);align-items:start}
+.fp-body .byline,.fp-body .thesis{margin-top:0}
+.fp-body .cta-row{margin-top:18px}
+.fp-row:focus-visible{outline:3px solid var(--mark);outline-offset:2px}
+.fp-cap{margin:12px 0 0;color:var(--ink-3);font-size:.82rem;line-height:1.45}
+.fp-cap b{color:var(--ink-2);font-weight:600}
+.cred-d summary{cursor:pointer;list-style:revert}
+.cred-d[open] summary{margin-bottom:10px}
+.chapters.fp-parts{display:block}
+.fp-part{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3.4fr);gap:18px 28px;padding:26px 0;border-top:1px solid var(--rule)}
+.fp-part:first-child{border-top:0;padding-top:4px}
+.fp-ph h3{font-family:var(--f-display);font-stretch:78%;font-weight:800;font-size:1.75rem;line-height:1.02;margin:0 0 8px}
+.fp-ph p{margin:0;color:var(--ink-2);font-size:.95rem;line-height:1.45}
+.fp-ph .rng{display:block;color:var(--ink-3);font-size:.85rem;margin-bottom:4px}
+.fp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.fp-close{grid-template-columns:minmax(0,1fr)}
+.fp-close .ch-card.closing{grid-column:auto}
+.ch-card .ph{aspect-ratio:4/3}
+.ph-over{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:baseline;gap:10px;padding:52px 16px 12px;background:linear-gradient(to bottom,transparent,rgba(5,8,14,.8));color:#fff}
+.ch-card .ph-over .num{position:static;font-size:2.3rem}
+.ph-over .ins{font-family:var(--f-display);font-stretch:76%;font-weight:800;font-size:1.65rem;line-height:1;color:#fff;text-wrap:balance;text-shadow:0 1px 10px rgba(0,0,0,.4)}
+.fp-parts .ch-card .txt h3{font-family:var(--f-body);font-stretch:100%;font-weight:700;font-size:1.08rem;line-height:1.3}
+@media (max-width:900px){.fp-body,.fp-part{grid-template-columns:minmax(0,1fr)}.fp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.fp-grid{grid-template-columns:minmax(0,1fr)}.fp-parts .ch-card .ph{aspect-ratio:16/9}}
+/* A: cover picture */
+.hero.fpA{padding:0}
+.fp-cover{position:relative;margin:0;background:#0d1117;overflow:hidden}
+.fp-cover img{display:block;width:100%;height:clamp(360px,min(68vh,52vw),740px);object-fit:cover;object-position:50% 50%;filter:grayscale(1) contrast(1.08)}
+.fp-over{position:absolute;left:0;right:0;bottom:0;padding:clamp(80px,12vw,170px) 0 clamp(20px,3.4vw,40px);background:linear-gradient(to bottom,transparent,rgba(5,8,14,.55) 42%,rgba(5,8,14,.88));color:#fff}
+.fp-over .wrap{display:block}
+.hero .fp-over h1{color:#fff;margin:0;font-size:clamp(3.4rem,min(10vw,15vh),8.6rem);text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero .fp-over h1 em{color:rgba(255,255,255,.62)}
+.fp-over .fp-sub{color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+/* B: the diagram is the cover */
+.hero.fpB .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:center}
+.fpB-text h1{margin-bottom:0;font-size:clamp(3.4rem,min(7.4vw,13vh),6.6rem)}
+@media (max-width:900px){.hero.fpB .wrap{grid-template-columns:minmax(0,1fr)}}
+.fpB-text .byline{margin-top:20px}
+.fpB-map .thesis{margin-top:16px;max-width:none}
+#machine .mc-nb circle{fill:var(--ink);stroke:none}
+#machine .mc-nb text{fill:var(--paper) !important;font-family:var(--f-display);font-weight:800;font-size:15px;text-anchor:middle;dominant-baseline:central;letter-spacing:0;text-transform:none}
+/* C: three buildings, contents list */
+.hero.fpC{padding:0}
+.fpC-tri{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;background:var(--paper)}
+.fpC-tri figure{margin:0;position:relative;overflow:hidden;background:#0d1117}
+.fpC-tri img{display:block;width:100%;height:clamp(300px,min(50vh,40vw),560px);object-fit:cover;filter:grayscale(1) contrast(1.08)}
+.fpC-tri figure:nth-child(1) img{object-position:50% 22%}
+.fpC-tri figure:nth-child(2) img{object-position:50% 52%;filter:grayscale(1) contrast(1.1) brightness(1.25)}
+.fpC-tri figure:nth-child(3) img{object-position:50% 25%}
+.fpC-tri figcaption{position:absolute;left:0;right:0;top:0;padding:12px 16px 40px;background:linear-gradient(to top,transparent,rgba(5,8,14,.5));color:#fff;display:flex;flex-direction:column;gap:2px}
+.fpC-tri figcaption b{font-family:var(--f-display);font-stretch:76%;font-weight:800;font-size:clamp(1.05rem,1.9vw,1.6rem);line-height:1}
+.fpC-tri figcaption span{font-size:.85rem;opacity:.85}
+.fpC-over{position:absolute;left:0;right:0;bottom:0;padding:clamp(70px,9vw,140px) 0 clamp(18px,2.6vw,32px);background:linear-gradient(to bottom,transparent,rgba(5,8,14,.5) 40%,rgba(5,8,14,.86));color:#fff;pointer-events:none}
+.hero.fpC .fpC-over .wrap{display:block}
+.hero .fpC-over h1{color:#fff;margin:0;font-size:clamp(3.2rem,min(9.4vw,14vh),8.2rem);text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero .fpC-over h1 em{color:rgba(255,255,255,.62)}
+.fpC-over .fp-sub{color:#fff;margin-top:8px;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+.fpC .fp-body{padding-top:clamp(16px,2vw,24px)}
+.fp-toc{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.fp-toc li{border-bottom:1px solid var(--rule)}
+.fp-row{display:grid;grid-template-columns:3.2rem minmax(0,1fr) auto 150px;gap:6px 20px;align-items:center;padding:14px 4px;color:inherit;text-decoration:none}
+.fp-row:hover{background:var(--card)}
+.fp-row .fp-n{font-family:var(--f-display);font-stretch:70%;font-weight:900;font-size:2.6rem;line-height:1;color:var(--ink-3)}
+.fp-row .fp-t{display:flex;flex-direction:column;gap:3px}
+.fp-row .fp-t b{font-family:var(--f-display);font-stretch:76%;font-weight:800;font-size:1.7rem;line-height:1}
+.fp-row .fp-q{font-weight:600;font-size:1rem}
+.fp-row .fp-d{color:var(--ink-2);font-size:.92rem}
+.fp-row .fp-m{color:var(--ink-3);white-space:nowrap}
+.fp-row .fp-th img{display:block;width:150px;height:96px;object-fit:cover;border-radius:4px;filter:grayscale(1) contrast(1.05)}
+.fp-row .fp-st{display:inline-block;margin-left:10px;padding:3px 9px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:.72rem;vertical-align:middle;font-family:var(--f-body);font-stretch:100%;font-weight:600}
+.fp-close .fp-toc{border-top:0}
+@media (max-width:900px){.fp-row{grid-template-columns:2.6rem minmax(0,1fr) 110px}.fp-row .fp-m{display:none}.fp-row .fp-th img{width:110px;height:76px}}
+@media (max-width:640px){.fpC-tri img{height:300px}.fpC-tri figcaption{padding:10px 8px 30px}.fpC-tri figcaption b{font-size:1rem}.fpC-tri figcaption span{font-size:.75rem}.fpC-over{padding-top:60px}.fpC-over .fp-sub{font-size:1.05rem}
+  .fp-row{grid-template-columns:2.2rem minmax(0,1fr) 84px;gap:4px 12px}.fp-row .fp-n{font-size:2rem}.fp-row .fp-t b{font-size:1.4rem}.fp-row .fp-d{display:none}.fp-row .fp-th img{width:84px;height:64px}}
 </style>
 
 <header class="top">
@@ -1688,23 +1765,19 @@ details.dk>p{padding:0 14px 12px}
 </header>
 
 <main id="home">
-  <section class="hero">
-    <div class="wrap">
-      <div>
-        <p class="eyebrow mono">American politics, explained for Danes</p>
-        <h1 class="display">Why can’t they just<em>…?</em></h1>
-        <p class="byline">By <b>Jens Kjeldgaard-Christiansen</b><span>Department of English and American Studies Center Aarhus, Aarhus University</span></p>
-        <p class="lede">Why can a president win with fewer votes? Why can’t the president just pass a law? Eight questions about American politics, each answered with something you can tap, drag or guess.</p>
-        <p class="thesis"><b>The short answer to all eight:</b> the system splits power on purpose. Most laws need the House, the Senate and the president to agree, each elected separately, so a determined minority can often say no.</p>
-        <div class="cta-row">
+  <section class="hero fpC">
+    <div class="fpC-tri">
+      <figure><img src="img/hx_capitol.jpg" alt="The dome of the U.S. Capitol"><figcaption><b>Congress</b><span>Article I</span></figcaption></figure>
+      <figure><img src="img/hx_white.jpg" alt="The White House at dusk"><figcaption><b>The president</b><span>Article II</span></figcaption></figure>
+      <figure><img src="img/hx_court.jpg" alt="The front of the Supreme Court Building"><figcaption><b>The Supreme Court</b><span>Article III</span></figcaption></figure>
+      <div class="fpC-over"><div class="wrap"><h1 class="display">Why can’t they just<em>…?</em></h1><p class="fp-sub">How American politics works, in eight short chapters</p></div></div>
+    </div>
+    <div class="wrap fp-body">
+      <div><p class="byline">By <b>Jens Kjeldgaard-Christiansen</b><span>Department of English and American Studies Center Aarhus, Aarhus University</span></p><p class="lede">Eight short chapters on how the United States is governed: the three branches, the elections that fill them, and the states and the Constitution around them. You learn by tapping, dragging and guessing, with real maps, votes and documents.</p><div class="cta-row">
           <button class="btn" id="start-btn">Start with chapter 1 <span class="arr">→</span></button>
           <button class="btn ghost" id="route-btn" type="button">Short on time? Take the short route</button>
-        </div>
-      </div>
-      <figure class="hero-fig">
-        <img src="img/inauguration1861.jpg" alt="Crowd at Abraham Lincoln’s first inauguration in front of the U.S. Capitol, whose dome is still under construction, March 4, 1861">
-        <figcaption><b>Abraham Lincoln’s first inauguration, March 4, 1861.</b> The new Capitol dome was still a building site. Weeks later the Civil War began.</figcaption>
-      </figure>
+        </div></div>
+      <div><p class="thesis"><b>The idea behind all eight:</b> the system splits power on purpose. Most laws need the House, the Senate and the president to agree, and each is elected separately. So big change is slow, and it usually takes broad agreement or a rare moment when one party holds all three.</p><p class="fp-cap"><b>The Capitol, the White House and the Supreme Court Building in Washington, D.C.</b> The Constitution sets up Congress in Article I, the presidency in Article II and the courts in Article III. Photos: Carol M. Highsmith, Library of Congress. No known restrictions.</p></div>
     </div>
   </section>
 
@@ -1720,6 +1793,16 @@ details.dk>p{padding:0 14px 12px}
     </div>
   </section>
 
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="display">Contents</h2>
+        <p>Take them in any order; the numbers are only a suggestion. About 10 minutes each. A closing chapter puts the pieces together.</p>
+      </div>
+      <div class="chapters" id="chapters"></div>
+    </div>
+  </section>
+
   <section class="section" id="map-sec">
     <div class="wrap">
       <div class="sec-head">
@@ -1731,7 +1814,7 @@ details.dk>p{padding:0 14px 12px}
         <div class="machine-side">
           <p class="big-count" id="mc-count">0<small> / 8</small></p>
           <h3 id="mc-head">Nothing lit up yet.</h3>
-          <p id="mc-text">Start with how Americans choose a president.</p>
+          <p id="mc-text">Start with Congress.</p>
           <button class="btn small" id="mc-next">Open chapter 1 <span class="arr">→</span></button>
           <div class="reset" id="mc-reset" aria-live="polite"></div>
         </div>
@@ -1739,27 +1822,17 @@ details.dk>p{padding:0 14px 12px}
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 class="display">Eight questions</h2>
-        <p>Take them in any order; the numbers are only a suggestion. About 10 minutes each. A closing chapter puts the pieces together.</p>
-      </div>
-      <div class="chapters" id="chapters"></div>
-    </div>
-  </section>
-
+  
   <section class="section">
     <div class="wrap about">
       <div>
         <h2 class="display">About the facts</h2>
         <p>Election figures come from official sources: the Federal Election Commission, the U.S. Census Bureau and the U.S. House of Representatives. Each step lists its own sources.</p>
-        <p>Where historians or political scientists disagree, the app says so in a box marked “Contested.” The 2026 midterm figures are as reported on November 7–9, 2026, while some races were still being counted.</p>
+        <p>Where historians or political scientists disagree, the app says so in a box marked “Contested.” The 2026 midterm figures are as reported by November 14, 2026, while some races were still being counted.</p>
         <p>Made for History, Society and Culture 2: American History and Society, Aarhus University.</p>
       </div>
       <div>
-        <p class="vlabel">Pictures</p>
-        <ul class="credits" id="credits"></ul>
+        <details class="cred-d"><summary class="vlabel">Picture credits</summary><ul class="credits" id="credits"></ul></details>
       </div>
     </div>
     <div class="wrap"><footer class="foot">Made by Jens Kjeldgaard-Christiansen, Department of English and American Studies Center Aarhus, Aarhus University · November 2026</footer></div>
@@ -4479,7 +4552,7 @@ const INTRO = {
     facts: [["4", "years per term"], ["2", "terms at most"], ["35", "minimum age"]] },
   congress: { h: "Congress", img: "hx_capitol", pos: "50% 30%", alt: "The white dome of the U.S. Capitol against a blue sky",
     cap: "<b>The dome of the U.S. Capitol, where both chambers of Congress meet.</b> Photo: Carol M. Highsmith, Library of Congress. No known restrictions.", url: "https://www.loc.gov/item/2010641920/",
-    lead: "Congress is America’s parliament. It writes the laws and decides how the government’s money is spent. It has two chambers, the House of Representatives and the Senate, and both meet in the Capitol in Washington, D.C.",
+    lead: "Congress is the lawmaking branch of the federal government. It writes the laws and decides how the government’s money is spent. It has two chambers, the House of Representatives and the Senate, and both meet in the Capitol in Washington, D.C.",
     facts: [["435", "House members, elected for two years"], ["100", "senators, elected for six years"], ["2", "chambers that must agree"]] },
   court: { h: "The Supreme Court", img: "hx_court", pos: "50% 30%", alt: "The marble front of the U.S. Supreme Court Building, with its columns and wide steps, in black and white",
     cap: "<b>The Supreme Court Building in Washington, D.C.</b> Photo: Carol M. Highsmith, Library of Congress. No known restrictions.", url: "https://www.loc.gov/item/2011636057/",
@@ -4499,7 +4572,7 @@ const INTRO = {
     facts: [["1787", "written"], ["4", "pages of parchment"], ["27", "amendments since"]] },
   states: { h: "Fifty states", img: "hx_fourc", pos: "50% 60%", alt: "The Four Corners Monument: a stone platform with lines marking where four states meet, flags around it",
     cap: "<b>Four Corners Monument, the only spot where four states meet:</b> Arizona, Utah, Colorado and New Mexico. Photo: Carol M. Highsmith, Library of Congress. No known restrictions.", url: "https://www.loc.gov/item/2011633953/",
-    lead: "The United States is a union of fifty states. Each has its own constitution, governor, parliament and courts, and makes most of the laws people live by. The federal government in Washington has only the powers the Constitution gives it.",
+    lead: "The United States is a union of fifty states. Each has its own constitution, governor, legislature and courts, and makes most of the laws people live by. The federal government in Washington has only the powers the Constitution gives it.",
     facts: [["50", "states, each with its own laws"], ["1", "federal government"], ["1959", "newest states: Alaska and Hawaii"]] },
   midterms: { h: "The 2026 midterms", img: "g_mid2022", lo: true, pos: "50% 55%", alt: "Voters queue outside a school at dusk, past a row of campaign signs for Senate, congressional and state legislative candidates",
     cap: "<b>Voters line up in Londonderry, New Hampshire, during the 2022 midterms.</b> The signs show how much is on a midterm ballot: candidates for the U.S. Senate, the House and the state legislature. Photo: Sdkb, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\" target=\"_blank\" rel=\"noopener\">CC BY-SA 4.0</a>, Wikimedia Commons.", url: "https://commons.wikimedia.org/w/index.php?curid=125174502",
@@ -4525,7 +4598,7 @@ var introHTML = function (s) {
 function preIntro(id) { const d = INTRO[id]; if (!d || d.pre) return; d.pre = 1; const i = new Image(); i.decoding = "async"; if (!d.lo) { i.sizes = "(max-width: 900px) 100vw, 1200px"; i.srcset = `img/${d.img}_s.jpg 1000w, img/${d.img}.jpg 2000w`; } i.src = `img/${d.img}.jpg`; }
 
 ["pointerover", "focusin", "touchstart"].forEach(ev => document.addEventListener(ev, e => { const a = e.target.closest && e.target.closest("[data-id]"); if (a && INTRO[a.dataset.id]) preIntro(a.dataset.id); }, { passive: true }));
-(window.requestIdleCallback || (f => setTimeout(f, 1500)))(() => preIntro("electoral"));
+(window.requestIdleCallback || (f => setTimeout(f, 1500)))(() => preIntro(CH[0].id));
 
 /* ---- v11: pictures where slides had empty space ---- */
 Object.assign(IMG, {
@@ -5263,7 +5336,7 @@ function renderHome() {
   $("#machine").innerHTML = machineSVG() + machineTiles(); paintMachine($("#machine"));
   $("#mc-count").innerHTML = `${n}<small> / ${MAIN.length}</small>`;
   const nxt = MAIN.find(c => !PROG.done[c.id] && !c.soon);
-  if (n === 0) { $("#mc-head").textContent = "Nothing lit up yet."; $("#mc-text").textContent = "Start with how Americans choose a president."; }
+  if (n === 0) { $("#mc-head").textContent = "Nothing lit up yet."; $("#mc-text").textContent = "Start with Congress."; }
   else { $("#mc-head").textContent = `${n === 1 ? "One piece" : n + " pieces"} in place.`; $("#mc-text").textContent = nxt ? `Next up: ${nxt.topic}.` : "The other chapters are still being built. Come back soon."; }
   const mb = $("#mc-next");
   if (nxt) { mb.hidden = false; mb.innerHTML = `Open chapter ${CH.indexOf(nxt) + 1} <span class="arr">→</span>`; mb.onclick = () => openChapter(nxt.id, 0); } else mb.hidden = true;
@@ -5352,7 +5425,7 @@ function go(j) { if (!cur) return; if (j >= cur.ch.steps.length) return closePla
 $("#p-next").onclick = () => go(cur.i + 1);
 $("#p-prev").onclick = () => go(cur.i - 1);
 $("#p-close").onclick = () => closePlayer(false);
-$("#start-btn").onclick = () => openChapter("electoral", 0);
+$("#start-btn").onclick = () => openChapter(CH[0].id, 0);
 document.addEventListener("keydown", e => {
   if (e.key === "Escape" && (!gp.hidden || !ws.hidden)) { if (!gp.hidden) closeGloss(); else closeWords(); return; }
   if (!cur) return;
@@ -5827,10 +5900,10 @@ const CTRIES = [
   { w: "democracy", note: "The word never appears. Article IV promises every state “a Republican Form of Government.”" },
   { w: "party", note: "Five times, always in the legal sense, as in a party to a court case. Political parties are never mentioned (Chapter 6)." },
   { w: "veto", note: "Not there. Article I, Section 7 says only that the president may “return” a bill “with his Objections” (Chapter 2)." },
-  { w: "filibuster", note: "Not there. The 60-vote hurdle is a rule the Senate made for itself (Chapter 3)." },
-  { w: "electoral college", note: "Not there. The text speaks only of “Electors” (Chapter 1)." },
-  { w: "judicial review", note: "Not there. The Supreme Court claimed the power in 1803, in Marbury v. Madison (Chapter 4)." },
-  { w: "abortion", note: "Not there. Roe v. Wade (1973) found a right to abortion in the Fourteenth Amendment; Dobbs (2022) found none (Chapter 4)." },
+  { w: "filibuster", note: "Not there. The 60-vote hurdle is a rule the Senate made for itself (Chapter 1)." },
+  { w: "electoral college", note: "Not there. The text speaks only of “Electors” (Chapter 4)." },
+  { w: "judicial review", note: "Not there. The Supreme Court claimed the power in 1803, in Marbury v. Madison (Chapter 3)." },
+  { w: "abortion", note: "Not there. Roe v. Wade (1973) found a right to abortion in the Fourteenth Amendment; Dobbs (2022) found none (Chapter 3)." },
   { w: "slavery", note: "Only once, in the Thirteenth Amendment of 1865, which abolished it. The text of 1787 avoided the word and spoke of “other Persons” and a “Person held to Service or Labour.”" },
   { w: "she", note: "Never. Search for “he” to compare." }
 ];
@@ -6131,8 +6204,8 @@ CH.forEach(c => { const d = c.steps[c.steps.length - 1], r = d.render; if (!SHOR
     if (ul) ul.insertAdjacentHTML("beforebegin", `<p class="short-a"><b>The short answer.</b> ${SHORT[c.id]}</p>`); }; });
 
 /* ---- v27g: the short route: nine hands-on stops ---- */
-const ROUTE = [["electoral", "Your turn"], ["president", "Predict what happens"], ["congress", "The obstacle course"], ["court", "The power to say no"],
-  ["represented", "Drawing the lines"], ["parties", "The arithmetic of two partie"], ["constitution", "Search it yourself"], ["states", "Cross a state line"], ["together", "The health care law, step by step"]]
+const ROUTE = [["congress", "The obstacle course"], ["president", "Predict what happens"], ["court", "The power to say no"], ["electoral", "Your turn"],
+  ["represented", "Drawing the lines"], ["parties", "The arithmetic of two partie"], ["states", "Cross a state line"], ["constitution", "Search it yourself"], ["together", "The health care law, step by step"]]
   .map(([id, k]) => { const c = CH.find(x => x.id === id), s = c && c.steps.find(x => (x.kicker || "").startsWith(k)); return s ? { c, s } : null; }).filter(Boolean);
 let routeAt = -1;
 function routeGo(k) {
@@ -6213,6 +6286,54 @@ renderStep = (fn => function () {
   const tx = $(".step-text", inner); if (!tx || $(".scr.film", tx)) return;
   tx.insertAdjacentHTML("beforeend", filmHTML(s.film)); filmMount($(".scr.film", tx), s.film);
 })(renderStep);
+
+/* ---- v28a: chapter order: the branches, then elections, then the states and the Constitution ---- */
+const CH_ORDER = ["congress", "president", "court", "electoral", "represented", "parties", "states", "constitution"];
+CH.sort((a, b) => (a.bonus ? 99 : CH_ORDER.indexOf(a.id)) - (b.bonus ? 99 : CH_ORDER.indexOf(b.id)));
+
+/* ---- v28b: front page ---- */
+const FP_V = "C";
+const FP_NAME = { congress: "Congress", president: "The president", court: "The Supreme Court", electoral: "Electing the president", represented: "Who gets represented", parties: "Two parties", states: "Fifty states", constitution: "The Constitution" };
+const FP_PARTS = [
+  ["The three branches", ["congress", "president", "court"], "Congress makes the laws, the president carries them out, and the Supreme Court can strike them down."],
+  ["Elections", ["electoral", "represented", "parties"], "How Americans choose a president and a Congress, and why two parties win nearly every seat."],
+  ["The framework", ["states", "constitution"], "What the fifty states decide for themselves, and the rulebook over the whole system."]];
+function fpCards(box, cards) {
+  Object.keys(FP_NAME).forEach(id => { const a = cards[id]; if (!a) return; const ph = $(".ph", a), num = $(".num", ph), ov = document.createElement("div");
+    ov.className = "ph-over"; ov.append(num); ov.insertAdjacentHTML("beforeend", `<span class="ins">${FP_NAME[id]}</span>`); ph.append(ov);
+    const p = $(".txt p", a), c = CH.find(x => x.id === id); if (p && c.teaser) p.textContent = c.teaser; });
+  FP_PARTS.forEach(([h, ids, d]) => { const sec = document.createElement("div"); sec.className = "fp-part";
+    const a = CH.findIndex(c => c.id === ids[0]) + 1, z = CH.findIndex(c => c.id === ids[ids.length - 1]) + 1;
+    sec.innerHTML = `<div class="fp-ph"><span class="rng">Chapters ${a}–${z}</span><h3>${h}</h3><p>${d}</p></div><div class="fp-grid"></div>`;
+    ids.forEach(id => cards[id] && $(".fp-grid", sec).append(cards[id])); box.append(sec); });
+}
+function fpToc(box, cards) {
+  const nxt = CH.find(c => !c.bonus && !PROG.done[c.id]);
+  const row = c => { const a = cards[c.id], meta = a ? $(".meta", a).textContent.replace(/ · .*/, "") : "";
+    const st = PROG.done[c.id] ? `<span class="fp-st">Finished ✓</span>` : c === nxt ? `<span class="fp-st">Start here</span>` : "";
+    return `<li><a class="fp-row" data-id="${c.id}" href="#${c.id}-1"><span class="fp-n">${c.bonus ? "" : CH.indexOf(c) + 1}</span><span class="fp-t"><b>${FP_NAME[c.id] || "Putting it together"}${st}</b><span class="fp-q">${c.q}</span><span class="fp-d">${c.teaser || ""}</span></span><span class="fp-m mono">${meta}</span><span class="fp-th"><img src="${IMG[c.img].file}" alt="" loading="lazy"></span></a></li>`; };
+  FP_PARTS.forEach(([h, ids, d]) => { const sec = document.createElement("div"); sec.className = "fp-part";
+    sec.innerHTML = `<div class="fp-ph"><h3>${h}</h3><p>${d}</p></div><ol class="fp-toc">${ids.map(id => row(CH.find(c => c.id === id))).join("")}</ol>`; box.append(sec); });
+  const tg = CH.find(c => c.id === "together"); if (tg) { const sec = document.createElement("div"); sec.className = "fp-part";
+    sec.innerHTML = `<div class="fp-ph"><h3>Closing chapter</h3><p>The whole system at work on one law.</p></div><ol class="fp-toc">${row(tg)}</ol>`; box.append(sec); }
+  $$(".fp-row", box).forEach(r => r.onclick = e => { e.preventDefault(); openChapter(r.dataset.id, 0); });
+}
+function fpNumbers() {
+  const NS = "http://www.w3.org/2000/svg";
+  $$("#machine .mc-piece").forEach(g => { const c = CH.find(x => x.piece === g.dataset.p); if (!c) return; const r = $("rect", g);
+    let x = +r.getAttribute("x"), y = +r.getAttribute("y");
+    if (g.dataset.p === "const") { $("text", g).setAttribute("x", 54); x = 34; y = 37; } else if (g.dataset.p === "parties") { x += 26; y += 27; }
+    const b = document.createElementNS(NS, "g"); b.setAttribute("class", "mc-nb"); b.setAttribute("aria-hidden", "true");
+    b.innerHTML = `<circle cx="${x}" cy="${y}" r="13"/><text x="${x}" y="${y + 1}">${CH.indexOf(c) + 1}</text>`; g.append(b); });
+}
+renderHome = (fn => function () {
+  fn();
+  const box = $("#chapters"), cards = {}; $$(".ch-card", box).forEach(a => cards[a.dataset.id] = a);
+  box.innerHTML = ""; box.classList.add("fp-parts");
+  if (FP_V === "C") fpToc(box, cards);
+  else { fpCards(box, cards); if (cards.together) { const sec = document.createElement("div"); sec.className = "fp-part fp-close"; sec.append(cards.together); box.append(sec); } }
+  if (FP_V === "B") fpNumbers();
+})(renderHome);
 renderHome();
 route();
 </script>

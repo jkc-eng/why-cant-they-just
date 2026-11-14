@@ -1,6 +1,6 @@
 # Why Can’t They Just…?
 
-An interactive guide to American politics for Danish students.
+An interactive guide to how American politics works, for students of American history and society.
 
 **Open it here: https://jkc-eng.github.io/why-cant-they-just/**
 
@@ -8,16 +8,24 @@ By Jens Kjeldgaard-Christiansen, Department of English and American Studies Cent
 
 ## What it is
 
-Eight questions Danes ask about American politics. Each question is a short chapter of about 10 minutes, with things to tap, drag or guess, a short founding text, and a brief comparison with Denmark where it helps. Every chapter ends with a short answer and a quiz. A closing chapter puts the pieces together, a short route takes students through nine hands-on stops, and a special chapter covers the 2026 midterms.
+Eight short chapters on how the United States is governed, each about 10 minutes, with things to tap, drag or guess and a short founding text. Some chapters add a brief comparison with Denmark where it helps. Every chapter ends with a short answer and a quiz. A closing chapter puts the pieces together, a short route takes students through nine hands-on stops, and a special chapter covers the 2026 midterms.
 
-1. Why can a president win with fewer votes?
-2. Why can’t the president just pass a law?
-3. Why does nothing get through Congress?
-4. Why do nine judges decide abortion?
-5. Why does Wyoming have as many senators as California?
-6. Why are there only two parties?
-7. Why can’t they just change the Constitution?
-8. Why is it legal in one state and a crime in the next?
+**The three branches**
+
+1. Congress: Why does nothing get through Congress?
+2. The president: Why can’t the president just pass a law?
+3. The Supreme Court: Why do nine judges decide abortion?
+
+**Elections**
+
+4. Electing the president: Why can a president win with fewer votes?
+5. Who gets represented: Why does Wyoming have as many senators as California?
+6. Two parties: Why are there only two parties?
+
+**The framework**
+
+7. Fifty states: Why is it legal in one state and a crime in the next?
+8. The Constitution: Why can’t they just change the Constitution?
 
 It works on phones and laptops, in light and dark mode. There is no sign-in, and progress is saved only in the student’s own browser.
 
