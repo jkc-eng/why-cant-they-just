@@ -1764,6 +1764,25 @@ details.dk>p{padding:0 14px 12px}
 .clip.yt .yt-by{margin:0;padding:8px 12px 9px;font-size:.8rem;line-height:1.45;color:var(--ink-3)}
 .clip.yt .yt-by a{color:var(--ink-3)}
 .scr.film .fm-note{margin:6px 0 0;font-weight:600}
+
+/* v28f: poll bars under "Where do you stand?" */
+.arg-poll{margin-top:14px;padding:14px 16px 12px;border-radius:12px;background:var(--card);box-shadow:var(--shadow)}
+.ap-h{margin:0 0 8px;font-weight:700}
+.ap-bar{display:flex;height:22px;border-radius:6px;overflow:hidden;background:var(--paper-2)}
+.ap-bar i{display:block;width:var(--w);transition:width .7s cubic-bezier(.2,.7,.3,1)}
+.arg-poll.grow .ap-bar i{width:0}
+.ap-a{--c:var(--mark)} .ap-b{--c:var(--ink-2)} .ap-m{--c:#F5DC9C} .ap-n{--c:color-mix(in srgb,var(--ink-3) 40%,var(--card))}
+.ap-bar i{background:var(--c)}
+.ap-bar i+i{border-left:2px solid var(--card)}
+.ap-key{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.ap-key li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:8px;align-items:start;font-size:.92rem;line-height:1.4;color:var(--ink-2)}
+.ap-key li b{color:var(--ink)}
+.ap-key li.me{color:var(--ink)}
+.ap-key li em{font-style:normal;font-weight:600;color:var(--ink-3)}
+.ap-sw{width:14px;height:14px;margin-top:3px;border-radius:3px;background:var(--c)}
+.ap-q{margin:10px 0 0;font-size:.84rem;line-height:1.45;color:var(--ink-3)}
+.arg-poll .fm-src{display:block;margin-top:6px;font-size:.8rem;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){.ap-bar i{transition:none}}
 </style>
 
 <header class="top">
@@ -5643,7 +5662,7 @@ function refFinal() {
     ks.sort((x, y) => plain(REF[x].t).localeCompare(plain(REF[y].t)));
     ks.forEach((k, i) => { const e = REF[k], x = ks.length > 1 ? String.fromCharCode(97 + i) : "";
       const yy = e.y === "n.d." ? (x ? "n.d.-" + x : "n.d.") : e.y + x;
-      e.s = e.y === "n.d." ? `${e.sa}, ${yy}` : `${e.sa} ${yy}`; e.r = `${e.a}. ${yy}${yy.endsWith(".") ? "" : "."} ${e.t}`; });
+      e.s = e.y === "n.d." ? `${e.sa}, ${yy}` : `${e.sa} ${yy}`; e.r = `${e.a}${e.a.endsWith(".") ? "" : "."} ${yy}${yy.endsWith(".") ? "" : "."} ${e.t}`; });
   });
 }
 function cite(k, loc) {
@@ -6396,6 +6415,61 @@ document.addEventListener("click", e => {
   fr.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; fr.allowFullscreen = true; fr.referrerPolicy = "strict-origin-when-cross-origin";
   a.replaceWith(fr); box.classList.add("on");
 });
+
+/* ---- v28f: "Where do you stand?" shows how Americans answered ---- */
+Object.assign(REF, {
+  pollPewEC: { sa: "Kiley", a: "Kiley, Jocelyn", y: "2024", t: "“Majority of Americans Continue to Favor Moving Away from Electoral College.” Pew Research Center, September 25.", u: "https://www.pewresearch.org/short-reads/2024/09/25/majority-of-americans-continue-to-favor-moving-away-from-electoral-college/" },
+  pollPewPres: { sa: "Borelli", a: "Borelli, Gabriel", y: "2025", t: "“Most Americans Say It Would Be ‘Too Risky’ to Give Presidents, Including Trump, More Power.” Pew Research Center, February 14.", u: "https://www.pewresearch.org/short-reads/2025/02/14/most-americans-say-it-would-be-too-risky-to-give-presidents-including-trump-more-power/" },
+  pollMonmouth: { sa: "Monmouth University Polling Institute", a: "Monmouth University Polling Institute", y: "2021", t: "“Public Divided on Filibuster Reform, but Few Want to Dump It Entirely.” April 29.", u: "https://www.monmouth.edu/polling-institute/reports/MonmouthPoll_US_042921/" },
+  pollMarquette: { sa: "Marquette Law School Poll", a: "Marquette Law School Poll", y: "2026", t: "“Marquette Law School Supreme Court Poll, May 20–26, 2026: Toplines.” Accessed November 14, 2026.", u: "https://law.marquette.edu/assets/community/poll/MLSPSC32/MLSPSC32Toplines.html" },
+  pollYouGov: { sa: "Orth", a: "Orth, Taylor", y: "2025", t: "“Americans Are Divided about Whether Congressional Districts Are Drawn Fairly.” YouGov, November 11.", u: "https://yougov.com/en-us/articles/53375-americans-divided-about-congressional-districts-drawn-fairly-gerrymandering-economist-yougov-poll" },
+  pollGallup: { sa: "Jones", a: "Jones, Jeffrey M.", y: "2025", t: "“Americans See Need for Third Party, but Offer Soft Support.” Gallup, October 20.", u: "https://news.gallup.com/poll/696521/americans-need-third-party-offer-soft-support.aspx" }
+});
+const ARG_POLL = new Map([
+  [ARG_EC, { who: "Pew Research Center", when: "August 26–September 2, 2024", n: "9,720 adults",
+    q: "Thinking about the way the president is elected in this country, would you prefer to …", src: "pollPewEC",
+    seg: [["a", 35, "Keep current system so the candidate who wins Electoral College vote wins"], ["b", 63, "Change the current system so the candidate who receives the most votes wins"]] }],
+  [ARG_PRES, { who: "Pew Research Center", when: "January 27–February 2, 2025", n: "half of 5,086 adults",
+    ql: "Pew Research Center asked half of 5,086 adults which of two statements came closer to their view", src: "pollPewPres",
+    seg: [["a", 21, "Many of the country’s problems could be dealt with more effectively if U.S. presidents didn’t have to worry so much about Congress or the courts"], ["b", 78, "It would be too risky to give U.S. presidents more power to deal directly with many of the country’s problems"]],
+    note: "The other half were asked about Donald Trump by name: 65% said too risky, 33% said more effective." }],
+  [ARG_FILI, { who: "Monmouth University", when: "April 8–12, 2021", n: "800 adults",
+    q: "Do you think the Senate should get rid of the filibuster entirely, keep it but reform how it can be used, or keep it as is with no changes?", src: "pollMonmouth",
+    seg: [["a", 38, "Keep it as is with no changes"], ["m", 38, "Keep it but reform how it can be used"], ["b", 19, "Get rid of it entirely"], ["n", 6, "Don’t know"]],
+    note: "National polls on the filibuster are rare. In the same poll, 29% said they had never heard of it." }],
+  [ARG_COURT, { who: "Marquette Law School Poll", when: "May 20–26, 2026", n: "1,001 adults",
+    ql: "The Marquette Law School Poll asked 1,001 adults whether they favor or oppose this proposal: “Have justices serve a fixed term on the U.S. Supreme Court rather than serving life terms”", src: "pollMarquette",
+    seg: [["a", 79, "Favor a fixed term"], ["b", 21, "Oppose"]], note: "The poll asked about a fixed term without naming a length." }],
+  [ARG_LINES, { who: "The Economist/YouGov Poll", when: "November 7–10, 2025", n: "1,663 adult citizens",
+    q: "Who do you think should draw congressional districts in your state?", src: "pollYouGov",
+    seg: [["a", 19, "The state legislature"], ["b", 50, "An independent commission"], ["n", 31, "Not sure"]] }],
+  [ARG_PARTY, { who: "Gallup", when: "September 2–16, 2025", n: "",
+    q: "In your view, do the Republican and Democratic parties do an adequate job of representing the American people, or do they do such a poor job that a third major party is needed?", src: "pollGallup",
+    seg: [["a", 30, "Do an adequate job"], ["b", 62, "A third major party is needed"], ["n", 8, "No opinion", true]] }]
+]);
+ARG_POLL.forEach(P => REF_EXTRA.add(P.src));
+const argPollHTML = (P, mine, fresh) => {
+  const tot = Math.max(100, P.seg.reduce((s, x) => s + x[1], 0));
+  return `<div class="arg-poll${fresh ? " grow" : ""}" aria-live="polite"><p class="ap-h">How Americans answered</p>
+    <div class="ap-bar" aria-hidden="true">${P.seg.map(([k, v]) => `<i class="ap-${k}${k === mine ? " me" : ""}" style="--w:${(100 * v / tot).toFixed(2)}%"></i>`).join("")}</div>
+    <ul class="ap-key">${P.seg.map(([k, v, lab, nonum]) => `<li class="ap-${k}${k === mine ? " me" : ""}"><span class="ap-sw"></span><span>${nonum ? "" : `<b>${v}%</b> `}${lab}${k === mine ? ` <em>· closest to your answer</em>` : ""}</span></li>`).join("")}</ul>
+    <p class="ap-q">${P.ql ? P.ql : `${P.who} asked${P.n ? " " + P.n : ""}: “${P.q}”`} (${P.when}).${P.note ? " " + P.note : ""}</p>
+    <span class="fm-src">Source: ${cite(P.src)}</span></div>`;
+};
+renderStep = (fn => function () {
+  fn();
+  if (!cur) return; const s = cur.ch.steps[cur.i], inner = $("#p-inner"), you = inner && $(".arg-you", inner); if (!s || !you) return;
+  const P = ARG_POLL.get(s); if (!P) { you.remove(); return; }
+  PROG.stand = PROG.stand || {}; const key = s.title;
+  const show = (pick, fresh) => {
+    $$(".chip", you).forEach(x => x.setAttribute("aria-pressed", x.dataset.s === pick));
+    const old = $(".arg-poll", you); if (old) old.remove();
+    you.insertAdjacentHTML("beforeend", argPollHTML(P, pick, fresh));
+    if (fresh) requestAnimationFrame(() => requestAnimationFrame(() => { const g = $(".arg-poll", you); if (g) g.classList.remove("grow"); }));
+  };
+  $$(".chip", you).forEach(b => b.onclick = () => { PROG.stand[key] = b.dataset.s; saveProg(); show(b.dataset.s, true); });
+  if (PROG.stand[key]) show(PROG.stand[key], false);
+})(renderStep);
 renderHome();
 route();
 </script>
