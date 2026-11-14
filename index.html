@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Why Can’t They Just…?</title>
-<meta name="description" content="An interactive guide to how American politics works: eight short chapters on the three branches, elections, the states and the Constitution, with things to tap, drag and guess. By Jens Kjeldgaard-Christiansen, Aarhus University.">
+<meta name="description" content="An interactive guide to how American politics works: nine short chapters on the three branches, elections, the states and the Constitution, with things to tap, drag and guess. By Jens Kjeldgaard-Christiansen, Aarhus University.">
 <meta name="author" content="Jens Kjeldgaard-Christiansen">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Why Can’t They Just…?">
 <meta property="og:title" content="Why Can’t They Just…? How American politics works">
-<meta property="og:description" content="An interactive guide to how American politics works: eight short chapters on the three branches, elections, the states and the Constitution, with things to tap, drag and guess. By Jens Kjeldgaard-Christiansen, Aarhus University.">
+<meta property="og:description" content="An interactive guide to how American politics works: nine short chapters on the three branches, elections, the states and the Constitution, with things to tap, drag and guess. By Jens Kjeldgaard-Christiansen, Aarhus University.">
 <meta property="og:url" content="https://jkc-eng.github.io/why-cant-they-just/">
 <meta property="og:image" content="https://jkc-eng.github.io/why-cant-they-just/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -1770,14 +1770,14 @@ details.dk>p{padding:0 14px 12px}
       <figure><img src="img/hx_capitol.jpg" alt="The dome of the U.S. Capitol"><figcaption><b>Congress</b><span>Article I</span></figcaption></figure>
       <figure><img src="img/hx_white.jpg" alt="The White House at dusk"><figcaption><b>The president</b><span>Article II</span></figcaption></figure>
       <figure><img src="img/hx_court.jpg" alt="The front of the Supreme Court Building"><figcaption><b>The Supreme Court</b><span>Article III</span></figcaption></figure>
-      <div class="fpC-over"><div class="wrap"><h1 class="display">Why can’t they just<em>…?</em></h1><p class="fp-sub">How American politics works, in eight short chapters</p></div></div>
+      <div class="fpC-over"><div class="wrap"><h1 class="display">Why can’t they just<em>…?</em></h1><p class="fp-sub">How American politics works, in nine short chapters</p></div></div>
     </div>
     <div class="wrap fp-body">
-      <div><p class="byline">By <b>Jens Kjeldgaard-Christiansen</b><span>Department of English and American Studies Center Aarhus, Aarhus University</span></p><p class="lede">Eight short chapters on how the United States is governed: the three branches, the elections that fill them, and the states and the Constitution around them. You learn by tapping, dragging and guessing, with real maps, votes and documents.</p><div class="cta-row">
+      <div><p class="byline">By <b>Jens Kjeldgaard-Christiansen</b><span>Department of English and American Studies Center Aarhus, Aarhus University</span></p><p class="lede">Nine short chapters on how the United States is governed: the three branches, the elections that fill them, and the states and the Constitution around them. You learn by tapping, dragging and guessing, with real maps, votes and documents.</p><div class="cta-row">
           <button class="btn" id="start-btn">Start with chapter 1 <span class="arr">→</span></button>
           <button class="btn ghost" id="route-btn" type="button">Short on time? Take the short route</button>
         </div></div>
-      <div><p class="thesis"><b>The idea behind all eight:</b> the system splits power on purpose. Most laws need the House, the Senate and the president to agree, and each is elected separately. So big change is slow, and it usually takes broad agreement or a rare moment when one party holds all three.</p><p class="fp-cap"><b>The Capitol, the White House and the Supreme Court Building in Washington, D.C.</b> The Constitution sets up Congress in Article I, the presidency in Article II and the courts in Article III. Photos: Carol M. Highsmith, Library of Congress. No known restrictions.</p></div>
+      <div><p class="thesis"><b>The idea behind all nine:</b> the system splits power on purpose. Most laws need the House, the Senate and the president to agree, and each is elected separately. So big change is slow, and it usually takes broad agreement or a rare moment when one party holds all three.</p><p class="fp-cap"><b>The Capitol, the White House and the Supreme Court Building in Washington, D.C.</b> The Constitution sets up Congress in Article I, the presidency in Article II and the courts in Article III. Photos: Carol M. Highsmith, Library of Congress. No known restrictions.</p></div>
     </div>
   </section>
 
@@ -5331,8 +5331,9 @@ function renderHome() {
   $("#news-btn").onclick = () => openChapter("midterms", 0);
   $("#news-badge").textContent = PROG.done.midterms ? "Finished ✓" : `About ${(CH.find(c => c.id === "midterms") || {}).mins || 15} minutes`;
   updateWords();
-  $("#prog-txt").textContent = `${n} of ${MAIN.length} finished`;
-  $("#prog-segs").innerHTML = MAIN.map(c => `<b class="${PROG.done[c.id] ? "on" : ""}"></b>`).join("");
+  const M9 = CH.filter(c => !c.bonus || c.closing);
+  $("#prog-txt").textContent = `${M9.filter(c => PROG.done[c.id]).length} of ${M9.length} finished`;
+  $("#prog-segs").innerHTML = M9.map(c => `<b class="${PROG.done[c.id] ? "on" : ""}"></b>`).join("");
   $("#machine").innerHTML = machineSVG() + machineTiles(); paintMachine($("#machine"));
   $("#mc-count").innerHTML = `${n}<small> / ${MAIN.length}</small>`;
   const nxt = MAIN.find(c => !PROG.done[c.id] && !c.soon);
@@ -5601,9 +5602,9 @@ Object.assign(INTRO.states, { img: "hx2_stateline", pos: "50% 6%", ppos: "84% 8%
 Object.assign(INTRO.midterms, { pos: "50% 50%", ppos: "40% 50%" });
 const ixChapter = s => CH.find(c => c.steps.includes(s)) || {};
 introHTML = function (s) {
-  const d = s.d, src = `img/${d.img}.jpg`, c = ixChapter(s), main = CH.filter(x => !x.bonus).length;
+  const d = s.d, src = `img/${d.img}.jpg`, c = ixChapter(s), main = CH.filter(x => !x.bonus || x.closing).length;
   const srcset = d.lo ? "" : ` srcset="img/${d.img}_s.jpg 1000w, ${src} 2000w" sizes="100vw"`;
-  const k = c.bonus ? "Special chapter" : typeof s.n === "number" ? `Chapter ${s.n} of ${main}` : s.n;
+  const k = c.bonus ? "Special chapter" : typeof s.n === "number" ? `Chapter ${CH.indexOf(c) + 1} of ${main}` : s.n;
   return `<article class="step ix">
     <div class="ix-stage"><figure class="ix-fig"><img src="${src}"${srcset} alt="${d.alt}" style="--pos:${d.pos};--ppos:${d.ppos || d.pos}" decoding="async" fetchpriority="high"></figure>
       <div class="ix-over"><div class="wrap"><p class="ix-k">${k}</p><h2 class="ix-h">${d.h}</h2><p class="ix-q">${s.q || ""}</p>${c.mins ? `<p class="ix-m">About ${c.mins} minutes</p>` : ""}</div></div></div>
@@ -5644,34 +5645,34 @@ function cite(k, loc) {
 /* ---- v27c: one founding text per chapter, on its opening page ---- */
 const DOCS = {
   electoral: { head: "The Constitution, Article II, Section 1 (1787)", cite: [["const", "art. II, sec. 1"]],
-    text: ["Each State shall appoint, {in such Manner as the Legislature thereof may direct|in whatever way that state’s lawmakers decide}, a Number of Electors, equal to the whole Number of Senators and Representatives to which the State may be {entitled|given a right to} in the Congress […]"],
+    text: ["Each State shall appoint, {in such Manner as the Legislature thereof may direct|in whatever way that state’s lawmakers decide}, a Number of Electors, equal to the whole Number of Senators and Representatives to which the State may be entitled in the Congress […]"],
     read: "The clause never mentions the voters. It lets each state’s lawmakers decide how the state’s electors are chosen, and today every state lets its voters choose them. A state gets one elector for each of its members of Congress, so even the smallest state has three." },
   president: { head: "The Constitution, Articles I and II (1787)", cite: [["const", "art. I, sec. 1; art. II, secs. 1, 3"]],
     text: ["All {legislative Powers|powers to make laws} herein granted shall be {vested in|given to} a Congress of the United States, which shall consist of a Senate and House of Representatives.",
       "The {executive Power|power to carry out the laws} shall be vested in a President of the United States of America. […] he shall {take Care that the Laws be faithfully executed|make sure the laws are carried out as written} […]"],
     read: "The first sentence opens Article I, on Congress. The second opens Article II, on the president. Congress makes the laws, and the president carries them out. A president can ask for a law, campaign for it and veto one, but cannot pass one." },
   congress: { head: "The Constitution, Article I, Section 7 (1787)", cite: [["const", "art. I, sec. 7"]],
-    text: ["Every Bill which shall have passed the House of Representatives and the Senate, shall, before it become a Law, be presented to the President of the United States; If he {approve|agrees with it} he shall sign it, but if not he shall return it, with his {Objections|reasons for refusing} […]"],
+    text: ["Every Bill which shall have passed the House of Representatives and the Senate, shall, before it become a Law, be presented to the President of the United States; If he approve he shall sign it, but if not he shall return it, with his Objections […]"],
     read: "One sentence names three bodies, and each of them can stop a bill: the House, the Senate and the president. The House and the Senate must pass exactly the same text. Congress can still pass a bill the president has vetoed, but only with two thirds of both chambers." },
   court: { head: "Marbury v. Madison, opinion of Chief Justice John Marshall (1803)", cite: [["marbury", ""]],
     text: ["It is {emphatically the province and duty|clearly the job and the duty} of the judicial department to say what the law is. Those who apply the rule to particular cases, must of necessity {expound|explain} and interpret that rule. If two laws conflict with each other, the courts must decide on the {operation|effect} of each."],
     read: "The Constitution never says that courts may strike down laws. In this case the Supreme Court reasoned its way to that power: if an ordinary law conflicts with the Constitution, judges must follow the Constitution. The power is called judicial review, and it is how the Court came to decide questions such as abortion." },
   represented: { head: "The Constitution, Seventeenth Amendment (1913) and Article V (1787)", cite: [["amend", "amend. XVII"], ["const", "art. V"]],
-    text: ["The Senate of the United States shall be {composed of|made up of} two Senators from each State, elected by the people {thereof|of that state}, for six years […]",
-      "[…] no State, without its {Consent|agreement}, shall be {deprived of its equal Suffrage|denied its equal vote} in the Senate."],
+    text: ["The Senate of the United States shall be composed of two Senators from each State, elected by the people {thereof|of that state}, for six years […]",
+      "[…] no State, without its Consent, shall be {deprived of its equal Suffrage|denied its equal vote} in the Senate."],
     read: "Until 1913 the state legislatures chose the senators. The Seventeenth Amendment gave that choice to the voters but kept two senators for every state, whatever its size. Article V protects the rule: no amendment can take away a state’s equal vote in the Senate unless that state agrees." },
   parties: { head: "George Washington, Farewell Address (1796)", cite: [["washington", ""]],
     text: ["Let me now take a more comprehensive view, and warn you in the most solemn manner against the {baneful|harmful} effects of the spirit of party generally.",
-      "[…] It serves always to distract {the public councils|the bodies that debate for the public} and {enfeeble|weaken} the public administration. It agitates the community with {ill-founded|groundless} jealousies and false alarms, {kindles the animosity|stirs up the hatred} of one part against another […]"],
+      "[…] It serves always to distract {the public councils|the bodies that debate for the public} and {enfeeble|weaken} the public administration. It agitates the community with ill-founded jealousies and false alarms, kindles the animosity of one part against another […]"],
     read: "The Constitution does not mention political parties, and the first president used his farewell to warn against them. Parties had formed anyway while he was in office. Every president since 1853 has been either a Democrat or a Republican." },
   constitution: { head: "The Constitution, Article V (1787)", cite: [["const", "art. V"]],
-    text: ["The Congress, whenever two thirds of both Houses shall {deem it necessary|find it necessary}, shall propose Amendments to this Constitution, or, on the {Application|request} of the Legislatures of two thirds of the several States, shall call a Convention for proposing Amendments, which […] shall be valid […] as Part of this Constitution, when {ratified|approved} by the Legislatures of three fourths of the several States, or by Conventions in three fourths thereof […]"],
+    text: ["The Congress, whenever two thirds of both Houses shall deem it necessary, shall propose Amendments to this Constitution, or, on the {Application|request} of the Legislatures of two thirds of the several States, shall call a Convention for proposing Amendments, which […] shall be valid […] as Part of this Constitution, when {ratified|approved} by the Legislatures of three fourths of the several States, or by Conventions in three fourths thereof […]"],
     read: "A change needs two steps, and both are hard. First two thirds of both chambers of Congress must propose it. (The other route, a convention called by two thirds of the states, has never been used.) Then three fourths of the states, today 38 of 50, must approve it." },
   states: { head: "The Constitution, Tenth Amendment (1791)", cite: [["bor", "amend. X"]],
-    text: ["The powers not {delegated|handed over} to the United States by the Constitution, nor prohibited by it to the States, are {reserved to|kept by} the States {respectively|each for itself}, or to the people."],
+    text: ["The powers not delegated to the United States by the Constitution, nor prohibited by it to the States, are {reserved to|kept by} the States {respectively|each for itself}, or to the people."],
     read: "The key word is <em>delegated</em>. The federal government in Washington has only the powers the Constitution hands to it. Everything else stays with the states or with the people. Courts have read the federal powers broadly over time, but most of the law people live by, from crime to marriage to schools, is still state law." },
   midterms: { head: "The Constitution, Article I, Section 2 (1787)", cite: [["const", "art. I, sec. 2"]],
-    text: ["The House of Representatives shall be {composed of|made up of} Members chosen every second Year by the People of the several States […]"],
+    text: ["The House of Representatives shall be composed of Members chosen every second Year by the People of the several States […]"],
     read: "House members serve two years and the president four. So every president faces a national vote halfway through the term, when the whole House and a third of the Senate are elected." }
 };
 const docWords = s => s.replace(/\{([^|}]+)\|([^}]+)\}/g, (m, a, b) => `<span class="dw" role="button" tabindex="0" aria-expanded="false" title="Tap for plain English">${a}</span><span class="dw-p" hidden>${b}</span>`);
@@ -6011,7 +6012,7 @@ INTRO.together = { h: "Putting it together", img: "hx2_joint", pos: "50% 34%", p
   lead: "Each chapter showed one part of the system. Put together, the parts share one design: power is split among bodies that are elected separately, at different times, by different voters, and most decisions need several of them to agree. That makes it hard for any one side to govern alone. It is meant to be: the framers feared power gathered in one place.",
   facts: [["3", "separate elections: House, Senate, president"], ["60", "senators to end debate on most bills"], ["⅔", "of both chambers to override a veto"]] };
 DOCS.together = { head: "James Madison, The Federalist No. 51 (1788)", cite: [["fed51", ""]],
-  text: ["Ambition must be made to {counteract|work against} ambition. The interest of the man must be connected with the constitutional rights of {the place|the office he holds}. It may be {a reflection on|an unflattering comment on} human nature, that such {devices|arrangements} should be necessary to control the abuses of government. But what is government itself, but the greatest of all reflections on human nature? If men were angels, no government would be necessary."],
+  text: ["Ambition must be made to counteract ambition. The interest of the man must be connected with the constitutional rights of {the place|the office he holds}. It may be {a reflection on|an unflattering comment on} human nature, that such {devices|arrangements} should be necessary to control the abuses of government. But what is government itself, but the greatest of all reflections on human nature? If men were angels, no government would be necessary."],
   read: "Madison wrote this to defend the new Constitution. His argument: since people in power will always want more, give each branch the means and the motive to resist the others. Every gate in this chapter is an example." };
 
 /* one law's journey */
@@ -6173,8 +6174,8 @@ TOG.steps.push({
 CH.splice(CH.findIndex(c => c.id === "midterms"), 0, TOG);
 
 /* chapter title, opener kicker, home card, and a way in from the last main chapter */
-openChapter = (f => function (id, i) { f(id, i); if (cur && cur.ch.closing) $("#p-title").innerHTML = `<b class="pt-l">Closing chapter · ${cur.ch.topic}</b><b class="pt-s">Closing chapter</b><span>${cur.ch.q}</span>`; })(openChapter);
-introHTML = (f => function (s) { const h = f(s); return ixChapter(s).closing ? h.replace(`<p class="ix-k">Special chapter</p>`, `<p class="ix-k">Closing chapter</p>`) : h; })(introHTML);
+openChapter = (f => function (id, i) { f(id, i); if (cur && cur.ch.closing) { const n = CH.filter(x => !x.bonus || x.closing).length; $("#p-title").innerHTML = `<b class="pt-l">${n} · ${cur.ch.topic}</b><b class="pt-s">Chapter ${n}</b><span>${cur.ch.q}</span>`; } })(openChapter);
+introHTML = (f => function (s) { const h = f(s); const n = CH.filter(x => !x.bonus || x.closing).length; return ixChapter(s).closing ? h.replace(`<p class="ix-k">Special chapter</p>`, `<p class="ix-k">Chapter ${n} of ${n}</p>`) : h; })(introHTML);
 renderHome = (f => function () {
   f();
   const c = TOG, done = PROG.done[c.id], allMain = CH.filter(x => !x.bonus).every(x => PROG.done[x.id]);
@@ -6311,7 +6312,7 @@ function fpToc(box, cards) {
   const nxt = CH.find(c => !c.bonus && !PROG.done[c.id]);
   const row = c => { const a = cards[c.id], meta = a ? $(".meta", a).textContent.replace(/ · .*/, "") : "";
     const st = PROG.done[c.id] ? `<span class="fp-st">Finished ✓</span>` : c === nxt ? `<span class="fp-st">Start here</span>` : "";
-    return `<li><a class="fp-row" data-id="${c.id}" href="#${c.id}-1"><span class="fp-n">${c.bonus ? "" : CH.indexOf(c) + 1}</span><span class="fp-t"><b>${FP_NAME[c.id] || "Putting it together"}${st}</b><span class="fp-q">${c.q}</span><span class="fp-d">${c.teaser || ""}</span></span><span class="fp-m mono">${meta}</span><span class="fp-th"><img src="${IMG[c.img].file}" alt="" loading="lazy"></span></a></li>`; };
+    return `<li><a class="fp-row" data-id="${c.id}" href="#${c.id}-1"><span class="fp-n">${c.closing ? CH.filter(x => !x.bonus).length + 1 : c.bonus ? "" : CH.indexOf(c) + 1}</span><span class="fp-t"><b>${FP_NAME[c.id] || "Putting it together"}${st}</b><span class="fp-q">${c.q}</span><span class="fp-d">${c.teaser || ""}</span></span><span class="fp-m mono">${meta}</span><span class="fp-th"><img src="${IMG[c.img].file}" alt="" loading="lazy"></span></a></li>`; };
   FP_PARTS.forEach(([h, ids, d]) => { const sec = document.createElement("div"); sec.className = "fp-part";
     sec.innerHTML = `<div class="fp-ph"><h3>${h}</h3><p>${d}</p></div><ol class="fp-toc">${ids.map(id => row(CH.find(c => c.id === id))).join("")}</ol>`; box.append(sec); });
   const tg = CH.find(c => c.id === "together"); if (tg) { const sec = document.createElement("div"); sec.className = "fp-part";
@@ -6334,6 +6335,23 @@ renderHome = (fn => function () {
   else { fpCards(box, cards); if (cards.together) { const sec = document.createElement("div"); sec.className = "fp-part fp-close"; sec.append(cards.together); box.append(sec); } }
   if (FP_V === "B") fpNumbers();
 })(renderHome);
+
+/* ---- v28c: a portrait on every race card ---- */
+Object.assign(IMG, {
+  p_jackson: { file: "img/p_jackson.jpg", credit: "Troy Jackson in the Maine Senate chamber, January 2, 2023. Photo: ArenLeBrun, CC0 (cropped).", url: "https://commons.wikimedia.org/wiki/File:Troy_Jackson_in_the_Senate_Chamber_(cropped).jpg" },
+  p_cooper: { file: "img/p_cooper.jpg", credit: "Roy Cooper at a campaign rally in Durham, North Carolina, April 9, 2026. Photo: NetwonsBucket, CC BY-SA 4.0 (cropped).", url: "https://commons.wikimedia.org/wiki/File:Roy_Cooper_at_Roy_Cooper_Rally_April_2026-2_(cropped).jpg" },
+  p_andrews: { file: "img/p_andrews.jpg", credit: "Annie Andrews, November 11, 2026, cropped from a photo with Representative Jim Clyburn. U.S. House of Representatives. Public domain.", url: "https://commons.wikimedia.org/wiki/File:Jim_Clyburn_and_Annie_Andrews_in_November_2026_(cropped_2).jpg" }
+});
+Object.assign(PORTRAIT, { jackson: { file: "img/p_jackson.jpg", alt: "Troy Jackson" }, cooper: { file: "img/p_cooper.jpg", alt: "Roy Cooper" }, andrews: { file: "img/p_andrews.jpg", alt: "Annie Andrews" } });
+{ const sc = RACES.find(r => r.st === "SC"); if (sc) sc.img = "andrews"; }
+
+/* ---- v28d: midterms opener, a 2026 "Vote here" sign ---- */
+delete IMG.g_mid2022;
+IMG.hx_vote2026 = { file: "img/hx_vote2026_s.jpg", credit: "A “Vote here” sign at an early-voting site in Hemby Bridge, North Carolina, October 20, 2026. Photo: Wesley Fryer, CC BY 4.0, Wikimedia Commons.", url: "https://commons.wikimedia.org/wiki/File:Hemby_NC_Early_Voting_Location_Sign_-_Oct_2026.jpg" };
+Object.assign(INTRO.midterms, { img: "hx_vote2026", lo: false, pos: "50% 56%", ppos: "62% 56%",
+  alt: "A red, white and blue “Vote here” sign with a big red arrow, standing on the grass outside an early-voting site",
+  cap: "<b>A “Vote here” sign at an early-voting site in Hemby Bridge, North Carolina, October 20, 2026.</b> Most states let people vote in person in the days or weeks before Election Day. Photo: Wesley Fryer, <a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, Wikimedia Commons.",
+  url: "https://commons.wikimedia.org/wiki/File:Hemby_NC_Early_Voting_Location_Sign_-_Oct_2026.jpg" });
 renderHome();
 route();
 </script>
