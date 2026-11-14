@@ -8,7 +8,7 @@ By Jens Kjeldgaard-Christiansen, Department of English and American Studies Cent
 
 ## What it is
 
-Eight questions Danes ask about American politics. Each question is a short chapter of about 10 minutes, with things to tap, drag or guess, and Denmark as the point of comparison. Every chapter ends with a short quiz, and a special chapter covers the 2026 midterms.
+Eight questions Danes ask about American politics. Each question is a short chapter of about 10 minutes, with things to tap, drag or guess, a short founding text, and a brief comparison with Denmark where it helps. Every chapter ends with a short answer and a quiz. A closing chapter puts the pieces together, a short route takes students through nine hands-on stops, and a special chapter covers the 2026 midterms.
 
 1. Why can a president win with fewer votes?
 2. Why can’t the president just pass a law?
@@ -23,7 +23,7 @@ It works on phones and laptops, in light and dark mode. There is no sign-in, and
 
 ## Sources and credits
 
-Each step lists its sources. Every photo, cartoon, painting and clip is credited where it appears in the app. The pictures and clips keep their own licenses; several photos from Wikimedia Commons are under Creative Commons licenses.
+Each step lists its sources in Chicago author-date style, and a References page lists them in full. Official records are used wherever they exist. Every photo, cartoon, painting and clip is credited where it appears in the app. The pictures and clips keep their own licenses; several photos from Wikimedia Commons are under Creative Commons licenses.
 
 ## Files
 
