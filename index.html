@@ -1755,6 +1755,15 @@ details.dk>p{padding:0 14px 12px}
 @media (max-width:900px){.fp-row{grid-template-columns:2.6rem minmax(0,1fr) 110px}.fp-row .fp-m{display:none}.fp-row .fp-th img{width:110px;height:76px}}
 @media (max-width:640px){.fpC-tri img{height:300px}.fpC-tri figcaption{padding:10px 8px 30px}.fpC-tri figcaption b{font-size:1rem}.fpC-tri figcaption span{font-size:.75rem}.fpC-over{padding-top:60px}.fpC-over .fp-sub{font-size:1.05rem}
   .fp-row{grid-template-columns:2.2rem minmax(0,1fr) 84px;gap:4px 12px}.fp-row .fp-n{font-size:2rem}.fp-row .fp-t b{font-size:1.4rem}.fp-row .fp-d{display:none}.fp-row .fp-th img{width:84px;height:64px}}
+
+/* v28e: YouTube excerpt inside a Film and TV box */
+.scr.film .clip.yt{grid-template-columns:minmax(0,1fr);margin:12px 0 4px;box-shadow:none}
+.clip.yt .clip-go{aspect-ratio:4/3;min-height:0}
+.clip.yt .clip-go img{opacity:.95}
+.clip.yt .yt-fr{display:block;width:100%;aspect-ratio:4/3;border:0;background:#000}
+.clip.yt .yt-by{margin:0;padding:8px 12px 9px;font-size:.8rem;line-height:1.45;color:var(--ink-3)}
+.clip.yt .yt-by a{color:var(--ink-3)}
+.scr.film .fm-note{margin:6px 0 0;font-weight:600}
 </style>
 
 <header class="top">
@@ -2991,7 +3000,7 @@ const COURSE = {
       ["Committee", "Every bill goes to a committee first. Most die there, never even voted on.", "Committee approves it", null],
       ["House vote", `It needs 218 of 435 votes. Democrats will have about ${hD} seats.`, "Passes the House", null],
       ["Senate debate", `To end debate it needs 60 senators. Democrats will have ${sD}, counting two independents. So ${60 - sD} Republicans must join, or the bill is ${T("filibuster", "filibustered")}.`, `Persuade ${60 - sD} Republicans`, "Give up"],
-      ["Senate vote", "With debate over, a simple majority passes it.", "Passes the Senate", null],
+      ["Senate vote", "With debate over, the bill itself needs only a simple majority: 51 of the 100 senators. If they split 50 to 50, the vice president, who presides over the Senate, casts the deciding vote. That is the only time the vice president votes.", "Passes the Senate", null],
       ["The president", "The bill reaches Trump’s desk. He opposes it.", "Send it to the White House", null],
       ["Override", `Overriding a veto takes 290 House members and 67 senators if everyone votes. Democrats would need about ${290 - hD} House Republicans and ${67 - sD} Republican senators to switch.`, "Try to override", null]
     ];
@@ -3019,7 +3028,7 @@ const CLOT = [[65, 2], [66, 2], [67, 1], [68, 0], [69, 7], [70, 1], [71, 1], [72
 const FILI = {
   kicker: "The filibuster",
   title: "In the Senate, 60 is the real majority.",
-  body: `<p>A Senate debate ends only when 60 senators vote to end it. This vote is called ${T("cloture", "cloture")}. Without it, a minority can talk a bill to death: a ${T("filibuster", "filibuster")}.</p><p>In 1957 Strom Thurmond spoke for 24 hours and 18 minutes against a civil rights bill. Today nobody has to talk: the threat is enough, so almost every major bill needs 60 votes. The big exception is budget bills passed under a special procedure called reconciliation: they need only 51, which is how Trump’s 2025 tax law passed the Senate, 51 to 50. The chart counts motions to end debate. <strong>Tap a bar.</strong></p>`,
+  body: `<p>A Senate debate ends only when 60 senators vote to end it. This vote is called ${T("cloture", "cloture")}. Without it, a minority can talk a bill to death: a ${T("filibuster", "filibuster")}.</p><p>In 1957 Strom Thurmond spoke for 24 hours and 18 minutes against a civil rights bill. Today nobody has to talk: the threat is enough, so almost every major bill needs 60 votes. The big exception is budget bills passed under a special procedure called reconciliation: they need only a simple majority. That is how Trump’s 2025 tax law passed: the senators split 50 to 50, and Vice President JD Vance broke the tie. The chart counts motions to end debate. <strong>Tap a bar.</strong></p>`,
   sources: ["senCloture", "senFil"],
   render(v) {
     const PH = phone(), W = PH ? 400 : 720, H = PH ? 270 : 300, L = 40, B = 30, max = 340, n = CLOT.length, bw = (W - L - 10) / n;
@@ -3824,14 +3833,14 @@ VETO.guess = { id: "veto", q: "Since 1789, presidents have vetoed 2,599 bills. H
   why: "112 times, about one veto in 23. Two-thirds of both chambers is a very high bar." };
 
 COURSE.body = `<p>Members of Congress introduce thousands of bills, and every one of them faces the same obstacle course. <strong>Guess first.</strong></p><p>Then try it yourself. From January 2027 Democrats will run both chambers, but Trump is still president. <strong>Can they pass a bill he opposes?</strong></p>`;
-COURSE.guess = { id: "course", q: "In 2023 and 2024, members of Congress introduced about 19,300 bills and resolutions. How many became law?", o: ["274", "1,900", "6,400", "11,000"], a: 0,
+COURSE.guess = { id: "course2", q: "In 2023 and 2024, members of Congress introduced about 19,300 bills and resolutions. How many became law?", o: ["93", "274", "1,912", "6,437"], a: 1,
   why: "Only 274, about one in 70. Most never even got a vote." };
 
 REVIEW.title = "Nine judges can cancel a law passed by Congress.";
 REVIEW.guess = { id: "review", q: "By 2014, how many federal laws had the Supreme Court struck down, in whole or in part?", o: ["About 10", "About 50", "About 180", "About 1,800"], a: 2,
   why: "176, and hundreds of state laws on top. Now count Denmark’s." };
 
-S5_SENATE.guess = { id: "senate", q: "The 26 smallest states elect 52 of the 100 senators. What share of Americans live in them?", o: ["About 18%", "About 30%", "About 40%", "About 50%"], a: 0,
+S5_SENATE.guess = { id: "senate", q: "The 26 smallest states elect 52 of the 100 senators. What share of Americans live in them?", o: ["About 18%", "About 27%", "About 39%", "About 52%"], a: 0,
   why: "About 18%. Fewer than one American in five elects a majority of the Senate." };
 QUIZ5[1] = { q: "In most states, who draws the districts for the House of Representatives?", o: ["The state legislature", "A national election commission", "The Supreme Court", "Each party draws half"], a: 0,
   why: "In most states the legislature draws the map, so the party that controls it can draw districts that help itself. A few states, such as Arizona and Michigan, use independent commissions." };
@@ -4689,7 +4698,7 @@ function clipHTML(k) {
   </div>`;
 }
 document.addEventListener("click", e => {
-  const b = e.target.closest && e.target.closest(".clip-go"); if (!b) return;
+  const b = e.target.closest && e.target.closest(".clip-go"); if (!b || b.closest(".clip.yt")) return;
   const box = b.closest(".clip"), k = box.dataset.clip;
   const v = document.createElement("video");
   v.className = "clip-v"; v.controls = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = "auto"; v.poster = `vid/${k}.jpg`;
@@ -6352,6 +6361,41 @@ Object.assign(INTRO.midterms, { img: "hx_vote2026", lo: false, pos: "50% 56%", p
   alt: "A red, white and blue “Vote here” sign with a big red arrow, standing on the grass outside an early-voting site",
   cap: "<b>A “Vote here” sign at an early-voting site in Hemby Bridge, North Carolina, October 20, 2026.</b> Most states let people vote in person in the days or weeks before Election Day. Photo: Wesley Fryer, <a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\" rel=\"noopener\">CC BY 4.0</a>, Wikimedia Commons.",
   url: "https://commons.wikimedia.org/wiki/File:Hemby_NC_Early_Voting_Location_Sign_-_Oct_2026.jpg" });
+
+/* ---- v28e: "I'm Just a Bill" plays in its Film and TV box (official YouTube excerpt, loaded on tap) ---- */
+FILI.sources = FILI.sources.concat(FILI.sources.includes("senVP") ? [] : ["senVP"]);
+COURSE.sources = COURSE.sources.concat(COURSE.sources.includes("senVP") ? [] : ["senVP"]);
+const YT_FILM = { justabill: { id: "_I_CMwj-j-k", len: "1:04", t: "“I’m Just a Bill” (1976), an excerpt",
+  by: "Excerpt from <em>Schoolhouse Rock!</em> (ABC), posted by Disney Channel Animation on YouTube." } };
+{ const fs = id => (FILM.find(x => x[2].id === id) || [])[2];
+  const jb = fs("justabill"); if (jb) { jb.q = null; jb.note = "Bill makes it. Most real bills don’t: the guess on this page shows how few do."; }
+  const ms = fs("mrsmith"); if (ms) Object.assign(ms, { id: "mrsmith2",
+    q: "When the film came out in 1939, what did it take to end a Senate debate?",
+    o: ["60 votes, the same as today", "Two-thirds of those voting", "A simple majority of senators"], a: 1,
+    rec: "Two-thirds of the senators voting, under a rule the Senate adopted in 1917. Before that, there was no way at all to end a debate and force a vote. In 1975 the Senate lowered the bar to three-fifths of all senators: 60 when every seat is filled.",
+    src: ["mrSmith", "sen-cloture"] }); }
+const ytCanEmbed = () => /(^|\.)github\.io$|^localhost$|^127\./.test(location.hostname);
+filmHTML = (f => function (x) {
+  const h = f(x), y = YT_FILM[x.id]; if (!y) return h;
+  const url = `https://www.youtube.com/watch?v=${y.id}`;
+  const v = `<div class="clip yt no-swipe" data-yt="${y.id}" style="--ar:4/3"><a class="clip-go" href="${url}" target="_blank" rel="noopener" aria-label="Play the cartoon: ${y.t.replace(/[“”]/g, "")}, ${y.len}"><img src="https://i.ytimg.com/vi/${y.id}/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><span class="clip-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span><span class="clip-len">${y.len}</span></a><p class="yt-by">${y.by} <a href="${url}" target="_blank" rel="noopener">Open on YouTube</a></p></div>`;
+  const h2 = h.replace(/(<p class="fm-scene">[\s\S]*?<\/p>)/, `$1${v}`);
+  return x.q ? h2 : h2.replace(/<p class="fm-q">[\s\S]*$/, `<p class="fm-note">${x.note}</p></aside>`);
+})(filmHTML);
+filmMount = (m => function (box, f) { if (f.q) m(box, f); })(filmMount);
+/* one sound per tap: chips and tiles already sound on press, so their own handlers' tap/toggle is dropped */
+{ const p0 = SND.play; let quiet = false;
+  document.addEventListener("click", e => { const el = e.target.closest && e.target.closest(".chip, .tile, #dkbtn"); if (!el || el.disabled) return; quiet = true; setTimeout(() => { quiet = false; }, 0); }, true);
+  SND.play = (k, x) => (quiet && (k === "tap" || k === "toggle")) ? undefined : p0(k, x); }
+document.addEventListener("click", e => {
+  const a = e.target.closest && e.target.closest(".clip.yt .clip-go"); if (!a || !ytCanEmbed()) return;
+  e.preventDefault(); const box = a.closest(".clip.yt"), id = box.dataset.yt;
+  const fr = document.createElement("iframe");
+  fr.className = "yt-fr"; fr.title = a.getAttribute("aria-label").replace(/^Play the cartoon: /, "");
+  fr.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
+  fr.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; fr.allowFullscreen = true; fr.referrerPolicy = "strict-origin-when-cross-origin";
+  a.replaceWith(fr); box.classList.add("on");
+});
 renderHome();
 route();
 </script>
