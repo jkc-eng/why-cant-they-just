@@ -1867,6 +1867,23 @@ details.dk>p{padding:0 14px 12px}
 .sb-plot.half .sb-t::before{content:"";position:absolute;z-index:1;left:-10px;right:-10px;bottom:calc((100% - 3.6rem) / 2);border-top:1.5px dashed var(--ink-2)}
 .sb-plot.half .sb-c:first-child .sb-t::after{content:"half";position:absolute;right:calc(100% + 14px);bottom:calc((100% - 3.6rem) / 2);transform:translateY(50%);font-size:.78rem;color:var(--ink-2)}
 @media (prefers-reduced-motion:reduce){.sb-t i{transition:none}}
+/* v39: simpler chapter endings */
+.done-wrap h2.end-q{font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.08}
+.cic{margin:0 0 24px;padding:16px 18px;border-radius:12px;background:var(--card);box-shadow:var(--shadow)}
+.cic h3{margin:0 0 10px;font-size:1.05rem}
+.cic ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.cic li{font-size:.95rem;line-height:1.45;color:var(--ink-2)}
+.cic li b{color:var(--ink)}
+/* v39: why not make them states */
+.fa{margin-top:16px}
+.fa h3{margin:0 0 6px;font-size:1.05rem}
+.fa-why{margin:0 0 12px;font-size:.95rem;line-height:1.45;color:var(--ink-2)}
+.fa-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px}
+.fa-k{margin:0 0 4px;font-weight:700;font-size:.92rem}
+.fa ul{margin:0;padding-left:1.1em;display:grid;gap:6px;font-size:.92rem;line-height:1.45;color:var(--ink-2)}
+.fa-pr{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--rule);font-size:.92rem;line-height:1.45;color:var(--ink-2)}
+.fa-pr b{color:var(--ink)}
+@media (max-width:640px){.fa-cols{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 <header class="top">
@@ -6317,9 +6334,7 @@ const SHORT = {
   midterms: "Democrats won control of both the House and the Senate, halfway through Trump’s second term. From January 2027 the government is divided: Congress can block, investigate and hold up spending, but Democrats cannot override a veto on their own.",
   together: "Because the system splits power among the House, the Senate and the president, each elected separately, and most laws need all three. Since 1969, one party has held all three in only 9 of 30 Congresses."
 };
-CH.forEach(c => { const d = c.steps[c.steps.length - 1], r = d.render; if (!SHORT[c.id]) return;
-  d.render = function (v) { r.call(this, v); const ul = $(".done-k", v) && $("ul.learned", v);
-    if (ul) ul.insertAdjacentHTML("beforebegin", `<p class="short-a"><b>The short answer.</b> ${SHORT[c.id]}</p>`); }; });
+/* v39: short answers now come from END below */
 
 /* ---- v27g: the short route: nine hands-on stops ---- */
 const ROUTE = [["congress", "The obstacle course"], ["president", "Predict what happens"], ["court", "The power to say no"], ["electoral", "Your turn"],
@@ -6618,8 +6633,7 @@ const WCC = {
     ["What the old words mean today", "court", "The Supreme Court decides, case by case, as with the Second Amendment. A Court with new members can read the same words differently."]]
 };
 const wccHTML = id => WCC[id] ? `<section class="wcc"><h3>Who could change it?</h3><ul>${WCC[id].map(([r, k, x]) => `<li><p class="wcc-r"><b>${r}</b><span class="wcc-t wcc-${k}">${WCC_TAG[k]}</span></p><p class="wcc-x">${x}</p></li>`).join("")}</ul></section>` : "";
-CH.forEach(c => { if (!WCC[c.id]) return; const d = c.steps[c.steps.length - 1], r = d.render;
-  d.render = function (v) { r.call(this, v); const ul = $(".done-k", v) && $("ul.learned", v); if (ul && !$(".wcc", v)) ul.insertAdjacentHTML("afterend", wccHTML(c.id)); }; });
+/* v39: replaced by the simpler chapter endings below */
 
 /* short route: "Next stop" is the main button; the route ends on its own screen */
 let routeEnd = false;
@@ -6837,6 +6851,103 @@ S5_SENATE.render = function (v) {
   sel.onchange = () => { if (!sel.value) return; SND.play("tap"); $$(".chip[data-g]", v).forEach(x => x.setAttribute("aria-pressed", "false")); one(sel.value); };
   G.ca();
 };
+/* ---- v39: simpler chapter endings: the chapter's question, a short answer, three points, "Could it change?" ---- */
+const END = {
+  congress: { a: "Because a bill has to clear several gates, and a different majority holds each one: the House, the Senate and the president. One no at any gate is enough.",
+    b: ["A bill must pass the House and the Senate in exactly the same words, and then get the president’s signature, unless two-thirds of both chambers override a veto.",
+      "In the Senate, 41 of 100 senators can block most bills with a filibuster. Once rare, filibuster threats are now routine, with hundreds per Congress.",
+      "If Congress and the president cannot agree on money, much of the government shuts down."],
+    c: [["House, Senate and president", "only by amending the Constitution, which sets out how a bill becomes law."],
+      ["The filibuster", "yes, quite easily on paper. It is a Senate rule, not part of the Constitution, and Senate majorities already cut it back for nominees in 2013 and 2017."],
+      ["Shutdowns", "yes, by law. Congress could keep the money flowing automatically when a deadline passes, but it has never agreed to."]] },
+  president: { a: "Because the Constitution gives the power to make laws to Congress. The president can propose, bargain and veto, but cannot pass a law.",
+    b: ["The president is elected separately, for a fixed term. Congress cannot vote a president out. It can only impeach, and removal takes two-thirds of the Senate.",
+      "The president can veto any bill. Congress needs two-thirds of both chambers to override, and has managed it 112 times since 1789.",
+      "The president commands the military and can pardon, but laws, taxes and war belong to Congress."],
+    c: [["The fixed term", "only by amending the Constitution, which sets the four-year term and the rules for impeachment."],
+      ["The veto", "only by amending the Constitution. The veto and the two-thirds override are in Article I."],
+      ["Who holds which powers", "partly, by law. Many powers presidents use, such as declaring a national emergency, come from laws Congress passed and could change, though the president can veto the change."]] },
+  court: { a: "Because the Supreme Court has the last word on what the Constitution means. In 1973 it found a right to abortion there, and in 2022 it found none and handed the question back to the states.",
+    b: ["The Supreme Court can strike down laws that break the Constitution. It claimed the power in 1803, and by 2017 it had struck down 182 federal laws.",
+      "Justices serve for life, so each appointment can shape the law for decades, and confirmations have become party-line fights.",
+      "Roe v. Wade (1973) protected abortion nationwide. Dobbs (2022) handed the question back to the states."],
+    c: [["Striking down laws", "not easily. The Court has used the power since 1803, and taking it away would most likely need an amendment."],
+      ["Justices for life", "most likely only by amendment, since the Constitution says judges serve “during good behaviour.” The number nine is different: Congress sets it by law and has changed it seven times."],
+      ["Abortion law", "yes. Each state now makes its own law, and a future Court could overturn Dobbs, as Dobbs overturned Roe."]] },
+  electoral: { a: "Because Americans elect the president state by state, not nationally. Almost every state gives all its electors to whoever wins it, even by one vote, so a candidate can win more votes nationwide and still lose.",
+    b: ["Americans vote for electors, state by state. 270 of 538 wins.",
+      "So a few close states decide, and the winner of the national vote can lose. It has happened five times.",
+      "It began as a 1787 compromise, and every attempt to abolish it has failed."],
+    c: [["The Electoral College", "only by amending the Constitution: two-thirds of Congress and 38 states."],
+      ["Winner takes all", "yes, state by state. Each state decides by law how to give out its electors, and Maine and Nebraska already split theirs by district."]] },
+  represented: { a: "Because the Senate represents states, not people: in 1787 the founders agreed that every state, large or small, gets two senators. The Constitution protects that rule more than any other, since no state can lose its equal vote without its consent.",
+    b: ["Every state has two senators, so the 26 smallest states, with 18% of Americans, elect a majority of the Senate.",
+      "States draw their own House districts, and the party in charge can draw them to win more seats than its votes would give it.",
+      "About four million Americans in Washington, D.C. and Puerto Rico have no voting member of Congress."],
+    c: [["Two senators per state", "almost certainly not. Not even an amendment can take away a state’s equal vote without its consent."],
+      ["House districts", "yes. States can hand the maps to independent commissions, as voters in Arizona and Michigan did, and Congress could set national rules by law."],
+      ["D.C. and Puerto Rico", "possibly. Congress can admit new states by law, but D.C. statehood is fiercely contested, and Puerto Ricans themselves disagree."]] },
+  parties: { a: "Because most American elections have one winner per district or state, and small parties rarely come first anywhere. So voters stick with the two that can win, since a vote for a third party can help the side they like least.",
+    b: ["Voters, not party members, pick the candidates in primaries, so politicians fear challengers from their own side.",
+      "The parties traded regions: the South went from Democratic to Republican.",
+      "The parties no longer overlap: every House Democrat now votes to the left of every Republican."],
+    c: [["One winner per district", "yes, by law. A 1967 federal law requires one House member per district, but states decide how the winner is picked, and Maine already uses ranked-choice voting."],
+      ["Primaries", "yes. Each state sets its own primary rules."],
+      ["Two parties", "no law creates them. They follow from the rules above, so they would change only if those rules did."]] },
+  states: { a: "Because the states, not Washington, make most of the laws people live by. The Constitution gives the federal government a list of powers and leaves the rest to the states.",
+    b: ["So the states make most everyday rules: crimes, schools, marriage, driving and elections.",
+      "Cross a state line and the law on marijuana, abortion, the death penalty or wages can change.",
+      "States can try ideas first, as with same-sex marriage. But when a state defies the Constitution, as in Little Rock in 1957, federal law wins."],
+    c: [["The split between the states and Washington", "only by amending the Constitution. The Tenth Amendment leaves to the states, or the people, every power not given to the federal government."],
+      ["Different laws in each state", "yes, all the time. Each state changes its own laws, in some states by a vote of its citizens. Where the Constitution lets Congress act, a federal law can set a floor for all, as with the minimum wage."]] },
+  constitution: { a: "Because changing it takes far more than a majority: two-thirds of both chambers of Congress, then three-quarters of the states. Of about 11,985 amendments proposed in Congress, 27 were ratified, the last in 1992.",
+    b: ["An amendment needs two-thirds of both chambers of Congress and then three-quarters of the states.",
+      "Thirteen small states with about 4% of Americans can block any amendment.",
+      "So old words decide new fights, as with the Second Amendment and guns."],
+    c: [["The rules for amending", "only by an amendment, which would have to clear the same bar."],
+      ["What the old words mean", "yes, without an amendment. The Supreme Court decides, case by case, and a Court with new members can read the same words differently."]] },
+  together: { a: "Because the House, the Senate and the president are elected separately, and most laws need all three. Since 1969, one party has held all three in only 9 of 30 Congresses.",
+    b: ["To pass a law alone, a party needs the House, 60 senators and the president. That rarely happens.",
+      "Even then, the courts can strike down what it passes.",
+      "The Affordable Care Act needed almost every part of the system, and in 2017 it survived a repeal attempt by one vote."] },
+  midterms: { a: "Democrats won control of both the House and the Senate, halfway through Trump’s second term. From January 2027 the government is divided: Congress can block, investigate and hold up spending, but Democrats cannot override a veto on their own.",
+    b: ["Midterms come halfway through a presidential term, and the president’s party almost always loses seats: in 18 of the 20 midterms since 1946.",
+      "2026 was a wave. Democrats flipped more than 40 House seats, eight Senate seats and five governorships, most of them in states Trump won in 2024.",
+      "Republicans redrew House maps in the middle of the decade to gain seats. In the wave, the plan largely backfired."] }
+};
+function endHTML(c) {
+  const e = END[c.id];
+  return `<p class="short-a"><b>The short answer.</b> ${e.a}</p>
+    <ul class="learned">${e.b.map(l => `<li><span>${l}</span></li>`).join("")}</ul>
+    ${e.c ? `<section class="cic"><h3>Could it change?</h3><ul>${e.c.map(([k, x]) => `<li><b>${k}:</b> ${x}</li>`).join("")}</ul></section>` : ""}`;
+}
+CH.forEach(c => { if (!END[c.id]) return; const d = c.steps[c.steps.length - 1], r = d.render;
+  d.render = function (v) { r.call(this, v); const k = $(".done-k", v), ul = k && $("ul.learned", v); if (!ul) return;
+    const h = k.nextElementSibling; if (h && h.tagName === "H2") { k.textContent = `${k.textContent} · ${c.topic}`; h.textContent = c.q; h.classList.add("end-q"); }
+    ul.outerHTML = endHTML(c); }; });
+
+/* ---- v39: chapter 5, D.C. and Puerto Rico: why not make them states? ---- */
+Object.assign(REF, {
+  "kffIRS": { "sa": "KFF", "a": "KFF", "y": "n.d.", "t": "“Total IRS Gross Collections, FY 2025.” State Health Facts. Accessed November 15, 2026.", "u": "https://www.kff.org/state-health-policy-data/state-indicator/irs-collections/" },
+  "fed43": { "sa": "Madison", "a": "Madison, James", "y": "1788", "t": "“The Federalist No. 43.” The Avalon Project, Yale Law School. Accessed November 15, 2026.", "u": "https://avalon.law.yale.edu/18th_century/fed43.asp" },
+  "pr2024": { "sa": "Primera Hora", "a": "Primera Hora", "y": "2025", "t": "“CEE certifica a la estadidad como la fórmula ganadora del plebiscito.” January 18.", "u": "https://www.primerahora.com/noticias/gobierno-politica/notas/cee-certifica-a-la-estadidad-como-la-formula-ganadora-del-plebiscito/" }
+});
+refDone = false;
+S5_LEFT.sources = [...new Set([...S5_LEFT.sources, "kffIRS", "fed43", "fec2024", "pr2024"])].filter(k => REF[k]);
+S5_LEFT.render = (f => function (v) { f.call(this, v); const p = $(".panel.lo", v); if (!p) return;
+  p.insertAdjacentHTML("afterend", `<div class="panel fa">
+    <h3>Why not just make them states?</h3>
+    <p class="fa-why">The Constitution gives seats in Congress only to states. D.C. is a federal district and Puerto Rico a territory, so full representation would mean statehood. Congress admits new states by law, though some argue D.C. would also need a constitutional amendment.</p>
+    <div class="fa-cols">
+      <div><p class="fa-k">For D.C. statehood</p><ul>
+        <li>“No taxation without representation.” The IRS collects more federal tax in D.C. than in 20 states, Wyoming and Vermont among them.</li>
+        <li>D.C. has more people than Wyoming or Vermont, which each have two senators.</li></ul></div>
+      <div><p class="fa-k">Against</p><ul>
+        <li>The founders kept the capital out of every state, so that no state could hold sway over Congress.</li>
+        <li>D.C. votes overwhelmingly Democratic, so opponents call statehood a bid for two more Democratic senators.</li></ul></div>
+    </div>
+    <p class="fa-pr"><b>Puerto Rico is a separate question</b>, because islanders themselves disagree. In a non-binding vote in 2024, 59% chose statehood and the rest free association or independence. Only Congress can admit a state, and it has not.</p>
+  </div>`); })(S5_LEFT.render);
 renderHome();
 route();
 </script>
