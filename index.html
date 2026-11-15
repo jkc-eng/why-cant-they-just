@@ -1840,6 +1840,15 @@ details.dk>p{padding:0 14px 12px}
 /* v29b: short-route bar fits on phones */
 .player.route .p-bottom .btn{white-space:nowrap}
 @media (max-width:520px){.player.route .p-bottom .wrap{gap:8px}.player.route .p-bottom .btn{padding-inline:14px}.player.route .pb-t{display:none}}
+
+/* v30: a quieter front page */
+.hero .fpC-over h1{font-size:clamp(2.6rem,min(6.8vw,10.5vh),6.2rem)}
+.fpC-over{padding-top:clamp(48px,6vw,96px);background:linear-gradient(to bottom,transparent,rgba(5,8,14,.42) 45%,rgba(5,8,14,.8))}
+.fpC-over .fp-sub{font-size:clamp(1.05rem,1.7vw,1.4rem);text-wrap:balance}
+.fpC .fp-body{grid-template-columns:minmax(0,1fr)}
+.fpC .fp-body .lede{max-width:46ch}
+.fp-credit{margin-top:16px}
+@media (max-width:640px){.hero .fpC-over h1{font-size:2.5rem}}
 </style>
 
 <header class="top">
@@ -1858,11 +1867,10 @@ details.dk>p{padding:0 14px 12px}
       <div class="fpC-over"><div class="wrap"><h1 class="display">Why can’t they just<em>…?</em></h1><p class="fp-sub">How American politics works, in nine short chapters</p></div></div>
     </div>
     <div class="wrap fp-body">
-      <div><p class="byline">By <b>Jens Kjeldgaard-Christiansen</b><span>Department of English and American Studies Center Aarhus, Aarhus University</span></p><p class="lede">Nine short chapters on how the United States is governed: the three branches, the elections that fill them, and the states and the Constitution around them. You learn by tapping, dragging and guessing, with real maps, votes and documents.</p><div class="cta-row">
+      <div><p class="byline">By <b>Jens Kjeldgaard-Christiansen</b><span>Department of English and American Studies Center Aarhus, Aarhus University</span></p><p class="lede">Each chapter starts from one question. You work out the answer yourself, with real maps, votes and documents.</p><div class="cta-row">
           <button class="btn" id="start-btn">Start with chapter 1 <span class="arr">→</span></button>
           <button class="btn ghost" id="route-btn" type="button">Short on time? Take the short route</button>
-        </div></div>
-      <div><p class="thesis"><b>The idea behind all nine:</b> the system splits power on purpose. Most laws need the House, the Senate and the president to agree, and each is elected separately. So big change is slow, and it usually takes broad agreement or a rare moment when one party holds all three.</p><p class="fp-cap"><b>The Capitol, the White House and the Supreme Court Building in Washington, D.C.</b> The Constitution sets up Congress in Article I, the presidency in Article II and the courts in Article III. Photos: Carol M. Highsmith, Library of Congress. No known restrictions.</p></div>
+        </div><p class="fp-cap fp-credit">Photos: Carol M. Highsmith, Library of Congress.</p></div>
     </div>
   </section>
 
