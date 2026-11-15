@@ -1884,6 +1884,17 @@ details.dk>p{padding:0 14px 12px}
 .fa-pr{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--rule);font-size:.92rem;line-height:1.45;color:var(--ink-2)}
 .fa-pr b{color:var(--ink)}
 @media (max-width:640px){.fa-cols{grid-template-columns:minmax(0,1fr)}}
+
+/* v41: clarity review */
+.pr-key{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center}
+.pr-key span{display:inline-flex;align-items:center;gap:6px}
+.pr-key i,.pr-ten i{flex:none}
+.pr-key i{width:14px;height:14px;border-radius:50%;display:inline-block}
+.pr-ten i.lost,.pr-key i.lost{background:transparent;box-shadow:inset 0 0 0 2.5px var(--ink-2)}
+.pr-key i.ret{background:var(--toss)}.pr-key i.ok{background:var(--ink)}
+#gmT text{font-size:19px}
+.vt-k{margin:12px 0 0}
+.s60-tk-h{margin:18px 0 6px}
 </style>
 
 <header class="top">
@@ -2416,8 +2427,8 @@ const STEP_BONUS = {
   render(v) {
     const per = 25000;
     const rows = [
-      { name: "Wyoming", pop: 576851, ev: 3 },
-      { name: "California", pop: 39538223, ev: 54 }
+      { name: "Wyoming", pop: 577719, ev: 3 },
+      { name: "California", pop: 39576757, ev: 54 }
     ];
     const icons = (n, offset) => {
       const full = Math.floor(n), frac = n - full; let out = "";
@@ -2446,7 +2457,7 @@ const STEP_FIVE = {
       ["1824", "Andrew Jackson", "John Quincy Adams", "Jackson 99 · Adams 84 · others 78", "No one had a majority of electors, so the House of Representatives chose Adams. Six of the 24 states had no popular vote for president at all."],
       ["1876", "Samuel Tilden", "Rutherford B. Hayes", "Hayes 185 · Tilden 184", "Twenty electoral votes were disputed. A 15-member commission of senators, representatives and Supreme Court justices gave all twenty to Hayes."],
       ["1888", "Grover Cleveland", "Benjamin Harrison", "Harrison 233 · Cleveland 168", "Cleveland had the votes but not the states. Four years later he beat Harrison and returned to the White House."],
-      ["2000", "Al Gore", "George W. Bush", "Bush 271 · Gore 266", "Gore led nationally by 543,895 votes. Florida, and with it the presidency, went to Bush by 537 votes, after the Supreme Court stopped a recount."],
+      ["2000", "Al Gore", "George W. Bush", "Bush 271 · Gore 266", "Gore led nationally by 543,895 votes. Florida, and with it the presidency, went to Bush by 537 votes, after a 36-day fight over recounts."],
       ["2016", "Hillary Clinton", "Donald Trump", "Trump 304 · Clinton 227", "Clinton led nationally by 2,868,686 votes. Trump won Michigan, Pennsylvania and Wisconsin by a combined 77,744."]
     ];
     v.innerHTML = `<figure class="figure"><img src="${IMG.commission1877.file}" alt="Painting of a crowded hearing room: the Electoral Commission hearing the disputed Florida returns in 1877"><figcaption><b>The Florida Case before the Electoral Commission</b>, by Cornelia Adele Fassett, 1879. The commission voted 8 to 7, along party lines, on each disputed state.</figcaption></figure>
@@ -2659,7 +2670,7 @@ const mn = v => String(v).replace("-", "−");
 const MT_HISTORY = {
   kicker: "Is this unusual?",
   title: "The president’s party almost always loses.",
-  body: `<p>Since 1946 the president’s party has lost House seats in 18 of 20 midterms. The two exceptions, 1998 and 2002, came when the president was unusually popular: Clinton and Bush both had approval ratings in the 60s in Gallup’s autumn polls.</p><p>In the 2026 exit polls, only about 38% of voters approved of Trump. Tap a bar to see who was president.</p>
+  body: `<p>From 1946 to 2022 the president’s party lost House seats in 18 of 20 midterms. With 2026 it is 19 of 21. The two exceptions, 1998 and 2002, came when the president was unusually popular: Clinton and Bush both had approval ratings in the 60s in Gallup’s autumn polls.</p><p>In the 2026 exit polls, only about 38% of voters approved of Trump. Tap a bar to see who was president.</p>
     <div class="contested"><span class="mono">Contested</span><p>Why does it happen? Political scientists offer several answers: voters punish the president for bad times; the president’s less committed voters stay home when the president is not on the ballot; and some voters deliberately balance power between the parties. How much each matters is debated.</p></div>`,
   sources: ["appMid", "apHouse", "cbsSen"],
   render(v) {
@@ -2705,13 +2716,13 @@ const MT_HISTORY = {
 const MT_NEXT = {
   kicker: "What changes in January",
   title: "From January: a divided government.",
-  body: `<p>The new Congress takes office on January 3, 2027, and Hakeem Jeffries, the Democrats’ leader in the House, is expected to become Speaker. Trump wrote that the country “took a giant step back in History with the results of the last Election.” He stays president until January 2029, but from January he faces a Congress run by the other party. This is called ${T("divided", "divided government")}, and since 1980 it has been more common than not.</p><p>What can a Democratic Congress do against a Republican president? <strong>Tap the cards.</strong></p>`,
+  body: `<p>The new Congress takes office on January 3, 2027, and Hakeem Jeffries, the Democrats’ leader in the House, is expected to become Speaker, the leader of the House. Trump wrote that the country “took a giant step back in History with the results of the last Election.” He stays president until January 2029, but from January he faces a Congress run by the other party. This is called ${T("divided", "divided government")}, and since 1969 it has been the norm.</p><p>What can a Democratic Congress do against a Republican president? <strong>Tap the cards.</strong></p>`,
   dk: `A Danish government that loses a vote of no confidence in the Folketing must resign or call an election. An American president cannot be voted out for losing a midterm.`,
   sources: ["cbsLive", "const", "house"],
   render(v) {
     const C = [
       ["Pass laws without the president?", "No", `He can ${T("veto", "veto")} any bill. Overriding a veto takes two-thirds of both chambers: 290 House members and 67 senators if everyone votes. Democrats have neither.`],
-      ["Block his nominees?", "Yes", "Cabinet members, ambassadors and federal judges, Supreme Court justices included, all need Senate approval."],
+      ["Block his nominees?", "Yes", "Cabinet members (the heads of the federal departments), ambassadors and federal judges, Supreme Court justices included, all need Senate approval."],
       ["Investigate his government?", "Yes", "The majority party runs every committee, and committees can demand documents and summon witnesses."],
       ["Control spending?", "Largely", "Every spending bill must pass both chambers. If the two sides cannot agree, parts of the government shut down."],
       ["Remove the president?", "Very unlikely", `The House can ${T("impeach", "impeach")} with a simple majority, but removal takes 67 votes in the Senate.`]
@@ -2782,7 +2793,7 @@ const MT_SCORE = {
     ];
     v.innerHTML = `<div class="tiles">${tiles.map((t, i) => `<button class="tile" data-i="${i}" aria-pressed="false"><b class="cnt" data-to="${t[0]}">${t[0]}</b><span>${t[1]}</span></button>`).join("")}</div><p class="cap-line" id="tc">&nbsp;</p>`;
     $$(".tile", v).forEach(b => b.onclick = () => { $$(".tile", v).forEach(x => x.setAttribute("aria-pressed", x === b)); $("#tc", v).textContent = tiles[+b.dataset.i][2]; });
-    if (!reduce) $$(".cnt", v).forEach((el, k) => {
+    if (false) $$(".cnt", v).forEach((el, k) => {
       const m = /^([+]?)(\d+)(\+?)$/.exec(el.dataset.to); if (!m) return; const to = +m[2]; const t0 = performance.now() + k * 120;
       const tick = now => { const p = Math.min(1, Math.max(0, (now - t0) / 900)); el.textContent = m[1] + Math.round(to * (1 - Math.pow(1 - p, 3))) + (p === 1 ? m[3] : ""); if (p < 1) requestAnimationFrame(tick); };
       requestAnimationFrame(tick);
@@ -2792,11 +2803,11 @@ const MT_SCORE = {
 
 const RACES = [
   { st: "TX", where: "Texas · Senate", head: "A Democrat wins Texas.", img: "talarico", text: "James Talarico, a state legislator and former schoolteacher, beat Republican attorney general Ken Paxton by about 12 points. Texas had not elected a Democrat to the Senate since 1988.", why: "If Texas can flip, no state is safe for either party." },
-  { st: "ME", where: "Maine · Senate", head: "The last moderate falls.", img: "jackson", text: "Susan Collins, a senator since 1997 and one of the last moderate Republicans, lost to Troy Jackson, a former logger and leader of the Maine Senate.", why: "Maine was the only Senate flip in a state Harris won in 2024." },
-  { st: "OH", where: "Ohio · Senate", head: "The comeback.", img: "brown", text: "Sherrod Brown lost his Senate seat in 2024. Two years later he won Ohio’s other seat, beating Jon Husted, who had been appointed when JD Vance became vice president.", why: "Trump won Ohio by 11 points in 2024." },
-  { st: "NC", where: "North Carolina · Senate", head: "The governor goes to Washington.", img: "cooper", text: "Roy Cooper, governor from 2017 to 2025, beat Michael Whatley, a former chair of the Republican National Committee backed by Trump.", why: "Trump backed the Republican Senate candidates in Texas, Georgia, North Carolina and South Carolina. All four lost in November." },
-  { st: "SC", where: "South Carolina · Senate", head: "The biggest surprise.", img: null, text: "Annie Andrews, a pediatrician, became the first Democrat South Carolina has elected to the Senate since 1998. She beat Darline Graham, who was appointed to the seat after her brother, Senator Lindsey Graham, died in July, and whom Trump backed.", why: "Trump won South Carolina by 18 points in 2024." },
-  { st: "NY", where: "New York’s 17th district · House", head: "One of 40.", img: "conley", text: "In the suburbs north of New York City, Democrat Cait Conley beat Republican Mike Lawler. It was the kind of close district that decides who controls the House.", why: "Democrats flipped more than 40 districts like it." }
+  { st: "ME", where: "Maine · Senate", head: "Collins loses.", img: "jackson", text: "Susan Collins, a senator since 1997 and one of the last moderate Republicans, lost to Troy Jackson, a former logger and leader of the Maine Senate.", why: "Maine was the only Senate flip in a state Harris won in 2024." },
+  { st: "OH", where: "Ohio · Senate", head: "Brown wins Ohio’s other seat.", img: "brown", text: "Sherrod Brown lost his Senate seat in 2024. Two years later he won Ohio’s other seat, beating Jon Husted, who had been appointed when JD Vance became vice president.", why: "Trump won Ohio by 11 points in 2024." },
+  { st: "NC", where: "North Carolina · Senate", head: "Cooper wins.", img: "cooper", text: "Roy Cooper, governor from 2017 to 2025, beat Michael Whatley, a former chair of the Republican National Committee backed by Trump.", why: "Trump backed the Republican Senate candidates in Texas, Georgia, North Carolina and South Carolina. All four lost in November." },
+  { st: "SC", where: "South Carolina · Senate", head: "Andrews wins South Carolina.", img: null, text: "Annie Andrews, a pediatrician, became the first Democrat South Carolina has elected to the Senate since 1998. She beat Darline Graham, who was appointed to the seat after her brother, Senator Lindsey Graham, died in July, and whom Trump backed.", why: "Trump won South Carolina by 18 points in 2024." },
+  { st: "NY", where: "New York’s 17th district · House", head: "Conley beats Lawler.", img: "conley", text: "In the suburbs north of New York City, Democrat Cait Conley beat Republican Mike Lawler. It was the kind of close district that decides who controls the House.", why: "Democrats flipped more than 40 districts like it." }
 ];
 const MT_RACES = {
   kicker: "Races to know",
@@ -2880,8 +2891,8 @@ const MT_WHY = {
       <div class="later off" id="gres">
         <div class="truth"><div class="truth-bar"><i id="tb"><em>38%</em></i><span class="you" id="ty"><span id="tyl"></span></span></div><p class="cap-line" id="gt"></p></div>
         <div class="stat3">
-          <div><b>2×</b><span>more voters said their finances were worse than said better</span><em class="mono">CBS News exit poll</em></div>
-          <div><b>~9 in 10</b><span>said government corruption was a major factor</span><em class="mono">CBS News exit poll</em></div>
+          <div><b>2×</b><span>as many voters said their finances were worse as said better</span><em class="mono">CBS News exit poll</em></div>
+          <div><b>About 9 in 10</b><span>said government corruption was a major factor</span><em class="mono">CBS News exit poll</em></div>
           <div><b>~6 in 10</b><span>said Trump puts his own interests above the country’s</span><em class="mono">CBS News exit poll</em></div>
         </div>
         <div class="contested"><span class="mono">Contested</span><p>Explanations differ. Analysts at Brookings point to prices driven up by tariffs and the war with Iran, to immigration enforcement many voters felt went too far, and to worries about corruption. They also note that unhappy Republicans mostly stayed home rather than switching sides: only about 6% of Republicans voted for a Democrat for the House. Trump said voters’ support for him had not carried over to Republican candidates, agreed that the Iran war had hurt, and said “we would have won” had he been on the ballot.</p></div>
@@ -2919,7 +2930,7 @@ const MAPWAR = [["Texas", 5, "R"], ["Florida", 4, "R"], ["Ohio", 2, "R"], ["Nort
 const MT_MAPS = {
   kicker: "The map war",
   title: "Both parties redrew the maps. The wave washed over them.",
-  body: `<p>House districts are normally redrawn once a decade, after the census. In 2025, at Trump’s urging, Texas Republicans redrew theirs in the middle of the decade to create five more Republican seats. Other states followed, and California’s Democrats answered with five seats of their own. This ${T("redistricting", "redistricting")} war was meant to hand Republicans about nine extra seats.</p><p>A ${T("gerrymander", "gerrymander")} works by spreading your own voters thinly across many districts. That wins seats in a normal year, but in a wave those thin margins can collapse.</p>`,
+  body: `<p>House districts are normally redrawn once a decade, after the census. In 2025, at Trump’s urging, Texas Republicans redrew theirs in the middle of the decade to create five more Republican seats. Other states followed, and California’s Democrats answered with five seats of their own. This ${T("redistricting", "redistricting")} war was meant to hand Republicans about nine extra seats.</p><p>A ${T("gerrymander", "gerrymander")} packs the other side’s voters into a few districts and cracks the rest, spreading them across districts your side wins by modest margins. That wins seats in a normal year, but in a wave those margins can collapse.</p>`,
   sources: ["ballot", "brookings"],
   render(v) {
     v.innerHTML = `<div class="panel">
@@ -3050,7 +3061,7 @@ const ALONE = {
       ["Declare war?", "No", "Only Congress can declare war. Presidents have often sent troops into combat without a declaration, but Congress last declared war in 1942."],
       ["Raise taxes?", "No", "Taxes belong to Congress, and tax bills must start in the House. In 2026 the Supreme Court struck down Trump’s biggest tariffs: the emergency law he used did not let him tax imports."],
       ["Put a judge on the Supreme Court?", "Only with the Senate", "The president nominates, and the Senate must confirm. The next chapter shows how hard that has become."],
-      ["Fire a cabinet member?", "Yes", "Cabinet members serve at the president’s pleasure. Firing one needs no one’s approval."],
+      ["Fire a cabinet member?", "Yes", "Cabinet members, the heads of the federal departments, can be fired at any time. The president needs no one’s approval."],
       ["Command the military?", "Yes", "The Constitution makes the president commander in chief of the armed forces."]
     ];
     v.innerHTML = `${fig("lbj1964", "<b>President Lyndon B. Johnson signs the Civil Rights Act</b>, July 2, 1964. Congress wrote and passed the law; his signature made it law. Photo: Cecil Stoughton, White House. Public domain.", "President Johnson signing a bill at a desk, surrounded by members of Congress and civil rights leaders")}
@@ -3390,7 +3401,7 @@ const GV = [
   1, 1, 1, 1, 1, 0, 0, 1, 0, 0,
   1, 1, 1, 1, 1, 1, 0, 0, 0, 0];
 const GMAPS = {
-  fair: { lab: "Lines that follow the map", f: (r, c) => Math.floor(c / 2), note: "Blue has 60% of the votes and wins 3 of 5 seats. Close to fair." },
+  fair: { lab: "Straight lines", f: (r, c) => Math.floor(c / 2), note: "Blue has 60% of the votes and wins 3 of 5 seats. Close to fair." },
   blue: { lab: "Blue draws the lines", f: (r, c) => r, note: "<b>Cracking.</b> Red voters are split up so they are a minority in every district. Blue wins all five seats with 60% of the votes." },
   red: { lab: "Red draws the lines", f: (r, c) => c <= 1 ? 0 : c <= 3 ? 1 : c === 9 ? 4 : r <= 1 ? 2 : r >= 3 ? 3 : 4, note: "<b>Packing.</b> Blue voters are squeezed into two districts they win 10–0. Red wins the other three, two of them narrowly, and with them the majority, with 40% of the votes." }
 };
@@ -3424,7 +3435,7 @@ const S5_DRAW = {
         <div class="gm-tools" id="gmTools" hidden><button type="button" class="btn ghost small" id="gmUndo">↶ Undo</button><button type="button" class="btn ghost small" id="gmClear">Start over</button><button type="button" class="btn ghost small" id="gmShow">Show me a way</button></div>
         <div class="gm-tally" id="gmS" aria-live="polite"></div>
         <p class="info" id="gmI" aria-live="polite"></p>
-        <p class="hint">The 2026 midterms chapter shows the real ‘map war’ of 2025–26.</p></div>
+        <p class="hint">Each label shows who wins the district and its vote, winner first. The 2026 midterms chapter shows the real ‘map war’ of 2025–26.</p></div>
       ${fig("gerrymander1812", "<b>The original ‘Gerry-mander’</b>, Boston Gazette, 1812. Governor Elbridge Gerry’s party drew a Massachusetts district so twisted that a cartoonist turned it into a salamander. Public domain.", "Cartoon of a voting district drawn as a winged monster")}`;
     const svg = $("#gmSvg", v), F = $$("#gmF rect", v), L = $("#gmL", v), C = $("#gmC", v), T_ = $("#gmT", v), G = $("#gmG", v), I = $("#gmI", v), S_ = $("#gmS", v), tools = $("#gmTools", v), finger = $("#gmFinger", v);
     let run = 0, mode = "fair";
@@ -3438,7 +3449,7 @@ const S5_DRAW = {
         if (c === 0 || !s.has(i - 1)) d += `M${c * W} ${r * W}v${W}`; if (c === 9 || !s.has(i + 1)) d += `M${(c + 1) * W} ${r * W}v${W}`; }); return d; };
     const centre = cells => cells.reduce((a, i) => { const [r, c] = cell(i); return [a[0] + c * W + W / 2, a[1] + r * W + W / 2]; }, [0, 0]).map(z => z / cells.length);
     const score = cells => { const b = cells.filter(i => GV[i]).length; return { b, r: cells.length - b, w: b > cells.length - b ? "b" : b < cells.length - b ? "r" : "t" }; };
-    const label = (cells, o, cls) => { const [cx, cy] = centre(cells); return `<text x="${cx}" y="${cy + 7}" class="${o.w} ${cls || ""}">${o.w === "t" ? "5–5" : `${Math.max(o.b, o.r)}–${Math.min(o.b, o.r)}`}</text>`; };
+    const label = (cells, o, cls) => { const [cx, cy] = centre(cells); return `<text x="${cx}" y="${cy - 4}" class="${o.w} ${cls || ""}"><tspan x="${cx}">${o.w === "t" ? "Tie" : o.w === "b" ? "Blue" : "Red"}</tspan><tspan x="${cx}" dy="1em">${o.w === "t" ? "5–5" : `${Math.max(o.b, o.r)}–${Math.min(o.b, o.r)}`}</tspan></text>`; };
     const danish = `<span class="gm-dk">Counted the Danish way, seats follow votes: <b>Blue 3, Red 2</b>, however the lines run.</span>`;
     /* ---------- ready-made maps ---------- */
     const preset = k => {
@@ -3722,7 +3733,7 @@ const S6_PRIM = {
       <div class="later off" id="prN">
         <p class="big-note">Harriet Hageman won the general election easily. In a safe state, the primary is the election that matters.</p>
         <p class="pr-ten">Of the ten Republicans who voted to impeach: ${["retired", "retired", "retired", "retired", "lost primary", "lost primary", "lost primary", "lost primary", "re-elected", "re-elected"].map(s => `<i class="${s === "re-elected" ? "ok" : s === "retired" ? "ret" : "lost"}" title="${s}"></i>`).join("")}</p>
-        <p class="hint">Gray: retired (4). Red: lost their primary (4). Black: re-elected in 2022 (2).</p></div></div>`;
+        <p class="hint pr-key"><span><i class="ret"></i>Retired (4)</span><span><i class="lost"></i>Lost their primary (4)</span><span><i class="ok"></i>Re-elected in 2022 (2)</span></p></div></div>`;
     animateBars($("#prB", v));
     $("#rv", v).onclick = e => { e.currentTarget.remove(); $("#prN", v).classList.remove("off"); };
   }
@@ -3775,7 +3786,7 @@ const S6_POLAR = {
       $$("rect.pd", v).forEach(r => r.style.transform = `scaleY(${Math.min(1, d.D[+r.dataset.i] * sc / 140)})`);
       $$("rect.pr", v).forEach(r => r.style.transform = `scaleY(${Math.min(1, d.R[+r.dataset.i] * sc / 140)})`);
       $("#plMD", v).style.transform = `translateX(${X(d.mD)}px)`; $("#plMR", v).style.transform = `translateX(${X(d.mR)}px)`;
-      $("#plS", v).innerHTML = [[d.closer, "members closer to the other party’s middle than to their own"], [(d.mR - d.mD).toFixed(2), "distance between the two party middles"], [`${d.nD} · ${d.nR}`, "Democrats · Republicans"]].map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+      $("#plS", v).innerHTML = [[d.closer, "members closer to the other party’s middle than to their own"], [((d.mR - d.mD) / (POLAR["1971"].mR - POLAR["1971"].mD)).toFixed(1).replace(/\.0$/, "") + "×", "the 1971 gap between the two party middles"], [`${d.nD} · ${d.nR}`, "Democrats · Republicans"]].map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
     };
     $$(".chip[data-y]", v).forEach(b => b.onclick = () => { $$(".chip[data-y]", v).forEach(x => x.setAttribute("aria-pressed", x === b)); show(b.dataset.y); });
     show(YRS[1]);
@@ -3886,7 +3897,7 @@ const AMS = [
 const S7_TL = {
   kicker: "27 changes in 235 years",
   title: "The Constitution changed in bursts: at the start, after the Civil War, and in hard times.",
-  body: `<p>The first ten amendments, the Bill of Rights, were added together in 1791. Three more rebuilt the country after the Civil War and the end of slavery. Many later ones widened the vote.</p><p>One was a failed experiment: Prohibition, the ban on alcohol from 1920 to 1933. <strong>Tap a dot, or pick a group.</strong></p>`,
+  body: `<p>The first ten amendments, the Bill of Rights, were added together in 1791. Three more rebuilt the country after the Civil War and the end of slavery. Many later ones widened the vote.</p><p>One was a failed experiment: Prohibition, the ban on alcohol from 1920 to 1933. <strong>Tap a number, or pick a group.</strong></p>`,
   sources: ["amends"],
   render(v) {
     const ERAS = [["1791", [0, 10]], ["1795–1804", [10, 12], "61 years with no change"], ["1865–1870", [12, 15], "43 years"], ["1913–1920", [15, 19], "13 years"], ["1933", [19, 21], "18 years"], ["1951–1971", [21, 26], "21 years"], ["1992", [26, 27], "34 years and counting"]];
@@ -4029,8 +4040,8 @@ function initVote(v) {
   const svg = $("#vwMap");
   svg.innerHTML = ks.map(s => `<path data-s="${s}" d="${ST[s].d}" style="fill-opacity:${s === "DC" ? .3 : (.1 + .8 * (Math.log(wt(s).sen) - lo) / (hi - lo)).toFixed(2)}"><title>${ST[s].n}</title></path>`).join("");
   $("#vwSel").innerHTML = ks.slice().sort((a, b) => ST[a].n.localeCompare(ST[b].n)).map(s => `<option value="${s}">${ST[s].n}</option>`).join("");
-  const fx = w => w >= 1.05 ? w.toFixed(1) + "×" : w > .95 ? "1×" : 1 / w >= 1.5 ? "1/" + Math.round(1 / w) : w.toFixed(2) + "×";
-  const words = w => w >= 1.05 ? `${w.toFixed(1)} times as much as` : w > .95 ? "about the same as" : 1 / w >= 1.5 ? `about 1/${Math.round(1 / w)} of` : `${Math.round(w * 100)}% of`;
+  const fx = w => w >= 1.05 ? w.toFixed(1) + "×" : w > .95 ? "1×" : w.toFixed(2) + "×";
+  const words = w => w >= 1.05 ? `${w.toFixed(1)} times as much as` : w > .95 ? "about the same as" : `${Math.round(w * 100)}% of`;
   const L2 = 3, R2 = 4, pos = w => 100 * (Math.log2(w) + L2) / (L2 + R2), mid = pos(1);
   const row = (t, sub, w) => `<div class="vw-row"><div class="vw-l"><b>${t}</b><span>${sub}</span></div><div class="vw-tr"><i class="vw-mid" style="left:${mid}%"></i>${w == null ? `<em>none</em>` : `<i class="vw-bar ${w >= 1 ? "up" : "dn"}" style="left:${Math.min(mid, pos(w))}%;width:${Math.abs(pos(w) - mid)}%"></i>`}</div><b class="vw-v">${w == null ? "0" : fx(w)}</b></div>`;
   const pick = (s, sound) => {
@@ -4240,7 +4251,7 @@ const S8_WHO = {
   render(v) {
     const col = { f: "Federal government", s: "The states", b: "Both" };
     v.innerHTML = `<div class="panel wh no-swipe">
-      <p class="vlabel">Who makes the rule? Tap to sort</p>
+      <p class="vlabel">Who makes the rule?</p>
       <div class="wh-tray">${WHO8.map((w, i) => `<button class="wh-t" data-i="${i}">${w[0]}</button>`).join("")}</div>
       <div class="wh-cols">${Object.entries(col).map(([k, t]) => `<div class="wh-c" data-k="${k}"><p class="wh-h">${t} <b>0</b></p><div class="wh-in"></div></div>`).join("")}</div>
       <p class="wh-why" id="whY" aria-live="polite">Twelve everyday rules. Where does each one come from?</p>
@@ -5094,7 +5105,7 @@ const BAL = [
     { t: "State Senator, District 12", n: 1, note: "Unopposed", c: [["Dale Kowalski", "Republican"]], w: 1 },
     { t: "State Representative, District 41", n: 1, c: [["Grace Tan", "Democratic"], ["Owen Mercer", "Republican"]] }]],
   ["Judges", [
-    { t: "State Supreme Court", n: 1, q: "Shall Justice Helen Ward be retained in office?", c: [["Yes"], ["No"]] },
+    { t: "State Supreme Court", n: 1, note: "Voters decide whether to keep this judge", q: "Shall Justice Helen Ward be retained in office?", c: [["Yes"], ["No"]] },
     { t: "Circuit Court Judge, Division 4", n: 1, note: "Nonpartisan", c: [["Michael Chen"], ["Laura Brooks"]] }]],
   ["County and local", [
     { t: "County Sheriff", n: 1, c: [["Victor Ruiz", "Democratic"], ["Tom Haskins", "Republican"]] },
@@ -5103,7 +5114,7 @@ const BAL = [
     { t: "Soil and Water Conservation District Supervisor", n: 1, note: "Nonpartisan", c: [["Walt Eberhardt"]], w: 1 }]],
   ["Questions for the voters", [
     { t: "Constitutional Amendment 1", n: 1, note: "Citizen initiative", q: "Shall the Constitution of New Arcadia be amended to establish a right to abortion until fetal viability?", c: [["Yes"], ["No"]] },
-    { t: "County Question A", n: 1, q: "Shall Sample County levy an additional property tax of 0.5 mills for ten years to fund the county library?", c: [["Yes"], ["No"]] }]]
+    { t: "County Question A", n: 1, q: "Shall Sample County levy an additional property tax of 50 cents per $1,000 of property value for ten years to fund the county library?", c: [["Yes"], ["No"]] }]]
 ];
 const BALC = BAL.flatMap(g => g[1]);
 const S8_BALLOT = {
@@ -5116,7 +5127,7 @@ const S8_BALLOT = {
     const NW = ["", "one", "two", "three"];
     let marks = BALC.map(() => ({})), scanned = false, anyway = false;
     let ci = 0;
-    const contest = c => { const i = ci++, rows = c.c.concat(c.w ? [["Write-in", null, 1]] : []);
+    const contest = c => { const i = ci++, rows = c.c.concat(c.w ? [["Write in another name", null, 1]] : []);
       return `<section class="bc" data-ci="${i}"><h4>${c.t}</h4><p class="bc-sub">Vote for ${c.n === 1 ? "one" : "up to " + NW[c.n]}${c.note ? `<span>${c.note}</span>` : ""}</p>${c.q ? `<p class="bc-q">${c.q}</p>` : ""}<ul>${rows.map((r, j) => `<li><button type="button" class="bc-o${r[2] ? " wr" : ""}" data-ci="${i}" data-ri="${j}" aria-pressed="false"><span class="ov" aria-hidden="true"></span><span class="nm">${r[0]}${r[1] ? `<small>${r[1]}</small>` : ""}${r[2] ? `<i class="ln" aria-hidden="true"></i>` : ""}</span></button></li>`).join("")}</ul></section>`; };
     v.innerHTML = `<div class="panel bal no-swipe">
       <div class="bal-top"><span class="vlabel">Sample ballot · fictional candidates, real offices</span><button type="button" class="btn ghost small" id="balSkip">Skip to the scanner ↓</button></div>
@@ -5684,7 +5695,7 @@ $("#wm").onclick = e => { e.preventDefault(); if (cur) closePlayer(false); windo
   S6_PRIM.body = S6_PRIM.body.replace("Danish parties choose their own candidates. American parties hold", "American parties do not choose their own candidates. They hold");
   S7_FUNNEL.dk = `Grundloven is hard to change too. The Folketing must pass the change twice, with an election in between, and then at least 40% of all voters must vote yes in a referendum. The last change was in 1953.`;
   S8_BALLOT.body = S8_BALLOT.body.replace("In a Folketing election a Danish voter makes one cross. An American ballot", "An American ballot");
-  VETO.guess.why = "112 times. Two-thirds of both chambers is a very high bar. Another 1,066 of the 2,599 were ‘pocket vetoes’, which Congress cannot override at all.";
+  VETO.guess.why = "112 times. Two-thirds of both chambers is a very high bar. Another 1,066 of the 2,599 were ‘pocket vetoes’: bills left unsigned after Congress adjourned, which Congress cannot override at all.";
 
   /* Denmark boxes stay only where the contrast explains the American rule; everything else goes */
   const KEEP = new Set([CHAMBERS, SHUT, REVIEW, ROE, S5_DRAW, S5_VOTE, S6_FPTP, S7_FUNNEL, S8_WHO]);
@@ -6948,6 +6959,73 @@ S5_LEFT.render = (f => function (v) { f.call(this, v); const p = $(".panel.lo", 
     </div>
     <p class="fa-pr"><b>Puerto Rico is a separate question</b>, because islanders themselves disagree. In a non-binding vote in 2024, 59% chose statehood and the rest free association or independence. Only Congress can admit a state, and it has not.</p>
   </div>`); })(S5_LEFT.render);
+
+/* ---- v41 (patch58): clarity review fixes ---- */
+(() => {
+  const miss = [];
+  const sub = (obj, key, a, b) => { if (!obj || typeof obj[key] !== "string" || !obj[key].includes(a)) { miss.push(a.slice(0, 50)); return; } obj[key] = obj[key].replace(a, b); };
+  const Q = (arr, start) => { const q = arr.find(x => x.q.startsWith(start)); if (!q) miss.push(start); return q || { o: [] }; };
+  const setO = (q, from, to) => { const j = q.o.indexOf(from); if (j < 0) miss.push(from); else q.o[j] = to; };
+  /* A1: the prediction is no longer answered before it is asked */
+  NC.title = "What happens when Congress turns against the president?";
+  NC.body = `<p>Sometimes Congress turns against the president: a scandal, a lost midterm, a law the two sides cannot agree on. <strong>Predict what happens</strong> in three situations.</p>`;
+  if (/^The term is fixed at four years\. /.test(PREDICT[0].why)) PREDICT[0].why = PREDICT[0].why.replace(/^The term is fixed at four years\. /, "The president and Congress are elected separately, for fixed terms, and neither can dismiss the other. "); else miss.push("PREDICT[0].why");
+  /* A2: ask what students cannot know yet */
+  Object.assign(S7_FUNNEL.guess, { id: "funnel2", q: "Since 1789, members of Congress have proposed about 11,985 amendments. How many of them passed both chambers of Congress?",
+    o: ["11", "33", "330", "1,100"], a: 1, why: "33. Of those, the states ratified 27, the last in 1992." });
+  /* A3: Recount asks who had the last word */
+  for (const c of CH) for (const s of c.steps) if (s.film && s.film.id === "recount") Object.assign(s.film, {
+    scene: "<em>Recount</em> (HBO, 2008) dramatizes the 36-day fight over Florida’s votes in 2000, from the first recount to the final ruling.",
+    q: "Who had the last word?", o: ["Florida’s Supreme Court", "The U.S. Congress", "The U.S. Supreme Court"], a: 2 });
+  /* A4: one name per chapter, the one in the contents */
+  CH.forEach(c => { if (FP_NAME[c.id]) { c.topic = FP_NAME[c.id]; if (INTRO[c.id]) INTRO[c.id].h = FP_NAME[c.id]; } });
+  /* B4: the suffrage dates get labels */
+  sub(S5_VOTE, "body", "<strong>Tap the dots.</strong>", "<strong>Tap a year.</strong>");
+  S5_VOTE.render = (f => function (v) { f.call(this, v);
+    const L = ["1870 · Race", "1920 · Women", "1924 · Native Americans", "1965 · Voting Rights Act", "1971 · Age 18"], nav = $(".dotnav", v);
+    if (!nav) return; nav.outerHTML = `<div class="chips vt-k" role="group" aria-label="Choose a year">${L.map((l, i) => `<button type="button" class="chip" data-k="u${i}" aria-pressed="false">${l}</button>`).join("")}</div>`;
+    const sync = () => { const on = $(".dot.on", v); $$(".vt-k .chip", v).forEach(b => b.setAttribute("aria-pressed", !!on && b.dataset.k === on.dataset.k)); };
+    $$(".vt-k .chip", v).forEach(b => b.onclick = () => { const d = $(`.dot[data-k="${b.dataset.k}"]`, v); if (d) d.dispatchEvent(new MouseEvent("click", { bubbles: true })); sync(); });
+    $$(".dot", v).forEach(d => d.addEventListener("click", () => setTimeout(sync)));
+    sync(); })(S5_VOTE.render);
+  /* B8: one instruction line at the end */
+  sub(COURSE, "body", " <strong>Guess first.</strong></p><p>Then try it yourself. From January 2027 Democrats will run both chambers, but Trump is still president. <strong>Can they pass a bill he opposes?</strong></p>",
+    "</p><p>From January 2027 Democrats will run both chambers, but Trump is still president. <strong>Guess first, then try it yourself: can they pass a bill he opposes?</strong></p>");
+  sub(S6_FPTP, "body", " <strong>Guess first.</strong></p>", "</p>");
+  sub(S6_FPTP, "body", "<strong>Then start a new party and see.</strong>", "<strong>Guess first, then start a new party.</strong>");
+  /* B9: "flipped" is linked once, in the House step; glossary groups by the chapter where a word first matters */
+  sub(MT_STATES, "body", T("flip", "flipped"), "flipped");
+  [["veto", "president"], ["impeach", "president"], ["gerrymander", "represented"]].forEach(([k, w]) => { if (GLOSS[k]) GLOSS[k].where = w; else miss.push("GLOSS " + k); });
+  /* B11 and the item changes */
+  setO(Q(QUIZ6, "A new party wins 15%"), "Exactly 15%", "About 5%");
+  setO(Q(QUIZ8, "Suppose Congress raised"), "$10, the federal floor", "$10, the federal rate");
+  setO(Q(QUIZ4, "Congress dislikes how"), "An amendment, or a later Court ruling differently", "An amendment, or a later Court that rules differently");
+  /* C1, C5, C8: chapter endings */
+  END.congress.b[0] = "Most bills never get a vote. In 2023 and 2024, only 274 of about 16,550 proposals became law.";
+  if (END.electoral.c[0][1] === "only by amending the Constitution: two-thirds of Congress and 38 states.") END.electoral.c[0][1] = "only by amending the Constitution, which takes two-thirds of Congress and 38 states."; else miss.push("END electoral c0");
+  sub(END.parties.b, 0, "Voters, not party members,", "Voters, not party leaders,");
+  /* B10: answer positions balanced across the whole app, not A–D in every checkpoint */
+  const place = (q, tgt) => { const ord = qOrder(q).map(j => q.o[j]), at = ord.indexOf(q.o[q.a]);
+    [ord[at], ord[tgt]] = [ord[tgt], ord[at]]; q.o = ord; q.a = tgt; q.ord = true; };
+  const PLAN = [[QUIZ1, [2, 0, 3, 0]], [QUIZ2, [1, 3, 1, 2]], [QUIZ3, [3, 0, 2, 2]], [QUIZ4, [0, 2, 1, 3]], [QUIZ5, [1, 1, 3, 0]],
+    [QUIZ6, [3, 2, 0, 1]], [QUIZ7, [0, 3, 3, 1]], [QUIZ8, [2, 1, 0, 2]], [QUIZ_MT, [3, 1, 2, 0]], [QUIZ_TOG, [1, 0, 2, 3]]];
+  PLAN.forEach(([A, P], k) => { if (A.length !== 4) { miss.push("quiz " + k + " length"); return; } A.forEach((q, i) => place(q, P[i])); });
+  if (miss.length) console.error("patch58 missing:", miss);
+})();
+/* A7: on a finished screen the footer button goes to the next chapter; "Almost there" keeps one way forward.
+   C6: the Count-to-60 challenges get a label. A4: the map counts map pieces. */
+renderStep = (f => function () { f.apply(this, arguments);
+  const n = $("#p-next"), inner = $("#p-inner"); if (!n || !inner || !cur) return; delete n.dataset.nextch;
+  const last = cur.i === cur.ch.steps.length - 1;
+  if (last && routeAt < 0) {
+    const dn = $("#d-next", inner); if (dn) { n.innerHTML = dn.innerHTML; n.dataset.nextch = "1"; dn.hidden = true; }
+    if ($(".almost-k", inner) && !$(".done-k", inner)) { const dm = $("#d-map", inner); if (dm) dm.remove(); }
+  }
+  const tk = $("ul.s60-tasks", inner); if (tk && !$(".s60-tk-h", inner)) tk.insertAdjacentHTML("beforebegin", `<p class="vlabel s60-tk-h">Challenges</p>`);
+})(renderStep);
+document.addEventListener("click", e => { const n = e.target.closest && e.target.closest("#p-next"); if (!n || !n.dataset.nextch) return;
+  const dn = $("#p-inner #d-next"); if (!dn) return; e.preventDefault(); e.stopImmediatePropagation(); dn.click(); }, true);
+renderHome = (f => function () { f.apply(this, arguments); const s = $("#mc-count small"); if (s && !/pieces/.test(s.textContent)) s.textContent += " map pieces"; })(renderHome);
 renderHome();
 route();
 </script>
