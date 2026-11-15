@@ -1895,6 +1895,20 @@ details.dk>p{padding:0 14px 12px}
 #gmT text{font-size:19px}
 .vt-k{margin:12px 0 0}
 .s60-tk-h{margin:18px 0 6px}
+
+/* v42: five clarity changes */
+.cb-a .cb-badge rect{fill:var(--card);stroke:var(--ink-3);stroke-width:1.5;transition:fill .25s,stroke .25s}
+.cb-a .cb-badge text{font-family:var(--f-body);font-size:14px;font-weight:600;fill:var(--ink)}
+.cb-a.on .cb-badge rect{fill:var(--mark);stroke:var(--ink)}
+@media (max-width:520px){.cb-bs{transform:scale(1.4)}}
+.wh-t.sel{border-style:solid;border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.wh-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.wh-btns .btn{margin:0}
+.wh-sc{font-weight:600;color:var(--ink-2)}
+.re-list{gap:14px}
+.gq-o:has(br){font-size:clamp(1rem,1.5vw,1.15rem);line-height:1.35;white-space:nowrap}
+.re-list li .re-q{display:block;color:var(--ink);font-size:1rem;font-weight:600;margin-top:2px}
+.re-list li .re-a{display:block;color:var(--ink-2);font-size:.95rem;line-height:1.45}
 </style>
 
 <header class="top">
@@ -3159,7 +3173,7 @@ const CLOT = [[65, 2], [66, 2], [67, 1], [68, 0], [69, 7], [70, 1], [71, 1], [72
 const FILI = {
   kicker: "The filibuster",
   title: "In the Senate, most bills need 60 votes just to get a vote.",
-  body: `<p>A Senate debate ends only when 60 senators vote to end it. This vote is called ${T("cloture", "cloture")}. Without it, a minority can talk a bill to death: a ${T("filibuster", "filibuster")}.</p><p>In 1957 Strom Thurmond spoke for 24 hours and 18 minutes against a civil rights bill. Today nobody has to talk: the threat is enough, so almost every major bill needs 60 votes. The big exception is budget bills passed under a special procedure called reconciliation: they need only a simple majority. That is how Trump’s 2025 tax law passed: the senators split 50 to 50, and Vice President JD Vance broke the tie. The chart counts motions to end debate. <strong>Tap a bar.</strong></p>`,
+  body: `<p>A Senate debate ends only when 60 senators vote to end it. This vote is called ${T("cloture", "cloture")}. Without it, a minority can talk a bill to death: a ${T("filibuster", "filibuster")}.</p><p>In 1957 Strom Thurmond spoke for 24 hours and 18 minutes against a civil rights bill. Today nobody has to talk: the threat is enough, so almost every major bill needs 60 votes. The chart counts motions to end debate. <strong>Tap a bar.</strong></p>`,
   sources: ["senCloture", "senFil"],
   render(v) {
     const PH = phone(), W = PH ? 400 : 720, H = PH ? 270 : 300, L = 40, B = 30, max = 340, n = CLOT.length, bw = (W - L - 10) / n;
@@ -3239,7 +3253,7 @@ const JUST = [["Clarence Thomas", "1948-06-23", "1991-10-23", "George H. W. Bush
 const NINE = {
   kicker: "Appointed for life",
   title: "Nine judges, no retirement age.",
-  body: `<p>Supreme Court justices are nominated by the president, confirmed by the Senate, and stay until they die or choose to retire. A justice appointed at 50 can shape American law for 30 or 40 years.</p><p>Six of today’s nine were appointed by Republican presidents and three by Democrats. <strong>Tap a justice, then try the Danish rule.</strong></p><p class="aside-note">Federal judges are appointed. Most state judges are not: in 38 states, voters elect the judges on the state’s highest court or vote on whether to keep them.</p>`,
+  body: `<p>Supreme Court justices are nominated by the president, confirmed by the Senate, and stay until they die or choose to retire. A justice appointed at 50 can shape American law for 30 or 40 years.</p><p>Six of today’s nine were appointed by Republican presidents and three by Democrats. <strong>Tap a justice, then try the Danish rule.</strong></p>`,
   dk: `Danish Supreme Court judges are appointed by the monarch on the advice of an independent council, not by politicians’ votes, and must retire at 70.`,
   sources: ["senScotus", "hr70", "brennanJudges"],
   render(v) {
@@ -3267,7 +3281,7 @@ const CONF = [["O’Connor", 1981, 99, 0], ["Scalia", 1986, 98, 0], ["Kennedy", 
 const WARS = {
   kicker: "Confirmation wars",
   title: "Confirmations used to be easy. Not anymore.",
-  body: `<p>Because a seat on the Court can last decades, the fight over each one has become a political war. In 1986 Antonin Scalia, a firm conservative, was confirmed 98 to 0. The first big fight came in 1987, when the Senate rejected Robert Bork, 58 to 42. Since 2017 no justice has received more than 54 votes.</p><p>In 2016 the Republican Senate refused even to hold a hearing for Barack Obama’s nominee, Merrick Garland, saying that in an election year the voters should decide. In 2020 the Senate, still Republican and still led by Mitch McConnell, confirmed Amy Coney Barrett eight days before the election. <strong>Tap a bar.</strong></p>`,
+  body: `<p>Because a seat on the Court can last decades, the fight over each one has become a political war. In 1986 Antonin Scalia, a firm conservative, was confirmed 98 to 0. The first big fight came in 1987, when the Senate rejected Robert Bork, 58 to 42. Since 2017 no justice has received more than 54 votes.</p><p>Two seats opened in election years, both times with Republicans in charge of the Senate. In March 2016, almost eight months before the election, President Obama, a Democrat, named Merrick Garland. In September 2020, about six weeks before the election, Ruth Bader Ginsburg died, and President Trump, a Republican, named Amy Coney Barrett. <strong>Guess what the Senate did, then tap a bar.</strong></p>`,
   sources: ["senScotus"],
   render(v) {
     v.innerHTML = `<div class="panel">
@@ -4152,29 +4166,29 @@ const CHECKS = {
   dk: `Grundloven also splits power three ways (§&nbsp;3). But a Danish government governs only as long as a Folketing majority accepts it, so the government and parliament usually pull in the same direction. A Danish government’s biggest risk is losing that majority.`,
   sources: ["fed51", "const", "senVeto", "jrev", "jud1869", "nixon", "grundlov3"],
   render(v) {
-    const NW = 176, NH = 74, chNo = id => CH.findIndex(c => c.id === id) + 1;
+    const NW = 176, NH = 74, CB_O = 22, CB_B = 36, chNo = id => CH.findIndex(c => c.id === id) + 1;
     const geo = (a, b) => {
       const [ax, ay] = [CB_N[a][2], CB_N[a][3]], [bx, by] = [CB_N[b][2], CB_N[b][3]];
       const dx = bx - ax, dy = by - ay, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy, ny = ux;
       const edge = Math.min((NW / 2) / Math.abs(ux || 1e-6), (NH / 2) / Math.abs(uy || 1e-6));
-      const s = [ax + ux * (edge + 8) + nx * 14, ay + uy * (edge + 8) + ny * 14], e = [bx - ux * (edge + 14) + nx * 14, by - uy * (edge + 14) + ny * 14];
-      const c = [(s[0] + e[0]) / 2 + nx * 30, (s[1] + e[1]) / 2 + ny * 30];
+      const s = [ax + ux * (edge + 8) + nx * CB_O, ay + uy * (edge + 8) + ny * CB_O], e = [bx - ux * (edge + 14) + nx * CB_O, by - uy * (edge + 14) + ny * CB_O];
+      const c = [(s[0] + e[0]) / 2 + nx * CB_B, (s[1] + e[1]) / 2 + ny * CB_B];
       const m = [.25 * s[0] + .5 * c[0] + .25 * e[0], .25 * s[1] + .5 * c[1] + .25 * e[1]];
       return { d: `M${s[0].toFixed(1)} ${s[1].toFixed(1)} Q${c[0].toFixed(1)} ${c[1].toFixed(1)} ${e[0].toFixed(1)} ${e[1].toFixed(1)}`, m };
     };
     const pairs = [["c", "p"], ["p", "c"], ["c", "j"], ["j", "c"], ["p", "j"], ["j", "p"]];
-    const arrows = pairs.map(([a, b]) => { const g = geo(a, b), n = CB.filter(k => k[0] === a && k[1] === b).length; return `<g class="cb-a" data-a="${a}" data-b="${b}"><path d="${g.d}" pathLength="100"/><g class="cb-badge" transform="translate(${g.m[0].toFixed(1)} ${g.m[1].toFixed(1)})"><g class="cb-bs"><circle r="13"/><text y="4.5" text-anchor="middle">${n}</text></g></g></g>`; }).join("");
+    const arrows = pairs.map(([a, b]) => { const g = geo(a, b), n = CB.filter(k => k[0] === a && k[1] === b).length; return `<g class="cb-a" data-a="${a}" data-b="${b}"><path d="${g.d}" pathLength="100"/><g class="cb-badge" transform="translate(${g.m[0].toFixed(1)} ${g.m[1].toFixed(1)})"><g class="cb-bs"><rect x="-40" y="-13" width="80" height="26" rx="13"/><text y="5" text-anchor="middle">${CB_LAB[a + b]}</text></g></g></g>`; }).join("");
     const nodes = Object.entries(CB_N).map(([k, [t, s, x, y]]) => `<g class="cb-n" data-k="${k}" tabindex="0" role="button" aria-label="${k === "c" ? "Congress" : k === "p" ? "The president" : "The courts"}: what can it do to the others?" transform="translate(${x} ${y})"><rect x="${-NW / 2}" y="${-NH / 2}" width="${NW}" height="${NH}" rx="12"/><text class="cb-t" y="-2" text-anchor="middle">${t}</text><text class="cb-s" y="20" text-anchor="middle">${s}</text></g>`).join("");
     v.innerHTML = `<div class="panel cb no-swipe">
-      <svg viewBox="0 0 600 350" class="cb-svg" role="group" aria-label="The three branches and the checks between them"><defs><marker id="cbHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--ink-3)"/></marker><marker id="cbHeadOn" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--ink)"/></marker></defs>${arrows}${nodes}</svg>
-      <div class="cb-list" id="cbL" aria-live="polite"><p class="cb-hint">Each arrow is a way one branch can block another. The numbers count them.</p></div></div>`;
+      <svg viewBox="0 0 600 364" class="cb-svg" role="group" aria-label="The three branches and the checks between them"><defs><marker id="cbHead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--ink-3)"/></marker><marker id="cbHeadOn" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--ink)"/></marker></defs>${arrows}${nodes}</svg>
+      <div class="cb-list" id="cbL" aria-live="polite"><p class="cb-hint">Each arrow names one way a branch can block another. Tap a branch to see them all.</p></div></div>`;
     const pick = k => {
       SND.play("pop");
       $$(".cb-n", v).forEach(n => n.classList.toggle("on", n.dataset.k === k));
       $$(".cb-a", v).forEach(a => { a.classList.toggle("on", a.dataset.a === k); a.classList.toggle("off", a.dataset.a !== k); });
       const by = {}; CB.filter(c => c[0] === k).forEach(c => (by[c[1]] = by[c[1]] || []).push(c));
       const nm = { c: "Congress", p: "the president", j: "the courts" };
-      $("#cbL", v).innerHTML = `<h3>What ${k === "p" ? "the president" : k === "c" ? "Congress" : "the courts"} can do to…</h3>${Object.entries(by).map(([t, list]) => `<div class="cb-grp"><p class="vlabel">… ${nm[t]}</p>${list.map(c => `<div class="cb-item"><b>${c[2]}</b><p>${c[3]}</p>${c[4] ? `<button class="cb-go" data-ch="${c[4]}">Chapter ${chNo(c[4])} →</button>` : ""}</div>`).join("")}</div>`).join("")}${k === "p" ? `<p class="cb-note">The president has just one formal check on Congress, but it is a strong one.</p>` : ""}`;
+      $("#cbL", v).innerHTML = `<h3>What ${k === "p" ? "the president" : k === "c" ? "Congress" : "the courts"} can do to…</h3>${Object.entries(by).map(([t, list]) => `<div class="cb-grp"><p class="vlabel">… ${nm[t]} · ${list.length === 1 ? "one way" : list.length + " ways"}</p>${list.map(c => `<div class="cb-item"><b>${c[2]}</b><p>${c[3]}</p>${c[4] ? `<button class="cb-go" data-ch="${c[4]}">Chapter ${chNo(c[4])} →</button>` : ""}</div>`).join("")}</div>`).join("")}${k === "p" ? `<p class="cb-note">The president has just one formal check on Congress, but it is a strong one.</p>` : ""}`;
       $$(".cb-go", v).forEach(b => b.onclick = () => openChapter(b.dataset.ch, 0));
     };
     $$(".cb-n", v).forEach(n => { n.onclick = () => pick(n.dataset.k); n.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(n.dataset.k); } }; });
@@ -4245,7 +4259,7 @@ const WHO8 = [
 const S8_WHO = {
   kicker: "Fifty governments under one roof",
   title: "Washington does not decide most of the rules Americans live by.",
-  body: `<p>The states came first. When they wrote a new Constitution in 1787, it gave the new federal government a list of powers: money, war, foreign affairs, trade between the states. The ${T("tenth", "Tenth Amendment")} leaves the rest “to the States respectively, or to the people.”</p><p>That is ${T("federalism", "federalism")}. Every state has its own constitution, governor, legislature and courts. <strong>Tap each rule to see who makes it.</strong></p>`,
+  body: `<p>The states came first. When they wrote a new Constitution in 1787, it gave the new federal government a list of powers: money, war, foreign affairs, trade between the states. The ${T("tenth", "Tenth Amendment")} leaves the rest “to the States respectively, or to the people.”</p><p>That is ${T("federalism", "federalism")}. Every state has its own constitution, governor, legislature and courts. <strong>Tap a rule, then say who makes it.</strong></p>`,
   dk: `Denmark is a unitary state. The Folketing makes the law for the whole country and decides which tasks the municipalities and regions handle, and it can take them back. The nearest Danish thing to an American state is the self-government of the Faroe Islands and Greenland.`,
   sources: ["const", "tenth", "drink21", "dolState"],
   render(v) {
@@ -4997,7 +5011,7 @@ const S60_TASKS = c => `<ul class="s60-tasks ${c}" aria-label="Try this"><li dat
 const SEN60 = {
   kicker: "Count to 60",
   title: "Count the votes yourself.",
-  body: `<p>From January 2027 Democrats lead the Senate: ${MID26.senate.d - 2} Democrats and 2 independents who vote with them, against ${MID26.senate.r} Republicans.${MID26.senate.u ? ` ${MID26.senate.u === 2 ? "Two races were" : "One race was"} still being counted.` : ""} Trump is still president, and the vice president, JD Vance, breaks ties.</p><p>Different decisions need different numbers. <strong>Pick a vote, then tap senators to win them over or lose them.</strong></p>${S60_TASKS("s60-tk-b")}`,
+  body: `<p>From January 2027 Democrats lead the Senate: ${MID26.senate.d - 2} Democrats and 2 independents who vote with them, against ${MID26.senate.r} Republicans.${MID26.senate.u ? ` ${MID26.senate.u === 2 ? "Two races were" : "One race was"} still being counted.` : ""} Trump is still president, and the vice president, JD Vance, breaks ties.</p><p>Different decisions need different numbers. Most bills need 60. Budget bills passed under a special procedure called reconciliation need only a simple majority: the Senate split 50 to 50 on Trump’s 2025 tax law, and Vance broke the tie. <strong>Pick a vote, then tap senators to win them over or lose them.</strong></p>${S60_TASKS("s60-tk-b")}`,
   sources: ["senFil", "senVP", "senNuclear", "senRecon", "constArt", "cbsSen", "cbsOpen"],
   render(v) {
     const D = MID26.senate.d, R = MID26.senate.r, U = MID26.senate.u, IND = 2;
@@ -6364,7 +6378,7 @@ renderStep = (f => function () {
   $("#route-tb").onclick = () => { SND.play("tap"); routeGo(k + 1); };
   if (cur.ch === ROUTE[k].c && cur.ch.steps[cur.i] === ROUTE[k].s) {
     const inner = $("#p-inner"), st = inner && inner.querySelector(".step-text");
-    if (st && !st.querySelector(".route-note")) st.insertAdjacentHTML("afterbegin", `<p class="route-note"><b>Short route, stop ${k + 1} of ${ROUTE.length}:</b> ${ROUTE[k].c.closing ? "the closing chapter" : ROUTE[k].c.bonus ? "a special chapter" : "chapter " + (CH.indexOf(ROUTE[k].c) + 1)}, ${ROUTE[k].c.topic.toLowerCase()}. Try it, then press “${last ? "Finish the route" : "Next stop"}.” To see the rest of this chapter, press “Explore.”</p>`);
+    if (st && !st.querySelector(".route-note")) st.insertAdjacentHTML("afterbegin", `<p class="route-note"><b>Short route, stop ${k + 1} of ${ROUTE.length}:</b> ${ROUTE[k].c.closing ? "the closing chapter" : ROUTE[k].c.bonus ? "a special chapter" : "chapter " + (CH.indexOf(ROUTE[k].c) + 1)}, ${ROUTE[k].c.topic.replace(/^[A-Z](?=[a-z]+ )/, m => m.toLowerCase())}. Try it, then press “${last ? "Finish the route" : "Next stop"}.” To see the rest of this chapter, press “Explore.”</p>`);
   }
 })(renderStep);
 closePlayer = (f => function (x) { routeAt = -1; f(x); })(closePlayer);
@@ -6668,11 +6682,11 @@ function routeFinish() {
   $("#p-title").innerHTML = `<b class="pt-l">Short route</b><b class="pt-s">Short route</b><span>Nine stops, one from each chapter</span>`;
   $("#p-segs").innerHTML = ""; $("#p-count").innerHTML = ""; $("#p-prev").disabled = false; $("#p-next").innerHTML = "Back to the map";
   $("#p-inner").innerHTML = `<article class="step solo route-end"><div class="re-wrap">
-      <p class="almost-k done-k">Short route finished</p>
-      <h2>Nine stops, done.</h2>
-      <p class="re-lede">You tried one hands-on piece of every chapter:</p>
-      <ol class="re-list">${ROUTE.map(r => `<li><b>${r.c.closing ? "Closing chapter" : "Chapter " + (CH.indexOf(r.c) + 1)} · ${r.c.topic}</b>${r.s.kicker !== r.c.topic ? `<span>${r.s.kicker}</span>` : ""}</li>`).join("")}</ol>
-      <p class="re-next">Each full chapter ends with four quick questions. Finish one, and its part of your map lights up.</p>
+      <p class="almost-k done-k">Nine stops, one per chapter</p>
+      <h2>Short route finished.</h2>
+      <p class="re-lede">Each chapter asks one question. The short answers:</p>
+      <ol class="re-list">${ROUTE.map(r => `<li><b>${r.c.closing ? "Closing chapter" : "Chapter " + (CH.indexOf(r.c) + 1)} · ${r.c.topic}</b><span class="re-q">${r.c.q}</span>${END[r.c.id] ? `<span class="re-a">${reFirst(END[r.c.id].a)}</span>` : ""}</li>`).join("")}</ol>
+      <p class="re-next">Each full chapter explains its answer and ends with four quick questions. Finish one, and its part of your map lights up.</p>
       <div class="cta-row">${nxt ? `<button class="btn" id="re-go">Start chapter ${CH.indexOf(nxt) + 1} in full <span class="arr">→</span></button>` : ""}<button class="btn${nxt ? " ghost" : ""}" id="re-map">Back to the map</button></div>
     </div></article>`;
   const g = $("#re-go"); if (g) g.onclick = () => { routeEnd = false; openChapter(nxt.id, 0); };
@@ -7026,6 +7040,67 @@ renderStep = (f => function () { f.apply(this, arguments);
 document.addEventListener("click", e => { const n = e.target.closest && e.target.closest("#p-next"); if (!n || !n.dataset.nextch) return;
   const dn = $("#p-inner #d-next"); if (!dn) return; e.preventDefault(); e.stopImmediatePropagation(); dn.click(); }, true);
 renderHome = (f => function () { f.apply(this, arguments); const s = $("#mc-count small"); if (s && !/pieces/.test(s.textContent)) s.textContent += " map pieces"; })(renderHome);
+
+/* ---- v42: five clarity changes (clarity review B1, B5, B6, B12, C5) ---- */
+const CB_LAB = { cp: "Impeach", pc: "Veto", cj: "Approve judges", jc: "Strike down laws", pj: "Pick judges", jp: "Rule against" };
+function reFirst(s) { const m = s.match(/^.+?\.(?=\s+[A-Z]|$)/); return m ? m[0] : s; }
+(() => {
+  const miss = [];
+  /* B1b: "Two empty seats" moves from Appointed for life to the top of Confirmation wars, as a guess that unlocks the chart */
+  let seats = null; for (const c of CH) for (const s of c.steps) if (s.film && s.film.id === "seats") { seats = s.film; delete s.film; }
+  if (!seats) miss.push("seats film");
+  NINE.sources = NINE.sources.filter(k => k !== "brennanJudges");
+  WARS.guess = { id: "seats", q: "What did the Senate do with each nominee?",
+    o: ["2016: confirmed<br>2020: confirmed", "2016: confirmed<br>2020: no vote", "2016: no vote<br>2020: confirmed", "2016: no vote<br>2020: no vote"], a: 2,
+    why: "The Senate never held a hearing or a vote on Garland. Its Republican leader, Mitch McConnell, said the voters should decide in an election year, and the seat stayed empty until Neil Gorsuch was confirmed in April 2017. In 2020 the Senate, still Republican and still led by McConnell, confirmed Barrett 52 to 48, eight days before the election. The president names the justices, but the Senate decides whether and when they join the Court." };
+  /* B6: pill width follows the label */
+  CHECKS.render = (f => function (v) { f.call(this, v);
+    $$(".cb-bs", v).forEach(g => { const tx = $("text", g), r = $("rect", g); try { const w = tx.getBBox().width; if (w > 0) { r.setAttribute("width", (w + 20).toFixed(1)); r.setAttribute("x", (-(w + 20) / 2).toFixed(1)); } } catch (e) {} });
+  })(CHECKS.render);
+  /* B12: the Court stop on the short route is the Roe/Dobbs case study */
+  const rc = ROUTE.find(r => r.c.id === "court"), roe = rc && rc.c.steps.find(s => s.kicker === "A case study");
+  if (roe) rc.s = roe; else miss.push("route court");
+  /* C5: the National Popular Vote compact */
+  REF.npv = { sa: "National Popular Vote", a: "National Popular Vote", y: "n.d.", t: "Home page. Accessed November 15, 2026.", u: "https://www.nationalpopularvote.com/" };
+  refDone = false;
+  END.electoral.c.push(["A national popular vote", "possibly, with the Electoral College still in place. States that join the National Popular Vote Interstate Compact promise their electors to the winner of the national vote, starting once the members hold 270 electoral votes between them. In November 2026 they held 222: 18 states and D.C. The compact would almost certainly be challenged in court."]);
+  const ec = CH.find(c => c.id === "electoral"), dEnd = ec.steps[ec.steps.length - 1]; dEnd.sources = [...(dEnd.sources || []), "npv"];
+  dEnd.render = (f => function (v) { f.call(this, v); const cic = $(".cic", v); if (cic && !$(".src", cic)) cic.insertAdjacentHTML("beforeend", srcHTML(["npv"])); })(dEnd.render);
+  if (miss.length) console.error("patch59 missing:", miss);
+})();
+/* B5: pick a rule, say who makes it, then see the answer */
+S8_WHO.render = function (v) {
+  const col = { f: "Federal government", s: "The states", b: "Both" };
+  let sel = null, right = 0, asked = 0;
+  v.innerHTML = `<div class="panel wh no-swipe">
+    <p class="vlabel">Who makes the rule? <span class="wh-sc" id="whS"></span></p>
+    <div class="wh-tray">${WHO8.map((w, i) => `<button class="wh-t" data-i="${i}" aria-pressed="false">${w[0]}</button>`).join("")}</div>
+    <div class="wh-cols">${Object.entries(col).map(([k, x]) => `<div class="wh-c" data-k="${k}"><p class="wh-h">${x} <b>0</b></p><div class="wh-in"></div></div>`).join("")}</div>
+    <div class="wh-why" id="whY" aria-live="polite">Twelve everyday rules. Pick one, then say who makes it.</div>
+    <button class="btn small ghost" id="whAll">Sort the rest</button></div>`;
+  const Y = $("#whY", v), score = () => { $("#whS", v).textContent = asked ? `· ${right} of ${asked} right` : ""; };
+  const put = (b, quiet) => {
+    const w = WHO8[+b.dataset.i], c = $(`.wh-c[data-k="${w[1]}"]`, v);
+    const p = document.createElement("span"); p.className = "wh-p " + w[1]; p.textContent = w[0]; $(".wh-in", c).appendChild(p);
+    b.remove(); $("b", c).textContent = $$(".wh-p", c).length;
+    if (!$(".wh-t", v)) { const a = $("#whAll", v); if (a) a.remove(); if (!quiet || asked) Y.insertAdjacentHTML("beforeend", ` <span class="wh-end">${asked ? `You got ${right} of ${asked} right. ` : ""}The states make most of the everyday rules.</span>`); }
+  };
+  const ask = b => {
+    sel = b; SND.play("tap");
+    $$(".wh-t", v).forEach(x => { x.classList.toggle("sel", x === b); x.setAttribute("aria-pressed", x === b); });
+    const w = WHO8[+b.dataset.i];
+    Y.innerHTML = `<strong>${w[0]}.</strong> Who makes this rule?<span class="wh-btns">${Object.entries(col).map(([k, x]) => `<button class="btn small wh-b" data-k="${k}">${x}</button>`).join("")}</span>`;
+    $$(".wh-b", Y).forEach(x => x.onclick = () => answer(x.dataset.k));
+  };
+  const answer = k => {
+    if (!sel) return; const b = sel, w = WHO8[+b.dataset.i], ok = k === w[1]; sel = null;
+    asked++; if (ok) right++; SND.play(ok ? "right" : "reveal");
+    Y.innerHTML = `<b>${ok ? "Correct." : "Incorrect."}</b> <strong>${w[0]}: ${col[w[1]].toLowerCase()}.</strong> ${w[2]}`;
+    put(b); score();
+  };
+  $$(".wh-t", v).forEach(b => b.onclick = () => ask(b));
+  $("#whAll", v).onclick = () => { SND.play("reveal"); sel = null; if (!asked) Y.textContent = ""; $$(".wh-t", v).forEach(b => put(b, true)); };
+};
 renderHome();
 route();
 </script>
