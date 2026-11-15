@@ -1783,12 +1783,69 @@ details.dk>p{padding:0 14px 12px}
 .ap-q{margin:10px 0 0;font-size:.84rem;line-height:1.45;color:var(--ink-3)}
 .arg-poll .fm-src{display:block;margin-top:6px;font-size:.8rem;color:var(--ink-3)}
 @media (prefers-reduced-motion:reduce){.ap-bar i{transition:none}}
+
+/* v29: who could change it */
+.wcc{margin:0 0 24px;padding:16px 18px 6px;border-radius:12px;background:var(--card);box-shadow:var(--shadow)}
+.wcc h3{margin:0 0 10px;font-size:1.05rem}
+.wcc ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.wcc li{padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.wcc li:last-child{border-bottom:0}
+.wcc-r{margin:0;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.wcc-r b{font-size:.98rem}
+.wcc-t{font-size:.76rem;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--paper-2);color:var(--ink-2);white-space:nowrap}
+.wcc-t.wcc-amend{background:var(--ink);color:var(--paper)}
+.wcc-t.wcc-consent{background:var(--ink);color:var(--paper)}
+.wcc-x{margin:4px 0 0;font-size:.92rem;line-height:1.45;color:var(--ink-2)}
+/* v29: short route */
+.player.route #p-count{display:flex;justify-content:center}
+.player.route #p-count .btn{white-space:nowrap}
+.rm-p{display:none}
+@media (max-width:520px){.rm-d,.rs-n{display:none}.rm-p{display:inline}}
+.route-end .re-wrap{max-width:640px}
+.route-end h2{margin:6px 0 10px}
+.re-lede{margin:0 0 10px}
+.re-list{margin:0 0 18px;padding-left:1.4em;display:grid;gap:8px}
+.re-list li b{display:block}
+.re-list li span{color:var(--ink-3);font-size:.92rem}
+.re-next{margin:0 0 18px;color:var(--ink-2)}
+/* v29: glossary */
+.words .mono{display:inline!important}
+.w-q{display:block;margin:4px 0 14px}
+.w-q input{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;padding:10px 12px;border:1.5px solid var(--rule);border-radius:10px;background:var(--paper);color:var(--ink)}
+.w-q input:focus{outline:2px solid var(--mark);outline-offset:1px}
+.wlist .wl-w button{gap:6px;align-items:center}
+.wlist .wl-w button:not(.got){border-color:var(--rule);background:var(--paper)}
+.wl-ok{font-style:normal;font-weight:800;color:var(--ink-2)}
+.wl-none{color:var(--ink-3)}
+
+/* v29b: named steps */
+.p-top{position:relative}
+.p-title[role=button]{cursor:pointer;border-radius:6px}
+.p-title[role=button]:hover .pt-caret,.p-title[aria-expanded=true] .pt-caret{color:var(--ink)}
+.p-title:focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+.pt-caret{color:var(--ink-3);font-size:.85em}
+.p-title b .pt-caret{display:inline}
+.p-steps{position:absolute;z-index:30;top:calc(100% + 6px);left:max(12px,calc((100vw - 1140px) / 2));width:min(340px,calc(100vw - 24px));max-height:min(70vh,520px);overflow:auto;background:var(--card);border:1px solid var(--rule);border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.18);padding:8px}
+.ps-h{margin:4px 8px 6px;font-size:.8rem;font-weight:700;color:var(--ink-3)}
+.p-steps button{display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;align-items:center;width:100%;text-align:left;font:inherit;font-size:.95rem;color:var(--ink-2);background:none;border:0;border-radius:8px;padding:8px;cursor:pointer}
+.p-steps button:hover,.p-steps button:focus-visible{background:var(--paper-2);outline:none}
+.p-steps button.cur{color:var(--ink);font-weight:700;background:color-mix(in srgb,var(--mark) 18%,var(--card))}
+.ps-n{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;font-size:.78rem;font-weight:700;border:1.5px solid var(--rule)}
+.p-steps button.seen .ps-n{background:var(--ink-3);border-color:var(--ink-3);color:var(--card)}
+.p-steps button.cur .ps-n{background:var(--ink);border-color:var(--ink);color:var(--card)}
+/* v29b: state pickers on the state-law map */
+.pm-sel{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 4px;font-size:.9rem;color:var(--ink-2)}
+.pm-sel{flex-wrap:nowrap}
+.pm-sel select{flex:1 1 0;min-width:0;max-width:13em;font:inherit;font-weight:600;color:var(--ink);background:var(--card);border:1.5px solid var(--rule);border-radius:999px;padding:7px 12px}
+/* v29b: short-route bar fits on phones */
+.player.route .p-bottom .btn{white-space:nowrap}
+@media (max-width:520px){.player.route .p-bottom .wrap{gap:8px}.player.route .p-bottom .btn{padding-inline:14px}.player.route .pb-t{display:none}}
 </style>
 
 <header class="top">
   <div class="wrap">
     <a class="wordmark" href="#map" id="wm"><i aria-hidden="true"></i>Why can’t they just…?</a>
-    <div class="prog" aria-live="polite"><button class="words" type="button" aria-label="Your word list"><span class="mono">Words</span><b class="words-n">0/36</b></button><button class="snd" type="button" aria-pressed="true" aria-label="Sound on. Tap to mute." title="Sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="w1" d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path class="w2" d="M18.2 6.6a7.6 7.6 0 0 1 0 10.8"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button><span class="mono" id="prog-txt">0 of 8 understood</span><span class="prog-segs" id="prog-segs"></span></div>
+    <div class="prog" aria-live="polite"><button class="words" type="button" aria-label="Glossary"><span class="mono">Glossary</span></button><button class="snd" type="button" aria-pressed="true" aria-label="Sound on. Tap to mute." title="Sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="w1" d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path class="w2" d="M18.2 6.6a7.6 7.6 0 0 1 0 10.8"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button><span class="mono" id="prog-txt">0 of 8 understood</span><span class="prog-segs" id="prog-segs"></span></div>
   </div>
 </header>
 
@@ -1872,7 +1929,7 @@ details.dk>p{padding:0 14px 12px}
     <button class="p-close" id="p-close" aria-label="Back to the map"><span class="mono">←</span> <span class="mono">Map</span></button>
     <div class="p-title" id="p-title"></div>
     <div class="p-segs" id="p-segs"></div>
-    <button class="words" type="button" aria-label="Your word list"><span class="mono">Words</span><b class="words-n">0/36</b></button>
+    <button class="words" type="button" aria-label="Glossary"><span class="mono">Glossary</span></button>
     <button class="snd" type="button" aria-pressed="true" aria-label="Sound on. Tap to mute." title="Sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="w1" d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path class="w2" d="M18.2 6.6a7.6 7.6 0 0 1 0 10.8"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
   </div></div>
   <div class="p-stage" id="p-stage"><div class="wrap" id="p-inner"></div></div>
@@ -1894,8 +1951,9 @@ details.dk>p{padding:0 14px 12px}
 </div>
 <div class="wsheet" id="wsheet" hidden role="dialog" aria-labelledby="w-title">
   <button class="g-x" id="w-x" aria-label="Close">×</button>
-  <h3 id="w-title">Your words</h3>
+  <h3 id="w-title">Glossary</h3>
   <p id="w-count"></p>
+  <label class="w-q"><span class="vh">Search the glossary</span><input type="search" id="w-q" placeholder="Search, e.g. cloture" autocomplete="off" spellcheck="false"></label>
   <div class="wlist" id="wlist"></div>
 </div>
 
@@ -2799,9 +2857,9 @@ const MT_WHY = {
 
 const SHIFT = [["Latino voters", 48, 29], ["Independents", 48, 38], ["Voters under 30", 39, 28], ["Black voters", 15, 8], ["White voters without a college degree", 64, 60]];
 const MT_WHO = {
-  kicker: "Who moved",
-  title: "The voters who gave Trump his 2024 win drifted away.",
-  body: `<p>Trump won in 2024 partly by gaining among groups that usually vote Democratic, especially Latino and young voters. In 2026 many of them swung back.</p><p>The chart compares Trump’s share of each group in 2024 with Republican House candidates’ share in 2026. That is not quite like with like, and early exit polls get revised, so treat the numbers as rough. <strong>Tap “Show 2026.”</strong></p>`,
+  kicker: "Group by group",
+  title: "Republicans lost ground with the groups behind Trump’s 2024 win.",
+  body: `<p>Trump won in 2024 partly by gaining among groups that usually vote Democratic, especially Latino and young voters. In 2026 Republicans did much worse with the same groups.</p><p>The chart compares Trump’s share of each group in 2024 with Republican House candidates’ share in 2026. That is not quite like with like, and early exit polls get revised, so treat the numbers as rough. Nor can a chart like this tell you whether the same people changed their minds or different people turned out to vote. <strong>Tap “Show 2026.”</strong></p>`,
   sources: ["brookings"],
   render(v) {
     const P = p => (p / 70 * 100).toFixed(2) + "%";
@@ -3046,7 +3104,7 @@ const COURSE = {
 const CLOT = [[65, 2], [66, 2], [67, 1], [68, 0], [69, 7], [70, 1], [71, 1], [72, 2], [73, 0], [74, 0], [75, 2], [76, 0], [77, 1], [78, 1], [79, 6], [80, 0], [81, 2], [82, 0], [83, 1], [84, 0], [85, 0], [86, 1], [87, 4], [88, 4], [89, 7], [90, 6], [91, 7], [92, 24], [93, 44], [94, 39], [95, 23], [96, 30], [97, 31], [98, 41], [99, 41], [100, 54], [101, 38], [102, 60], [103, 80], [104, 82], [105, 69], [106, 71], [107, 71], [108, 62], [109, 68], [110, 139], [111, 137], [112, 115], [113, 252], [114, 128], [115, 201], [116, 328], [117, 336], [118, 266], [119, 297]];
 const FILI = {
   kicker: "The filibuster",
-  title: "In the Senate, 60 is the real majority.",
+  title: "In the Senate, most bills need 60 votes just to get a vote.",
   body: `<p>A Senate debate ends only when 60 senators vote to end it. This vote is called ${T("cloture", "cloture")}. Without it, a minority can talk a bill to death: a ${T("filibuster", "filibuster")}.</p><p>In 1957 Strom Thurmond spoke for 24 hours and 18 minutes against a civil rights bill. Today nobody has to talk: the threat is enough, so almost every major bill needs 60 votes. The big exception is budget bills passed under a special procedure called reconciliation: they need only a simple majority. That is how Trump’s 2025 tax law passed: the senators split 50 to 50, and Vice President JD Vance broke the tie. The chart counts motions to end debate. <strong>Tap a bar.</strong></p>`,
   sources: ["senCloture", "senFil"],
   render(v) {
@@ -3565,7 +3623,7 @@ const S6_FPTP = {
       const t = +$("#fpR", v).value / 100; $("#fpV", v).textContent = Math.round(t * 100) + "%";
       let A = [0, 0, 0], V = [0, 0, 0];
       FP_D.forEach(d => {
-        const n = Math.min(.95, conc ? t * (d.hot ? 2.8 : .4) : t * (.85 + .3 * d.u)), b = d.L * (1 - n), r = (1 - d.L) * (1 - n);
+        const hn = Math.min(.95, 2.8 * t), n = conc ? (d.hot ? hn : (t - .25 * hn) / .75) : Math.min(.95, t * (.85 + .3 * d.u)), b = d.L * (1 - n), r = (1 - d.L) * (1 - n);
         V[0] += b; V[1] += r; V[2] += n; A[n > b && n > r ? 2 : b > r ? 0 : 1]++;
       });
       const q = V.map(x => x), sum = q[0] + q[1] + q[2], ex = q.map(x => 100 * x / sum), B = ex.map(Math.floor);
@@ -3852,8 +3910,8 @@ VETO.guess = { id: "veto", q: "Since 1789, presidents have vetoed 2,599 bills. H
   why: "112 times, about one veto in 23. Two-thirds of both chambers is a very high bar." };
 
 COURSE.body = `<p>Members of Congress introduce thousands of bills, and every one of them faces the same obstacle course. <strong>Guess first.</strong></p><p>Then try it yourself. From January 2027 Democrats will run both chambers, but Trump is still president. <strong>Can they pass a bill he opposes?</strong></p>`;
-COURSE.guess = { id: "course2", q: "In 2023 and 2024, members of Congress introduced about 19,300 bills and resolutions. How many became law?", o: ["93", "274", "1,912", "6,437"], a: 1,
-  why: "Only 274, about one in 70. Most never even got a vote." };
+COURSE.guess = { id: "course2", q: "In 2023 and 2024, members of Congress introduced about 16,550 proposals for new laws. How many became law?", o: ["93", "274", "1,912", "6,437"], a: 1,
+  why: "Only 274, about one in 60. Most never even got a vote." };
 
 REVIEW.title = "Nine judges can cancel a law passed by Congress.";
 REVIEW.guess = { id: "review", q: "By 2014, how many federal laws had the Supreme Court struck down, in whole or in part?", o: ["About 10", "About 50", "About 180", "About 1,800"], a: 2,
@@ -4168,7 +4226,7 @@ const PM_POL = {
 const S8_MAP = {
   kicker: "Cross a state line",
   title: "Drive across a state line, and the law changes.",
-  body: `<p>Because states make their own laws, some things that are legal in one state are crimes in the next. Since the Supreme Court’s Dobbs ruling in 2022, that includes abortion.</p><p><strong>Guess first, then pick a law and compare two neighbors.</strong> Tap the map to choose your own pair.</p>`,
+  body: `<p>Because states make their own laws, some things that are legal in one state are crimes in the next. Since the Supreme Court’s Dobbs ruling in 2022, that includes abortion.</p><p><strong>Guess first, then pick a law and compare two neighbors.</strong> Tap the map, or pick two states from the lists, to choose your own pair.</p>`,
   dk: `In Denmark these rules are the same everywhere: cannabis is illegal, there is no death penalty, abortion is available on request until 18 weeks, and there is no legal minimum wage at all, because pay is set in agreements between unions and employers.`,
   sources: ["mppLegal", "afsCannabis", "dpiState", "kffAbort", "dolState", "lexAbort"],
   guess: { id: "mj", q: "In how many of the 50 states can adults legally buy or use marijuana?", o: ["4", "14", "24", "44"], a: 2,
@@ -4181,20 +4239,25 @@ const S8_MAP = {
       <svg viewBox="0 0 975 610" class="pm-map" role="img" aria-label="Map of states by law. Tap two states to compare.">${Object.keys(ST).map(s => `<path data-s="${s}" d="${ST[s].d}"><title>${ST[s].n}</title></path>`).join("")}</svg>
       <div class="legend pm-leg" id="pmLeg"></div>
       <div class="chips pm-pairs">${PAIRS.map(([a, b]) => `<button class="chip" data-a="${a}" data-b="${b}">${ST8(a)} → ${ST8(b)}</button>`).join("")}</div>
+      <div class="pm-sel"><select id="pmSA" aria-label="First state"></select><span>and</span><select id="pmSB" aria-label="Second state"></select></div>
       <div class="pm-cmp" id="pmC" aria-live="polite"></div></div>`;
     const paint = () => {
       const P = PM_POL[pol];
       const svg = $(".pm-map", v);
       $$(".pm-map path", v).forEach(p => { const s = p.dataset.s; p.setAttribute("class", P.cls(s) + (s === A ? " sa" : s === B ? " sb" : "")); });
       [A, B].forEach(s => { const p = $(`path[data-s="${s}"]`, svg); if (p) svg.appendChild(p); });
+      $("#pmSA", v).value = A; $("#pmSB", v).value = B;
       $("#pmLeg", v).innerHTML = P.leg.map(([t, c]) => `<span><i class="${c}"></i>${t}</span>`).join("");
       $$(".pm-pol .chip", v).forEach(c => c.setAttribute("aria-pressed", c.dataset.p === pol));
       $$(".pm-pairs .chip", v).forEach(c => c.setAttribute("aria-pressed", c.dataset.a === A && c.dataset.b === B));
-      const diff = Object.keys(PM_POL).filter(k => PM_POL[k].txt(A) !== PM_POL[k].txt(B)).length;
+      const diff = Object.keys(PM_POL).filter(k => (PM_POL[k].same || PM_POL[k].txt)(A) !== (PM_POL[k].same || PM_POL[k].txt)(B)).length;
       $("#pmC", v).innerHTML = `<div class="pm-row pm-hd"><span></span><b class="ta">${ST8(A)}</b><b class="tb">${ST8(B)}</b></div>${Object.entries(PM_POL).map(([k, p]) => `<div class="pm-row ${k === pol ? "on" : ""}"><span class="mono">${p.lab}</span><span>${p.txt(A)}</span><span>${p.txt(B)}</span></div>`).join("")}<p class="pm-sum">${A === B ? "Pick a second state." : diff ? `${diff} of 4 laws differ between ${ST8(A)} and ${ST8(B)}.` : `These four laws are the same in ${ST8(A)} and ${ST8(B)}.`}</p>`;
     };
     $$(".pm-pol .chip", v).forEach(c => c.onclick = () => { pol = c.dataset.p; paint(); });
     $$(".pm-pairs .chip", v).forEach(c => c.onclick = () => { A = c.dataset.a; B = c.dataset.b; turn = 0; paint(); });
+    { const opts = Object.keys(ST).filter(s => PM_POL.mw.txt && MIN_WAGE[s] !== undefined).sort((a, b) => ST[a].n.localeCompare(ST[b].n)).map(s => `<option value="${s}">${ST[s].n}</option>`).join("");
+      $("#pmSA", v).innerHTML = opts; $("#pmSB", v).innerHTML = opts;
+      $("#pmSA", v).onchange = e => { A = e.target.value; turn = 1; paint(); }; $("#pmSB", v).onchange = e => { B = e.target.value; turn = 0; paint(); }; }
     $(".pm-map", v).addEventListener("click", e => { const p = e.target.closest("path"); if (!p) return; SND.play("tap"); if (turn === 0) A = p.dataset.s; else B = p.dataset.s; turn = 1 - turn; paint(); });
     paint();
   }
@@ -4749,7 +4812,7 @@ const CH = [
   { id: "president", topic: "The president is not a prime minister", q: "Why can’t the president just pass a law?", teaser: "Checks and balances, no-confidence votes, vetoes, and what a president can do alone.", img: "sotu1981", mins: 7, piece: "pres",
     learned: ["Power is split between Congress, the president and the courts, and each can block the others: checks and balances.", "A Danish prime minister needs the Folketing’s trust. An American president is elected separately, and Congress cannot vote the president out.", "U.S. elections fall on fixed dates. A Danish prime minister chooses when to call one.", "The president can veto any bill. Congress needs two-thirds of both chambers to override, and has managed it 112 times out of 2,599.", "The president commands the military and can pardon, but laws, taxes and war belong to Congress."] },
   { id: "congress", topic: "The obstacle course", q: "Why does nothing get through Congress?", teaser: "Two chambers, the filibuster, a bill’s obstacle course, and shutdowns.", img: "capitol", mins: 6, piece: "cong",
-    learned: ["A bill must pass the House and the Senate in exactly the same words, and then get the president’s signature.", "In the Senate, 41 of 100 senators can block most bills with a filibuster, so 60 is the real majority.", "Filibuster threats went from rare to routine: hundreds of cloture motions per Congress.", "If Congress and the president cannot agree on money, the government shuts down. Denmark’s constitution and a strong custom prevent that."] },
+    learned: ["A bill must pass the House and the Senate in exactly the same words, and then get the president’s signature, unless two-thirds of both chambers override a veto.", "In the Senate, 41 of 100 senators can block most bills with a filibuster, so it takes 60 votes just to get to a final vote.", "Filibuster threats went from rare to routine: hundreds of cloture motions per Congress.", "If Congress and the president cannot agree on money, the government shuts down. Denmark’s constitution and a strong custom prevent that."] },
   { id: "court", topic: "Nine judges for life", q: "Why do nine judges decide abortion?", teaser: "Striking down laws, judges for life, confirmation wars, and abortion.", img: "court", mins: 6, piece: "court",
     learned: ["The Supreme Court can strike down laws that break the Constitution. By 2014 it had struck down 176 federal laws. Denmark’s courts have done it once.", "Justices serve for life, so each appointment can shape the law for decades, and confirmations have become party-line fights.", "Roe v. Wade (1973) protected abortion nationwide. Dobbs (2022) handed the question back to the states.", "In Denmark the Folketing decides abortion law, and judges retire at 70."] },
   { id: "represented", topic: "Who gets represented", q: "Why does Wyoming have as many senators as California?", teaser: "Two senators per state, gerrymandering, who is left out, and who could vote.", img: "verdict1855", mins: 7, piece: "dist",
@@ -4765,7 +4828,7 @@ const CH = [
       "2026 was a wave. Democrats flipped more than 40 House seats, seven Senate seats and five governorships, most of them in states Trump won in 2024.",
       "Voters were worried about prices and corruption, Trump’s approval was below 40%, and groups that moved toward him in 2024 moved back.",
       "Republicans redrew House maps in the middle of the decade to gain seats. In the wave, the plan largely backfired.",
-      "From January 2027 the government is divided: Democrats can block, investigate and hold up spending, but they cannot pass laws over a veto."] }
+      "From January 2027 the government is divided: Democrats can block, investigate and hold up spending, but they cannot override a veto on their own."] }
 ];
 
 /* ---- v23: "The argument": both sides of one reform debate per chapter ---- */
@@ -5492,7 +5555,7 @@ function openGloss(k, anchor) {
   $$(`.term[data-t="${k}"]`).forEach(t => t.classList.add("got"));
   { const gi = $("#g-ill"); gi.hidden = !g.ill; gi.innerHTML = g.ill ? g.ill() : ""; } $("#g-term").textContent = g.term; $("#g-def").innerHTML = g.def;
   const dk = $("#g-dk"); dk.hidden = !g.dk; dk.innerHTML = g.dk ? `<span class="dk-tag">Compare Denmark</span>${g.dk}` : "";
-  const kick = $("#g-n"); kick.classList.toggle("new", isNew); kick.textContent = `${gotCount()} of ${GN} words collected`;
+  const kick = $("#g-n"); kick.classList.toggle("new", isNew); kick.textContent = isNew ? "New word" : "Glossary";
   gb.hidden = false; gp.hidden = false; placeGloss(anchor); fitSVG(gp); syncInert();
   gAnchor = anchor; updateWords(); $("#g-x").focus({ preventScroll: true });
 }
@@ -5818,7 +5881,7 @@ const PREDICT = [
 Object.assign(NC, {
   kicker: "Predict what happens",
   title: "Losing a fight with Congress doesn’t end a presidency.",
-  body: `<p>The president and Congress are elected separately, for fixed terms, and neither can dismiss the other. Most European democracies work differently: there, a government lasts only as long as a majority in parliament supports it.</p><p><strong>Predict what happens</strong> in three situations.</p>`,
+  body: `<p>The president and Congress are elected separately, for fixed terms, and neither can dismiss the other. Most European democracies work differently: there, a government lasts only until a majority in parliament votes against it.</p><p><strong>Predict what happens</strong> in three situations.</p>`,
   dk: `In Denmark the Folketing can bring down the government at any time. If a majority passes a ${T("noconf", "vote of no confidence")} in the prime minister, the government must resign or call an election (Grundloven § 15).`,
   sources: ["const", "house-leg", "t270", "dkconst"],
   render(v) { predictRender(v, PREDICT); }
@@ -6061,7 +6124,7 @@ const ACA_PATH = {
   sources: ["hc2009", "rc2009", "rc2009b", "senParty", "hc2010", "obamaLib", "rc2010", "crsByrd", "housePartyDiv", "nfib", "kffMed", "rc2017"],
   render(v) {
     let i = 0, seen = 0;
-    const chip = c => c === "M" ? "Special chapter: the midterms" : `Chapter ${c}`;
+    const chip = c => { if (c === "M") return "Special chapter: the midterms"; const id = ACA_OLD[c], x = CH.find(y => y.id === id); return x ? `Chapter ${CH.indexOf(x) + 1} · ${ACA_NAME[id]}` : ""; };
     v.innerHTML = `<div class="panel jr no-swipe"><div class="jr-track" role="group" aria-label="Stops">${ACA_STOPS.map((s, j) => `<button type="button" class="jr-dot" data-j="${j}" aria-label="Stop ${j + 1}: ${s.d}">${j + 1}</button>`).join("")}<span class="fill"></span></div><div class="jr-card" aria-live="polite"></div></div>`;
     const card = $(".jr-card", v);
     const show = () => {
@@ -6225,7 +6288,7 @@ const SHORT = {
   parties: "Because most American elections have one winner per district or state. Small parties rarely come first anywhere, so voters stick with the two that can win, and a vote for a third party can help the side a voter likes least.",
   constitution: "Because an amendment needs two thirds of both chambers of Congress and then three fourths of the states. Thirteen states can block any change, and the last amendment was ratified in 1992.",
   states: "Because the states, not Washington, make most of the laws people live by. The Constitution gives the federal government a list of powers and leaves the rest to the states, so crossing a state line can change what is legal.",
-  midterms: "Democrats won control of both the House and the Senate, halfway through Trump’s second term. From January 2027 the government is divided: Congress can block, investigate and hold up spending, but it cannot pass laws over a veto.",
+  midterms: "Democrats won control of both the House and the Senate, halfway through Trump’s second term. From January 2027 the government is divided: Congress can block, investigate and hold up spending, but Democrats cannot override a veto on their own.",
   together: "Because the system splits power among the House, the Senate and the president, each elected separately, and most laws need all three. Since 1969, one party has held all three in only 9 of 30 Congresses."
 };
 CH.forEach(c => { const d = c.steps[c.steps.length - 1], r = d.render; if (!SHORT[c.id]) return;
@@ -6249,7 +6312,7 @@ renderStep = (f => function () {
   $("#route-tb").onclick = () => { SND.play("tap"); routeGo(k + 1); };
   if (cur.ch === ROUTE[k].c && cur.ch.steps[cur.i] === ROUTE[k].s) {
     const inner = $("#p-inner"), st = inner && inner.querySelector(".step-text");
-    if (st && !st.querySelector(".route-note")) st.insertAdjacentHTML("afterbegin", `<p class="route-note"><b>Short route, stop ${k + 1} of ${ROUTE.length}:</b> ${ROUTE[k].c.closing ? "the closing chapter" : ROUTE[k].c.bonus ? "a special chapter" : "chapter " + (CH.indexOf(ROUTE[k].c) + 1)}, ${ROUTE[k].c.topic.toLowerCase()}. Try it, then press the yellow button below ${last ? "to finish" : "for the next stop"}.</p>`);
+    if (st && !st.querySelector(".route-note")) st.insertAdjacentHTML("afterbegin", `<p class="route-note"><b>Short route, stop ${k + 1} of ${ROUTE.length}:</b> ${ROUTE[k].c.closing ? "the closing chapter" : ROUTE[k].c.bonus ? "a special chapter" : "chapter " + (CH.indexOf(ROUTE[k].c) + 1)}, ${ROUTE[k].c.topic.toLowerCase()}. Try it, then press “${last ? "Finish the route" : "Next stop"}.” To see the rest of this chapter, press “Explore.”</p>`);
   }
 })(renderStep);
 closePlayer = (f => function (x) { routeAt = -1; f(x); })(closePlayer);
@@ -6460,6 +6523,7 @@ renderStep = (fn => function () {
   fn();
   if (!cur) return; const s = cur.ch.steps[cur.i], inner = $("#p-inner"), you = inner && $(".arg-you", inner); if (!s || !you) return;
   const P = ARG_POLL.get(s); if (!P) { you.remove(); return; }
+  if (P.mid && !$('.chip[data-s="m"]', you)) { const ca = $('.chip[data-s="a"]', you); if (ca) ca.insertAdjacentHTML("afterend", `<button class="chip" aria-pressed="false" data-s="m">${P.mid}</button>`); }
   PROG.stand = PROG.stand || {}; const key = s.title;
   const show = (pick, fresh) => {
     $$(".chip", you).forEach(x => x.setAttribute("aria-pressed", x.dataset.s === pick));
@@ -6470,6 +6534,178 @@ renderStep = (fn => function () {
   $$(".chip", you).forEach(b => b.onclick = () => { PROG.stand[key] = b.dataset.s; saveProg(); show(b.dataset.s, true); });
   if (PROG.stand[key]) show(PROG.stand[key], false);
 })(renderStep);
+
+/* ---- v29: outside-review fixes ---- */
+PM_POL.dp.same = s => PM_POL.dp.cls(s);
+PM_POL.ab.same = s => PM_POL.ab.txt(s).replace(/ \(.*\)$/, "");
+const ACA_OLD = { 1: "electoral", 2: "president", 3: "congress", 4: "court", 5: "represented", 6: "parties", 7: "constitution", 8: "states" };
+const ACA_NAME = { congress: "Congress", president: "The president", court: "The Supreme Court", electoral: "Electing the president", represented: "Who gets represented", parties: "Two parties", states: "Fifty states", constitution: "The Constitution" };
+ARG_POLL.get(ARG_FILI).mid = "Keep it, but reform it";
+SRC.senRes1 = ["Congressional Record, Résumé of Congressional Activity, 118th Congress, first session", "https://www.senate.gov/reference/resources/pdf/Resumes/118_1.pdf"];
+REF.senRes1 = { sa: "<em>Congressional Record</em>", a: "<em>Congressional Record</em>", y: "2024", t: "“Final Résumé of Congressional Activity, First Session of the One Hundred Eighteenth Congress.” Daily Digest. Accessed November 15, 2026.", u: "https://www.senate.gov/reference/resources/pdf/Resumes/118_1.pdf" };
+{ const i = COURSE.sources.indexOf("senRes"); if (i >= 0 && !COURSE.sources.includes("senRes1")) COURSE.sources.splice(i, 0, "senRes1"); }
+
+/* one reasoning question per checkpoint, in place of a recall or easy item */
+QUIZ3[1] = { q: "One party holds 55 Senate seats. All 55 back an ordinary bill, and the other 45 senators oppose it. What happens?",
+  o: ["It passes, since 55 is a clear majority", "The vice president must break the tie", "It goes to the Supreme Court first", "The 45 can block it with a filibuster"], a: 3, ord: true,
+  why: "Ending debate takes 60 votes, so the 45 can stop the bill from ever reaching a final vote. Budget bills under special rules, like Trump’s 2025 tax law, are one of the few exceptions." };
+QUIZ2[3] = { q: "A bill passes the Senate 60 to 40 and the House 250 to 185. The president vetoes it. If everyone votes the same way again, what happens?",
+  o: ["The veto stands: neither vote reaches two-thirds", "The bill becomes law: both votes were majorities", "The Supreme Court decides whether it becomes law", "Only the House vote counts for an override"], a: 0, ord: true,
+  why: "An override needs two-thirds of both chambers: 67 senators and 290 House members when all are voting. 60 and 250 both fall short, so the veto stands." };
+QUIZ4[2] = { q: "Congress dislikes how the Supreme Court has read the Constitution. What would it take to overturn that reading?",
+  o: ["A new law, passed by majorities in both chambers", "A two-thirds vote of the Senate, with no House vote", "An order from the president, approved by Congress", "An amendment, or a later Court ruling differently"], a: 3, ord: true,
+  why: "An ordinary law can’t overrule the Court’s reading of the Constitution. An amendment can, or the Court itself in a later case, as Dobbs overruled Roe in 2022." };
+QUIZ1[4] = { q: "Two winner-take-all states have the same number of electors. Candidate A wins one by 2 votes. Candidate B wins the other by 2 million. Who gets more electors from the two?",
+  o: ["B, who won millions more votes", "A, whose state was the closer race", "Whoever won more states overall", "Neither: they get the same number"], a: 3, ord: true,
+  why: "Each state gives all its electors to its winner, by 2 votes or by 2 million. Votes beyond the winning margin add nothing, which is how the national vote winner can lose." };
+QUIZ5[0] = { q: "A bill would help the big states at the expense of the small ones. Most Americans support it. Where is it most likely to be blocked?",
+  o: ["In the Senate", "In the House", "In the Supreme Court", "By the president’s veto"], a: 0,
+  why: "Every state has two senators, so the 26 smallest states, with about 18% of Americans, hold a majority of the Senate. In the House, seats follow population." };
+QUIZ6[1] = { q: "A district votes Right 46%, Left 44% and Green 10%. Nearly all Green voters prefer Left to Right. Who wins the seat?",
+  o: ["Right, though most preferred Left", "Left, once Green votes are added", "Green, which holds the balance", "Nobody, until a runoff is held"], a: 0,
+  why: "First past the post counts only first choices. Right wins with 46%, though 54% preferred Left. That is the spoiler problem, and one reason small parties struggle." };
+QUIZ8[1] = { q: "Suppose Congress raised the federal minimum wage to $10 an hour. A state’s own minimum is $8. What must most employers there pay?",
+  o: ["Whichever the employer picks", "$8, the state’s own rate", "$9, the average of the two", "$10, the federal floor"], a: 3, ord: true,
+  why: "The federal minimum is a floor for most workers in every state. States can set a higher minimum, as 30 states and D.C. do, but not a lower one." };
+QUIZ7[1] = { q: "With every member voting, an amendment gets 290 of 435 votes in the House and 60 of 100 in the Senate. Can it go to the states?",
+  o: ["No: 60 senators is short of two-thirds", "No: 290 is short of two-thirds of the House", "Yes: both chambers passed it by majority", "Yes, once the president has signed it"], a: 0, ord: true,
+  why: "Proposing an amendment takes two-thirds of both chambers. 290 of 435 is exactly two-thirds of the House, but 60 of 100 senators is short of 67. The president plays no part." };
+
+/* "Who could change it?" on each chapter's finished screen */
+const WCC_TAG = { amend: "Constitutional amendment", senate: "The Senate itself", law: "Congress, by law", state: "Each state", court: "The Supreme Court", none: "No law to change", consent: "Practically no one" };
+const WCC = {
+  congress: [["The 60-vote filibuster", "senate", "It is a Senate rule, not part of the Constitution. Majorities have already cut it back for nominees, in 2013 and 2017."],
+    ["House, Senate and president must all agree", "amend", "Article I of the Constitution sets out how a bill becomes law."]],
+  president: [["A fixed four-year term, with no vote of no confidence", "amend", "The term is set in Article II, and the two-term limit by the 22nd Amendment (1951)."],
+    ["Powers Congress has handed to presidents", "law", "Many powers presidents use, such as declaring a national emergency, come from laws Congress passed and could change. The president can veto the change."]],
+  court: [["Justices serve for life", "amend", "Most likely an amendment: the Constitution says judges serve “during good behaviour.”"],
+    ["Nine justices", "law", "The Constitution sets no number. Congress has changed it seven times, and nine dates from 1869."]],
+  electoral: [["The Electoral College", "amend", "It is in the Constitution, so replacing it needs two-thirds of Congress and 38 states."],
+    ["Winner takes all", "state", "Each state decides by state law. Maine and Nebraska already split their electors by district."]],
+  represented: [["Two senators per state", "consent", "The Constitution says no state can lose its equal vote in the Senate without its own consent, even by amendment."],
+    ["Who draws the House districts", "state", "Each state, by law or in its constitution. Voters in Arizona and Michigan gave the job to independent commissions. Congress could also set national rules by law."]],
+  parties: [["One winner per district", "law", "A 1967 federal law requires one House member per district. States decide how the winner is picked: Maine uses ranked-choice voting."],
+    ["Only two big parties", "none", "No law creates two parties. They follow from the rules above."]],
+  states: [["Different laws in each state", "state", "Each state, for itself, by law or in some states by a vote of its citizens. Where the Constitution lets Congress act, a federal law can set one rule for all, as with the minimum wage."],
+    ["The split between the states and Washington", "amend", "The Tenth Amendment leaves to the states, or the people, every power not given to the federal government."]],
+  constitution: [["How hard it is to amend", "amend", "Only an amendment can change the rules for amendments."],
+    ["What the old words mean today", "court", "The Supreme Court decides, case by case, as with the Second Amendment. A Court with new members can read the same words differently."]]
+};
+const wccHTML = id => WCC[id] ? `<section class="wcc"><h3>Who could change it?</h3><ul>${WCC[id].map(([r, k, x]) => `<li><p class="wcc-r"><b>${r}</b><span class="wcc-t wcc-${k}">${WCC_TAG[k]}</span></p><p class="wcc-x">${x}</p></li>`).join("")}</ul></section>` : "";
+CH.forEach(c => { if (!WCC[c.id]) return; const d = c.steps[c.steps.length - 1], r = d.render;
+  d.render = function (v) { r.call(this, v); const ul = $(".done-k", v) && $("ul.learned", v); if (ul && !$(".wcc", v)) ul.insertAdjacentHTML("afterend", wccHTML(c.id)); }; });
+
+/* short route: "Next stop" is the main button; the route ends on its own screen */
+let routeEnd = false;
+renderStep = (f => function () {
+  f();
+  const pl = $("#player"); pl.classList.toggle("route", routeAt >= 0); pl.classList.remove("route-fin");
+  if (routeAt < 0 || !cur) return;
+  const k = routeAt, last = k === ROUTE.length - 1, more = cur.i < cur.ch.steps.length - 1;
+  $("#p-count").innerHTML = more ? `<button type="button" class="btn ghost small" id="route-more"><span class="rm-d">Explore this chapter</span><span class="rm-p">Explore</span> →</button>` : "";
+  const rm = $("#route-more"); if (rm) rm.onclick = () => go(cur.i + 1);
+  $("#p-next").innerHTML = last ? "Finish the route →" : `Next stop<span class="rs-n"> · ${k + 2} of ${ROUTE.length}</span> →`;
+})(renderStep);
+document.addEventListener("click", e => {
+  if (routeAt < 0 || !e.target.closest || !e.target.closest("#p-next")) return;
+  e.preventDefault(); e.stopPropagation(); routeGo(routeAt + 1);
+}, true);
+function routeFinish() {
+  routeAt = -1; routeEnd = true; PROG.routeDone = true; saveProg(); SND.play("done");
+  const pl = $("#player"); pl.classList.remove("route"); pl.classList.add("route-fin");
+  const nxt = CH.find(c => !c.bonus && !PROG.done[c.id]);
+  $("#p-title").innerHTML = `<b class="pt-l">Short route</b><b class="pt-s">Short route</b><span>Nine stops, one from each chapter</span>`;
+  $("#p-segs").innerHTML = ""; $("#p-count").innerHTML = ""; $("#p-prev").disabled = false; $("#p-next").innerHTML = "Back to the map";
+  $("#p-inner").innerHTML = `<article class="step solo route-end"><div class="re-wrap">
+      <p class="almost-k done-k">Short route finished</p>
+      <h2>Nine stops, done.</h2>
+      <p class="re-lede">You tried one hands-on piece of every chapter:</p>
+      <ol class="re-list">${ROUTE.map(r => `<li><b>${r.c.closing ? "Closing chapter" : "Chapter " + (CH.indexOf(r.c) + 1)} · ${r.c.topic}</b>${r.s.kicker !== r.c.topic ? `<span>${r.s.kicker}</span>` : ""}</li>`).join("")}</ol>
+      <p class="re-next">Each full chapter ends with five quick questions. Finish one, and its part of your map lights up.</p>
+      <div class="cta-row">${nxt ? `<button class="btn" id="re-go">Start chapter ${CH.indexOf(nxt) + 1} in full <span class="arr">→</span></button>` : ""}<button class="btn${nxt ? " ghost" : ""}" id="re-map">Back to the map</button></div>
+    </div></article>`;
+  const g = $("#re-go"); if (g) g.onclick = () => { routeEnd = false; openChapter(nxt.id, 0); };
+  $("#re-map").onclick = () => closePlayer(true);
+  $("#p-stage").scrollTop = 0; $("#p-next").focus({ preventScroll: true });
+  try { history.replaceState(null, "", "#map"); } catch (e) {}
+}
+routeGo = (f => function (k) { if (k >= ROUTE.length) return routeFinish(); routeEnd = false; f(k); })(routeGo);
+go = (f => function (j) {
+  if (!routeEnd) return f(j);
+  routeEnd = false; $("#player").classList.remove("route-fin");
+  return cur && j < cur.i ? routeGo(ROUTE.length - 1) : closePlayer(true);
+})(go);
+closePlayer = (f => function (x) { routeEnd = false; $("#player").classList.remove("route", "route-fin"); f(x); })(closePlayer);
+renderHome = (f => function () {
+  f();
+  const h = $("#mc-head"), tx = $("#mc-text");
+  if (PROG.routeDone && h && h.textContent === "Nothing lit up yet.") { h.textContent = "Short route done."; if (tx) tx.textContent = "Now finish a whole chapter to light up its part of the map."; }
+})(renderHome);
+
+/* the word list becomes a glossary: every term open and searchable from the start */
+const wPlain = x => String(x || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").toLowerCase();
+function paintGlossary() {
+  const got = PROG.terms || {}, qv = ($("#w-q").value || "").trim().toLowerCase();
+  const hit = k => !qv || GLOSS[k].term.toLowerCase().includes(qv) || wPlain(GLOSS[k].def).includes(qv);
+  const groups = CH.map(c => [c, Object.keys(GLOSS).filter(k => GLOSS[k].where === c.id)]);
+  const rest = Object.keys(GLOSS).filter(k => !CH.some(c => c.id === GLOSS[k].where)); if (rest.length) groups.push([{ topic: "Other words" }, rest]);
+  const html = groups.map(([c, ks]) => [c, ks.filter(hit)]).filter(([, ks]) => ks.length).map(([c, ks]) =>
+    `<div class="wl-ch"><p class="wl-h"><b>${c.topic}</b></p><div class="wl-w">${ks.map(k => `<button class="${got[k] ? "got" : ""}" data-k="${k}">${GLOSS[k].term}${got[k] ? `<i class="wl-ok" aria-label=", opened before">✓</i>` : ""}</button>`).join("")}</div></div>`).join("");
+  $("#wlist").innerHTML = html || `<p class="wl-none">No term matches “${qv.replace(/[<>&"]/g, "")}.”</p>`;
+  $$("#wlist button[data-k]").forEach(b => b.onclick = () => openGloss(b.dataset.k, null));
+}
+function openGlossary() {
+  const n = gotCount();
+  $("#w-count").textContent = `${GN} terms from the chapters. ${n ? `A check marks the ${n === 1 ? "one" : n} you have opened.` : "Tap one to read what it means."}`;
+  $("#w-q").value = ""; paintGlossary();
+  ws.hidden = false; gb.hidden = false; gb.classList.add("dim"); syncInert();
+  $("#w-q").focus({ preventScroll: true });
+}
+$("#w-q").addEventListener("input", paintGlossary);
+$$(".words").forEach(b => b.onclick = openGlossary);
+updateWords = () => {};
+
+/* ---- v29b: named steps you can jump to ---- */
+const stepName = (s, j) => s.intro ? "Opening" : s.full ? "Finished" : (s.kicker || `Step ${j + 1}`);
+$(".p-top").insertAdjacentHTML("beforeend", `<div class="p-steps" id="p-steps" hidden role="menu" aria-label="Steps in this chapter"></div>`);
+const PS = $("#p-steps");
+function closeSteps() { if (PS.hidden) return; PS.hidden = true; $("#p-title").setAttribute("aria-expanded", "false"); }
+function openSteps() {
+  if (!cur || routeEnd) return;
+  const { ch, i } = cur;
+  PS.innerHTML = `<p class="ps-h">${ch.bonus && !ch.closing ? "Special chapter" : ch.closing ? "Closing chapter" : "Chapter " + (CH.indexOf(ch) + 1)} · ${ch.topic}</p>` +
+    ch.steps.map((s, j) => `<button type="button" role="menuitem" class="${j === i ? "cur" : j < i ? "seen" : ""}" data-j="${j}"${j === i ? ' aria-current="step"' : ""}><span class="ps-n">${j + 1}</span><span class="ps-t">${stepName(s, j)}</span></button>`).join("");
+  $$("button", PS).forEach(b => b.onclick = () => { closeSteps(); go(+b.dataset.j); });
+  PS.hidden = false; $("#p-title").setAttribute("aria-expanded", "true");
+  const c = $("button.cur", PS) || $("button", PS); if (c) { c.focus({ preventScroll: true }); c.scrollIntoView({ block: "nearest" }); }
+}
+function stepsTitle() {
+  const pt = $("#p-title"); if (!cur || routeEnd) return;
+  if (!$(".pt-caret", pt)) $$(".pt-l, .pt-s", pt).forEach(e => e.insertAdjacentHTML("beforeend", `<span class="pt-caret" aria-hidden="true"> ▾</span>`));
+  pt.setAttribute("role", "button"); pt.tabIndex = 0; pt.setAttribute("aria-haspopup", "menu"); pt.setAttribute("aria-expanded", "false");
+}
+renderStep = (f => function () {
+  f(); closeSteps();
+  if (!cur) return; const { ch } = cur;
+  $$("#p-segs button").forEach((b, j) => { const nm = stepName(ch.steps[j], j); b.title = nm; b.setAttribute("aria-label", `Step ${j + 1}: ${nm}`); });
+  stepsTitle();
+})(renderStep);
+openChapter = (f => function (id, i) { f(id, i); stepsTitle(); })(openChapter);
+$("#p-title").addEventListener("click", () => { if (!$(".pt-caret", $("#p-title"))) return; PS.hidden ? openSteps() : closeSteps(); });
+$("#p-title").addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && $(".pt-caret", $("#p-title"))) { e.preventDefault(); PS.hidden ? openSteps() : closeSteps(); } });
+document.addEventListener("click", e => { if (!PS.hidden && !e.target.closest("#p-steps, #p-title")) closeSteps(); });
+document.addEventListener("keydown", e => {
+  if (PS.hidden) return;
+  if (e.key === "Escape") { e.stopImmediatePropagation(); closeSteps(); $("#p-title").focus({ preventScroll: true }); }
+  else if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); e.stopImmediatePropagation();
+    const bs = $$("button", PS), k = bs.indexOf(document.activeElement); const n = bs[Math.max(0, Math.min(bs.length - 1, k + (e.key === "ArrowDown" ? 1 : -1)))]; if (n) n.focus(); }
+  else if (e.key === "ArrowLeft" || e.key === "ArrowRight") e.stopImmediatePropagation();
+}, true);
+closePlayer = (f => function (x) { closeSteps(); f(x); })(closePlayer);
+/* the route ending's title is not a chapter: no step list there */
+routeFinish = (f => function () { f(); const pt = $("#p-title"); pt.removeAttribute("role"); pt.removeAttribute("tabindex"); pt.removeAttribute("aria-haspopup"); pt.removeAttribute("aria-expanded"); })(routeFinish);
+/* short route on phones: Back shrinks to an arrow so the bar fits */
+$("#p-prev").innerHTML = `← <span class="pb-t">Back</span>`; $("#p-prev").setAttribute("aria-label", "Back");
 renderHome();
 route();
 </script>
