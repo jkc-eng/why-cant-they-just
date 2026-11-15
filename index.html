@@ -4867,7 +4867,7 @@ const CH = [
   { id: "states", topic: "Fifty states, one country", q: "Why is it legal in one state and a crime in the next?", teaser: "What the states decide, fifty sets of laws, states going first, and the fight over states’ rights.", img: "nevada", mins: 6, piece: "states",
     learned: ["The Constitution gives the federal government a list of powers. The rest belong to the states: federalism.", "So the states make most everyday rules: crimes, schools, marriage, driving and elections.", "Cross a state line and the law on marijuana, abortion, the death penalty or wages can change.", "States can try ideas first, as with same-sex marriage. But when a state defies the Constitution, as in Little Rock in 1957, federal law wins."] },
   { id: "midterms", bonus: true, topic: "The 2026 midterms", q: "What just happened in the 2026 midterms?", img: "capitol", mins: 10,
-    learned: ["Midterms come halfway through a presidential term, and the president’s party almost always loses seats: in 18 of the 20 midterms since 1946.",
+    learned: ["Midterms come halfway through a presidential term, and the president’s party almost always loses seats: in 19 of the 21 midterms since 1946, 2026 included.",
       "2026 was a wave. Democrats flipped more than 40 House seats, seven Senate seats and five governorships, most of them in states Trump won in 2024.",
       "Voters were worried about prices and corruption, Trump’s approval was below 40%, and groups that moved toward him in 2024 moved back.",
       "Republicans redrew House maps in the middle of the decade to gain seats. In the wave, the plan largely backfired.",
@@ -5666,7 +5666,7 @@ $("#wm").onclick = e => { e.preventDefault(); if (cur) closePlayer(false); windo
   Object.assign(ch("president"), { topic: "The president", teaser: "Checks and balances, a fixed term, the veto, and what a president can do alone." });
   ch("president").learned = ["Power is split between Congress, the president and the courts, and each can block the others: checks and balances.", "The president is elected separately, for a fixed term. Congress cannot vote a president out. It can only impeach, and removal takes two-thirds of the Senate.", "The president can veto any bill. Congress needs two-thirds of both chambers to override, and has managed it 112 times since 1789.", "The president commands the military and can pardon, but laws, taxes and war belong to Congress."];
   ch("congress").learned[3] = "If Congress and the president cannot agree on money, much of the government shuts down.";
-  ch("court").learned = ["The Supreme Court can strike down laws that break the Constitution. It claimed the power in 1803, and by 2014 it had struck down 176 federal laws.", "Justices serve for life, so each appointment can shape the law for decades, and confirmations have become party-line fights.", "Roe v. Wade (1973) protected abortion nationwide. Dobbs (2022) handed the question back to the states."];
+  ch("court").learned = ["The Supreme Court can strike down laws that break the Constitution. It claimed the power in 1803, and by 2014 it had struck down 176 federal laws.", "Justices serve for life, so each appointment can shape the law for decades, and confirmations have become party-line fights.", "Since 2022 each state has made its own abortion law, and voters in 18 states have voted on it directly."];
 
   /* titles and bodies */
   STEP_538.title = "Each state’s voters choose that state’s electors.";
@@ -6853,7 +6853,7 @@ S5_SENATE.render = function (v) {
 };
 /* ---- v39: simpler chapter endings: the chapter's question, a short answer, three points, "Could it change?" ---- */
 const END = {
-  congress: { a: "Because a bill has to clear several gates, and a different majority holds each one: the House, the Senate and the president. One no at any gate is enough.",
+  congress: { a: "Because a bill has to clear three gates, the House, the Senate and the president, and each can say no. Only two-thirds of both chambers can override a veto.",
     b: ["A bill must pass the House and the Senate in exactly the same words, and then get the president’s signature, unless two-thirds of both chambers override a veto.",
       "In the Senate, 41 of 100 senators can block most bills with a filibuster. Once rare, filibuster threats are now routine, with hundreds per Congress.",
       "If Congress and the president cannot agree on money, much of the government shuts down."],
@@ -6870,7 +6870,7 @@ const END = {
   court: { a: "Because the Supreme Court has the last word on what the Constitution means. In 1973 it found a right to abortion there, and in 2022 it found none and handed the question back to the states.",
     b: ["The Supreme Court can strike down laws that break the Constitution. It claimed the power in 1803, and by 2017 it had struck down 182 federal laws.",
       "Justices serve for life, so each appointment can shape the law for decades, and confirmations have become party-line fights.",
-      "Roe v. Wade (1973) protected abortion nationwide. Dobbs (2022) handed the question back to the states."],
+      "Since 2022 each state has made its own abortion law, and voters in 18 states have voted on it directly."],
     c: [["Striking down laws", "not easily. The Court has used the power since 1803, and taking it away would most likely need an amendment."],
       ["Justices for life", "most likely only by amendment, since the Constitution says judges serve “during good behaviour.” The number nine is different: Congress sets it by law and has changed it seven times."],
       ["Abortion law", "yes. Each state now makes its own law, and a future Court could overturn Dobbs, as Dobbs overturned Roe."]] },
@@ -6911,7 +6911,7 @@ const END = {
       "Even then, the courts can strike down what it passes.",
       "The Affordable Care Act needed almost every part of the system, and in 2017 it survived a repeal attempt by one vote."] },
   midterms: { a: "Democrats won control of both the House and the Senate, halfway through Trump’s second term. From January 2027 the government is divided: Congress can block, investigate and hold up spending, but Democrats cannot override a veto on their own.",
-    b: ["Midterms come halfway through a presidential term, and the president’s party almost always loses seats: in 18 of the 20 midterms since 1946.",
+    b: ["Midterms come halfway through a presidential term, and the president’s party almost always loses seats: in 19 of the 21 midterms since 1946, 2026 included.",
       "2026 was a wave. Democrats flipped more than 40 House seats, eight Senate seats and five governorships, most of them in states Trump won in 2024.",
       "Republicans redrew House maps in the middle of the decade to gain seats. In the wave, the plan largely backfired."] }
 };
