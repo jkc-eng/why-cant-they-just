@@ -1849,6 +1849,24 @@ details.dk>p{padding:0 14px 12px}
 .fpC .fp-body .lede{max-width:46ch}
 .fp-credit{margin-top:16px}
 @media (max-width:640px){.hero .fpC-over h1{font-size:2.5rem}}
+
+/* v38: Senate chart as one comparison */
+.sb .chips{margin:0}
+.sb-sel{margin:12px 0 0}
+.sb-h{margin:22px 0 2px}
+.sb-plot{display:flex;justify-content:center;align-items:flex-end;gap:clamp(14px,4vw,36px);margin:0 0 4px}
+.sb-c{flex:0 1 clamp(78px,22vw,118px);display:flex;flex-direction:column;align-items:center;min-width:0}
+.sb-t{position:relative;width:100%;height:clamp(180px,27vh,220px);padding-top:3.6rem;box-sizing:border-box;display:flex;align-items:flex-end;border-bottom:1.5px solid var(--rule)}
+.sb-t i{position:relative;display:block;width:100%;font-style:normal;background:var(--toss);border-radius:4px 4px 0 0;transition:height .55s cubic-bezier(.2,.7,.2,1)}
+.sb-c.on .sb-t i{background:var(--mark)}
+.sb-plot.half .sb-c{flex-basis:clamp(112px,32vw,150px)}
+.sb-n{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);padding-bottom:6px;font:800 clamp(1.2rem,4.8vw,1.65rem)/1.05 var(--f-display);color:var(--ink);white-space:nowrap;text-align:center}
+.sb-n small{display:block;font:600 .8rem/1.25 var(--f-body);color:var(--ink-2)}
+.sb-l{margin-top:8px;font-size:.88rem;line-height:1.25;color:var(--ink-2);text-align:center}
+.sb-c.on .sb-l{color:var(--ink);font-weight:700}
+.sb-plot.half .sb-t::before{content:"";position:absolute;z-index:1;left:-10px;right:-10px;bottom:calc((100% - 3.6rem) / 2);border-top:1.5px dashed var(--ink-2)}
+.sb-plot.half .sb-c:first-child .sb-t::after{content:"half";position:absolute;right:calc(100% + 14px);bottom:calc((100% - 3.6rem) / 2);transform:translateY(50%);font-size:.78rem;color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){.sb-t i{transition:none}}
 </style>
 
 <header class="top">
@@ -3310,7 +3328,7 @@ const mil = n => n >= 1e6 ? (n / 1e6).toFixed(1).replace(/\.0$/, "") + " million
 const S5_SENATE = {
   kicker: "Two senators per state",
   title: "Wyoming and California both get two senators. California has 68 times as many people.",
-  body: `<p>The Constitution gives every state two ${T("senate", "senators")}, whatever its size. It was a compromise in 1787: the small states would not accept a Congress where seats followed population alone. In the ${T("house", "House")}, they do.</p><p>So in the Senate, a voter in a small state counts for far more than a voter in a big one. <strong>Pick a group of states, or tap one.</strong></p>`,
+  body: `<p>The Constitution gives every state two ${T("senate", "senators")}, whatever its size. It was a compromise in 1787: the small states would not accept a Congress where seats followed population alone. In the ${T("house", "House")}, they do.</p><p>So in the Senate, a voter in a small state counts for far more than a voter in a big one. <strong>Pick a group of states, or one state.</strong></p>`,
   dk: `Denmark has nothing like the Senate. Thanks to the compensatory seats, a vote counts the same toward the national result wherever in Denmark it is cast.`,
   sources: ["census", "compromise", "dkElect"],
   render(v) {
@@ -6778,6 +6796,47 @@ $("#p-prev").innerHTML = `← <span class="pb-t">Back</span>`; $("#p-prev").setA
   if (miss.length) console.error("patch54 missing:", miss);
 })();
 filmHTML = (h => f => { const x = h(f); return f.tag ? x.replace("Film and TV vs. the record", f.tag) : x; })(filmHTML);
+
+/* ---- v38 (patch55): the Senate chart shows one comparison at a time ---- */
+S5_SENATE.render = function (v) {
+  const byName = Object.keys(POP20).sort((a, b) => ST[a].n.localeCompare(ST[b].n));
+  v.innerHTML = `<div class="panel sen5 sb">
+      <div class="chips" role="group" aria-label="Compare states">
+        <button class="chip" aria-pressed="true" data-g="ca">California vs. Wyoming</button>
+        <button class="chip" aria-pressed="false" data-g="big">The 9 biggest states</button>
+        <button class="chip" aria-pressed="false" data-g="small">The 26 smallest states</button>
+      </div>
+      <label class="pm-sel sb-sel">Or one state: <select id="sbSel"><option value="">Pick a state</option>${byName.map(s => `<option value="${s}">${ST[s].n}</option>`).join("")}</select></label>
+      <p class="vlabel sb-h" id="sbH"></p>
+      <div class="sb-plot" id="sbP"></div>
+      <p class="info" id="sbI" aria-live="polite"></p></div>`;
+  const P = $("#sbP", v), sel = $("#sbSel", v), tot = a => a.reduce((x, s) => x + POP20[s], 0);
+  const pct = x => (100 * x / POP_TOT).toFixed(1).replace(/\.0$/, "") + "%";
+  const num = n => { const m = mil(n).split(" "); return m[1] ? `${m[0]}<small>${m[1]}</small>` : m[0]; };
+  const draw = (head, cols, note, half) => {
+    P.classList.toggle("half", !!half); $("#sbH", v).textContent = head; $("#sbI", v).innerHTML = note;
+    P.innerHTML = cols.map(c => `<div class="sb-c${c.on ? " on" : ""}"><div class="sb-t"><i style="height:0"><b class="sb-n">${c.n}</b></i></div><span class="sb-l">${c.l}</span></div>`).join("");
+    requestAnimationFrame(() => requestAnimationFrame(() => $$(".sb-t i", P).forEach((i, k) => i.style.height = Math.max(.8, cols[k].h) + "%")));
+  };
+  const share = (states, note) => { const s = 2 * states.length, pp = 100 * tot(states) / POP_TOT;
+    draw("Share of the Senate and share of Americans", [
+      { n: s + "%", l: "of the Senate", h: s, on: true },
+      { n: Math.round(pp) + "%", l: "of Americans", h: pp, on: true }], note, true); };
+  const perSen = (s, note) => { const mx = POP20.CA / 2;
+    const cols = [...new Set(["WY", s, "CA"].filter(Boolean))].sort((a, b) => POP20[a] - POP20[b]);
+    draw("People per senator", cols.map(x => ({ n: num(POP20[x] / 2), l: ST[x].n, h: 100 * POP20[x] / 2 / mx, on: !s || x === s })), note); };
+  const G = {
+    ca: () => perSen(null, `In the Senate, one Wyoming voter weighs about as much as 68 Californians.`),
+    big: () => share(POP_ORDER.slice(0, 9), `California, Texas, Florida, New York, Pennsylvania, Illinois, Ohio, Georgia and North Carolina: half of all Americans, under a fifth of the Senate.`),
+    small: () => share(POP_ORDER.slice(-26), `Together they hold a majority of the Senate. Small states are not all on one side: Vermont and Delaware vote Democratic, Wyoming and the Dakotas Republican. But rural states are overrepresented, and rural voters lean Republican today.`)
+  };
+  const one = s => { const k = POP20[s] / POP20.WY, kk = k < 10 ? k.toFixed(1).replace(/\.0$/, "") : Math.floor(k);
+    perSen(s, s === "WY" ? `<strong>Wyoming</strong> has the fewest people of any state, so its senators speak for the fewest people.`
+      : `<strong>${ST[s].n}</strong>: ${pct(POP20[s])} of Americans, 2% of the Senate. In the Senate, one person in Wyoming counts as much as ${kk} in ${ST[s].n}.`); };
+  $$(".chip[data-g]", v).forEach(b => b.onclick = () => { $$(".chip[data-g]", v).forEach(x => x.setAttribute("aria-pressed", x === b)); sel.value = ""; G[b.dataset.g](); });
+  sel.onchange = () => { if (!sel.value) return; SND.play("tap"); $$(".chip[data-g]", v).forEach(x => x.setAttribute("aria-pressed", "false")); one(sel.value); };
+  G.ca();
+};
 renderHome();
 route();
 </script>
