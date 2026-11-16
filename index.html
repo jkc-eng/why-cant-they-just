@@ -7101,6 +7101,16 @@ S8_WHO.render = function (v) {
   $$(".wh-t", v).forEach(b => b.onclick = () => ask(b));
   $("#whAll", v).onclick = () => { SND.play("reveal"); sel = null; if (!asked) Y.textContent = ""; $$(".wh-t", v).forEach(b => put(b, true)); };
 };
+
+/* ---- v43: chapter 4 checkpoint, stronger options ---- */
+(() => {
+  const q3 = QUIZ1.find(q => q.q.startsWith("How many times has the candidate with the most votes")),
+    q4 = QUIZ1.find(q => q.q.startsWith("Two winner-take-all states"));
+  if (!q3 || !q4) { console.error("patch60 missing"); return; }
+  q3.o = ["Twice", "Three times", "Four times", "Five times"]; q3.a = 3; q3.ord = true;
+  q4.q = "Two winner-take-all states have 10 electors each. Candidate A wins one by 2 votes. Candidate B wins the other by 2 million votes. How many electors does each get?";
+  q4.o = ["A 10 · B 10", "A 5 · B 15", "A 1 · B 19", "A 0 · B 20"]; q4.a = 0; q4.ord = true;
+})();
 renderHome();
 route();
 </script>
