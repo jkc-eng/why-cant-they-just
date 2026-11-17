@@ -1910,6 +1910,9 @@ details.dk>p{padding:0 14px 12px}
 .re-list li .re-q{display:block;color:var(--ink);font-size:1rem;font-weight:600;margin-top:2px}
 .re-list li .re-a{display:block;color:var(--ink-2);font-size:.95rem;line-height:1.45}
 .jr-dot{z-index:1}.jr-track .fill{z-index:0}
+.gates li.over .lt{background:var(--mark);box-shadow:inset 0 0 0 2px var(--ink)}
+.gates li.over .gvv{color:var(--ink);font-weight:700}
+.gates li.gv-sub{display:block;border:0;background:none;padding:6px 2px 0;font-size:.82rem;color:var(--ink-3)}
 </style>
 
 <header class="top">
@@ -6243,10 +6246,13 @@ const GOVERN = {
       const needS = p ? 50 : 51;
       let g = gate("House vote", "a majority: 218 of 435", h, 218) + gate("End the Senate debate", "cloture: 60 of 100", s, 60) + gate("Senate vote", p ? "a majority, or 50 plus the vice president" : "a majority: 51 of 100", s, needS);
       g += p ? `<li class="open"><span class="lt" aria-hidden="true"></span><span class="gn"><b>The president</b><small>your party’s president signs</small></span><span class="gvv">signs</span></li>`
-        : `<li class="shut"><span class="lt" aria-hidden="true"></span><span class="gn"><b>The president</b><small>the other party’s president vetoes</small></span><span class="gvv">vetoes</span></li>` + gate("Override in the House", "two thirds: 290 of 435", h, 290) + gate("Override in the Senate", "two thirds: 67 of 100", s, 67);
+        : (h >= 290 && s >= 67
+          ? `<li class="over"><span class="lt" aria-hidden="true"></span><span class="gn"><b>The president</b><small>the other party’s president vetoes, and Congress can override</small></span><span class="gvv">overridden</span></li>`
+          : `<li class="shut"><span class="lt" aria-hidden="true"></span><span class="gn"><b>The president</b><small>the other party’s president vetoes, unless both chambers override</small></span><span class="gvv">vetoes</span></li>`)
+        + `<li class="gv-sub" aria-hidden="true">A veto can be overridden by two-thirds of both chambers:</li>` + gate("Override in the House", "two thirds: 290 of 435", h, 290) + gate("Override in the Senate", "two thirds: 67 of 100", s, 67);
       $("#gvG", v).innerHTML = g;
       const nS = Math.max(0, 60 - s, needS - s, p ? 0 : 67 - s), nH = Math.max(0, 218 - h, p ? 0 : 290 - h), ok = !nS && !nH;
-      $("#gvO", v).innerHTML = ok ? `<b class="ok">The bill passes.</b> Your party can pass it alone: every gate opens on its own votes.`
+      $("#gvO", v).innerHTML = ok ? `<b class="ok">The bill passes.</b> ${p ? "Your party can pass it alone: every gate opens on its own votes." : "The president vetoes it, but your party holds two-thirds of both chambers and overrides the veto on its own votes."}`
         : `<b class="no">The bill is blocked.</b> Voting alone, your party cannot pass it. It needs <b>${[nH ? nH + (nH === 1 ? " representative" : " representatives") : "", nS ? nS + (nS === 1 ? " senator" : " senators") : ""].filter(Boolean).join(" and ")}</b> from the other party${p ? "." : " to get past the veto."}`;
       if (last !== null && last !== ok) SND.play(ok ? "right" : "wrong"); last = ok;
     };
