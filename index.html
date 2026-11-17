@@ -1915,6 +1915,13 @@ details.dk>p{padding:0 14px 12px}
 .gates li.gv-sub{display:block;border:0;background:none;padding:6px 2px 0;font-size:.82rem;color:var(--ink-3)}
 .gpop{z-index:42}
 @media (min-width:521px){.gpop.sheet{left:50%!important;right:auto;top:50%!important;bottom:auto;transform:translate(-50%,-50%);width:min(460px,calc(100vw - 32px));border-radius:12px;padding:18px 20px 20px;animation:none;max-height:85vh;overflow:auto}}
+.mc-route{pointer-events:none}
+.mc-route .rt{fill:none;stroke:var(--mark);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.mc-route .rt-l{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:700;letter-spacing:.08em;opacity:0}
+.rt-dot{pointer-events:none;fill:var(--mark);stroke:var(--ink);stroke-width:2.5;opacity:0}
+.mc-route.done .rt,.mc-route.done .rt-l{opacity:1}
+.mc-tile[data-p=route]{grid-column:1/-1}
+@media (max-width:400px){.mc-tile{padding:10px 8px;gap:6px}.mc-tile b{font-size:.9rem}}
 </style>
 
 <header class="top">
@@ -1965,7 +1972,7 @@ details.dk>p{padding:0 14px 12px}
     <div class="wrap">
       <div class="sec-head">
         <h2 class="display">Your map of the system</h2>
-        <p>Chapters 1 to 8 each explain one part of the machine. Finish one and its part lights up. Chapter 9 puts the parts together. Tap any part to go there.</p>
+        <p>Chapters 1 to 8 each explain one part of the machine. Finish one and its part lights up. Chapter 9 lights the route one law took through all of them. Tap any part to go there.</p>
       </div>
       <div class="machine-wrap">
         <div class="machine" id="machine"></div>
@@ -5409,7 +5416,7 @@ CH.filter(c => c.soon).forEach(c => {
 
 /* ---------------- system machine (SVG) ---------------- */
 const PIECE_NAME = { ec: "Electoral College", pres: "President", cong: "Congress", court: "Supreme Court", dist: "Who gets seats", parties: "Two parties", const: "Constitution", states: "50 states" };
-function machineTiles() { return `<div class="mc-tiles">${CH.filter(c => !c.bonus).map((c, i) => `<button type="button" class="mc-tile" data-p="${c.piece}"><span class="n">${i + 1}</span><b>${PIECE_NAME[c.piece] || c.topic}</b><i class="tk" aria-hidden="true">✓</i></button>`).join("")}</div>`; }
+function machineTiles() { return `<div class="mc-tiles">${CH.filter(c => !c.bonus).map((c, i) => `<button type="button" class="mc-tile" data-p="${c.piece}"><span class="n">${i + 1}</span><b>${PIECE_NAME[c.piece] || c.topic}</b><i class="tk" aria-hidden="true">✓</i></button>`).join("")}${CH.some(c => c.piece === "route") ? `<button type="button" class="mc-tile" data-p="route"><span class="n">9</span><b>How it connects</b><i class="tk" aria-hidden="true">✓</i></button>` : ""}</div>`; }
 function machineSVG() {
   const voters = Array.from({ length: 22 }, (_, i) => `<g transform="translate(${52 + i * 28.5} 448) scale(.9)"><circle class="mc-voter" cx="10" cy="6" r="6"/><rect class="mc-voter" x="3" y="14" width="14" height="22" rx="6"/></g>`).join("");
   const tick = (x, y) => `<g class="tick" transform="translate(${x} ${y})"><circle r="13"/><path d="M-6 0l4 4 8-8" stroke="var(--mark-ink)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`;
@@ -5420,6 +5427,7 @@ function machineSVG() {
     </g>
     <path class="mc-wire" d="M165 444 V318 M400 444 V318 M165 230 V190 M400 230 V190 M480 125 H500 M235 70 V56 H600 V70"/>
     <text class="mc-label" x="252" y="50">SENATE CONFIRMS JUDGES</text>
+    <g class="mc-route" aria-hidden="true"><path class="rt" d="M360 446 V373 H165 V130 H595 V274"/><text class="rt-l" x="350" y="428" text-anchor="end">2010 HEALTH LAW</text><circle class="rt-dot" r="9" cx="360" cy="446"/></g>
         <g class="mc-piece" data-p="cong" tabindex="0" role="button" aria-label="Congress">
       <rect x="30" y="70" width="270" height="120" rx="8"/>
       <text x="165" y="104" text-anchor="middle">Congress</text>
@@ -5506,8 +5514,8 @@ function renderHome() {
   { const cl = CH.find(c => c.closing);
     if (cl && !nxt && n === MAIN.length) {
       const mb0 = $("#mc-next");
-      if (PROG.done[cl.id]) { $("#mc-head").textContent = "The whole map is in place."; $("#mc-text").textContent = "You have finished all nine chapters."; }
-      else { $("#mc-head").textContent = `All ${n} pieces in place.`; $("#mc-text").textContent = "Chapter 9, Putting it together, shows them working on one law."; }
+      if (PROG.done[cl.id]) { $("#mc-head").textContent = "The whole map is in place."; $("#mc-text").textContent = "You have finished all nine chapters. The yellow line is the route the 2010 health care law took."; }
+      else { $("#mc-head").textContent = `All ${n} pieces in place.`; $("#mc-text").textContent = "Chapter 9, Putting it together, lights the route one law took through them."; }
       if (!PROG.done[cl.id]) { mb0.hidden = false; mb0.innerHTML = `Open chapter 9 <span class="arr">→</span>`; mb0.onclick = () => openChapter(cl.id, 0); }
     } }
   const mb = $("#mc-next");
@@ -6324,7 +6332,7 @@ const QUIZ_TOG = [
     why: "Voters choose the House, the Senate and the president separately, at different times. Most laws need all three, and the courts can still strike them down." }
 ];
 
-const TOG = { id: "together", bonus: true, closing: true, topic: "Putting it together", q: "Why can’t one side just govern?", img: "hx2_joint", mins: 7,
+const TOG = { id: "together", piece: "route", bonus: true, closing: true, topic: "Putting it together", q: "Why can’t one side just govern?", img: "hx2_joint", mins: 7,
   teaser: "The 2010 health care law, step by step, and how rarely one party has held the House, the Senate and the presidency at once.",
   learned: ["Power is split among the House, the Senate and the president, each elected separately, and the courts can strike down what they pass.",
     "To pass a law alone, a party needs the House, 60 senators and the president. That rarely happens.",
@@ -7127,6 +7135,26 @@ S8_WHO.render = function (v) {
   q4.q = "Two winner-take-all states have 10 electors each. Candidate A wins one by 2 votes. Candidate B wins the other by 2 million votes. How many electors does each get?";
   q4.o = ["A 10 · B 10", "A 5 · B 15", "A 1 · B 19", "A 0 · B 20"]; q4.a = 0; q4.ord = true;
 })();
+/* v53: chapter 9 lights the route of the 2010 health care law */
+paintMachine = (f => function (root, justDone) {
+  f.apply(this, arguments);
+  const g = root && root.querySelector(".mc-route"); if (!g) return;
+  const on = !!PROG.done.together;
+  g.classList.toggle("done", on);
+  if (!on || justDone !== "together") return;
+  const path = g.querySelector(".rt"), dot = g.querySelector(".rt-dot"), L = path.getTotalLength();
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  g.ownerSVGElement.appendChild(dot); path.style.strokeDasharray = L; path.style.strokeDashoffset = L; dot.style.opacity = 1;
+  const T = 2600, t0 = performance.now() + 500;
+  const step = now => {
+    const k = Math.max(0, Math.min(1, (now - t0) / T)), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    path.style.strokeDashoffset = L * (1 - e);
+    const pt = path.getPointAtLength(L * e); dot.setAttribute("cx", pt.x); dot.setAttribute("cy", pt.y);
+    if (k < 1) requestAnimationFrame(step);
+    else { path.style.strokeDasharray = ""; path.style.strokeDashoffset = ""; dot.style.transition = "opacity .6s"; dot.style.opacity = 0; }
+  };
+  requestAnimationFrame(step);
+})(paintMachine);
 renderHome();
 route();
 </script>
