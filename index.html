@@ -1913,6 +1913,8 @@ details.dk>p{padding:0 14px 12px}
 .gates li.over .lt{background:var(--mark);box-shadow:inset 0 0 0 2px var(--ink)}
 .gates li.over .gvv{color:var(--ink);font-weight:700}
 .gates li.gv-sub{display:block;border:0;background:none;padding:6px 2px 0;font-size:.82rem;color:var(--ink-3)}
+.gpop{z-index:42}
+@media (min-width:521px){.gpop.sheet{left:50%!important;right:auto;top:50%!important;bottom:auto;transform:translate(-50%,-50%);width:min(460px,calc(100vw - 32px));border-radius:12px;padding:18px 20px 20px;animation:none;max-height:85vh;overflow:auto}}
 </style>
 
 <header class="top">
@@ -5633,7 +5635,7 @@ function openGloss(k, anchor) {
   $$(`.term[data-t="${k}"]`).forEach(t => t.classList.add("got"));
   { const gi = $("#g-ill"); gi.hidden = !g.ill; gi.innerHTML = g.ill ? g.ill() : ""; } $("#g-term").textContent = g.term; $("#g-def").innerHTML = g.def;
   const dk = $("#g-dk"); dk.hidden = !g.dk; dk.innerHTML = g.dk ? `<span class="dk-tag">Compare Denmark</span>${g.dk}` : "";
-  const kick = $("#g-n"); kick.classList.toggle("new", isNew); kick.textContent = isNew ? "New word" : "Glossary";
+  const kick = $("#g-n"); kick.classList.toggle("new", isNew); kick.textContent = isNew ? "" : "Glossary";
   gb.hidden = false; gp.hidden = false; placeGloss(anchor); fitSVG(gp); syncInert();
   gAnchor = anchor; updateWords(); $("#g-x").focus({ preventScroll: true });
 }
