@@ -1964,7 +1964,7 @@ details.dk>p{padding:0 14px 12px}
     <div class="wrap">
       <div class="sec-head">
         <h2 class="display">Your map of the system</h2>
-        <p>Every chapter explains one part of the machine. Finish it and that part lights up. Tap any part to go there.</p>
+        <p>Chapters 1 to 8 each explain one part of the machine. Finish one and its part lights up. Chapter 9 puts the parts together. Tap any part to go there.</p>
       </div>
       <div class="machine-wrap">
         <div class="machine" id="machine"></div>
@@ -5502,8 +5502,15 @@ function renderHome() {
   const nxt = MAIN.find(c => !PROG.done[c.id] && !c.soon);
   if (n === 0) { $("#mc-head").textContent = "Nothing lit up yet."; $("#mc-text").textContent = "Start with Congress."; }
   else { $("#mc-head").textContent = `${n === 1 ? "One piece" : n + " pieces"} in place.`; $("#mc-text").textContent = nxt ? `Next up: ${nxt.topic}.` : "The other chapters are still being built. Come back soon."; }
+  { const cl = CH.find(c => c.closing);
+    if (cl && !nxt && n === MAIN.length) {
+      const mb0 = $("#mc-next");
+      if (PROG.done[cl.id]) { $("#mc-head").textContent = "The whole map is in place."; $("#mc-text").textContent = "You have finished all nine chapters."; }
+      else { $("#mc-head").textContent = `All ${n} pieces in place.`; $("#mc-text").textContent = "Chapter 9, Putting it together, shows them working on one law."; }
+      if (!PROG.done[cl.id]) { mb0.hidden = false; mb0.innerHTML = `Open chapter 9 <span class="arr">→</span>`; mb0.onclick = () => openChapter(cl.id, 0); }
+    } }
   const mb = $("#mc-next");
-  if (nxt) { mb.hidden = false; mb.innerHTML = `Open chapter ${CH.indexOf(nxt) + 1} <span class="arr">→</span>`; mb.onclick = () => openChapter(nxt.id, 0); } else mb.hidden = true;
+  if (nxt) { mb.hidden = false; mb.innerHTML = `Open chapter ${CH.indexOf(nxt) + 1} <span class="arr">→</span>`; mb.onclick = () => openChapter(nxt.id, 0); } else if (!(CH.find(c => c.closing) && !PROG.done[CH.find(c => c.closing).id] && n === MAIN.length)) mb.hidden = true;
   $("#chapters").innerHTML = MAIN.map((c, i) => {
     const st = PROG.done[c.id] ? `<span class="badge mono done">Finished ✓</span>` : c.soon ? `<span class="badge mono">In production</span>` : c === nxt ? `<span class="badge mono open">Start here</span>` : "";
     return `<a class="ch-card ${c.soon ? "soon" : ""}" data-id="${c.id}" href="#${c.id}-1"><div class="ph"><img src="${IMG[c.img].file}" alt="" loading="lazy"><span class="num">${i + 1}</span>${st}</div><div class="txt"><h3>${c.q}</h3><p>${c.topic}${c.teaser ? ". " + c.teaser : ""}</p><span class="meta mono">${c.soon ? "Coming soon" : "About " + c.mins + " min · " + c.steps.length + " steps"}</span></div></a>`;
