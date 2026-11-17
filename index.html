@@ -1923,6 +1923,26 @@ details.dk>p{padding:0 14px 12px}
 .mc-tile[data-p=route]{grid-column:1/-1}
 @media (max-width:400px){.mc-tile{padding:10px 8px;gap:6px}.mc-tile b{font-size:.9rem}}
 svg.wired .mc-wire{stroke:var(--mark);stroke-width:4;transition:stroke .6s}
+
+/* v57 */
+.yg{margin:0 0 24px;padding:16px 18px;border-radius:12px;background:var(--card);box-shadow:var(--shadow)}
+.yg h3{margin:0 0 10px;font-size:1.05rem}
+.yg h3 span{font-weight:500;color:var(--ink-3)}
+.yg ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.yg li{font-size:.95rem;line-height:1.45;color:var(--ink-2)}
+.yg li b{color:var(--ink)}
+.yg li i{font-style:normal;font-weight:700}
+.yg li i.ok{color:#2E8B57}
+.dr-hide .bar.cl{opacity:0}
+.dr-on svg{touch-action:none;cursor:crosshair}
+.bar.cl{transition:opacity .5s}
+.dr-me{fill:none;stroke:var(--mark);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.dr-done .dr-me{stroke-dasharray:7 6;stroke-width:3.5}
+.dr-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px}
+.dr-row .btn[disabled]{opacity:.45;cursor:default}
+.dr-skip{font:inherit;font-size:.9rem;background:none;border:0;padding:6px 2px;color:var(--ink-2);text-decoration:underline;cursor:pointer}
+.dr-key{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--ink-2);margin-top:6px}
+.dr-key i{display:inline-block;width:22px;border-top:3.5px dashed var(--mark)}
 </style>
 
 <header class="top">
@@ -5349,7 +5369,7 @@ const LC_BOSSES = lookStep({
   lead: "Who looks big here, and who looks small? Tap through four details.",
   spots: [
     { t: "The bosses", r: [[0.42, 0.15, 0.44, 0.44]], c: "Giant moneybags in top hats. Each is a trust, a company that had swallowed a whole industry: Standard Oil, Copper, Steel Beam, and more down the row." },
-    { t: "The senators", r: [[0.0, 0.53, 0.72, 0.47]], c: "The senators sit small at their desks, with the bosses standing over them." },
+    { t: "The senators", r: [[0.0, 0.53, 0.72, 0.47]], c: "The senators sit small at their desks, with the bosses standing over them. The charge: senators answered to big business, not to the voters." },
     { t: "Two doors", r: [[0.14, 0.10, 0.09, 0.15], [0.80, 0.0, 0.20, 0.12]], c: "Top left, the “People’s Entrance” to the public gallery is marked “Closed.” Top right, the monopolists’ entrance stands wide open." },
     { t: "The sign", r: [[0.40, 0.01, 0.22, 0.17]], c: "“This is a Senate of the Monopolists, by the Monopolists and for the Monopolists!” It twists Abraham Lincoln’s famous words about government “of the people, by the people, for the people.”" }
   ],
@@ -5366,7 +5386,7 @@ const LC_PANIC = lookStep({
   spots: [
     { t: "The elephant", r: [[0.05, 0.02, 0.40, 0.62]], c: "Labeled “The Republican Vote.” This was Nast’s first Republican elephant: huge and strong, but easily scared. The symbol stuck." },
     { t: "The donkey", r: [[0.44, 0.14, 0.27, 0.58]], c: "A donkey in a lion’s skin labeled “Caesarism,” wearing the collar of the <i>New York Herald</i>. The paper was scaring readers with claims that President Grant wanted a third term, like a Roman dictator." },
-    { t: "The trap", r: [[0.04, 0.62, 0.57, 0.38]], c: "The frightened elephant is heading for a pit marked “Chaos,” covered with flimsy planks: “Inflation,” “Repudiation,” “Reform.”" },
+    { t: "The trap", r: [[0.04, 0.62, 0.57, 0.38]], c: "The frightened elephant is heading for a pit marked “Chaos.” Its flimsy planks are the Democrats’ promises as Nast saw them: “Inflation,” “Repudiation” of the national debt, “Home Rule” (“This is a white man’s government”) for the South, and “Reform” from Tammany, New York’s corrupt Democratic machine." },
     { t: "The fox", r: [[0.46, 0.76, 0.13, 0.18]], z: 2.2, c: "And the Democrats? In this cartoon they are a fox, its collar marked “Democratic,” waiting by the pit. Nast drew the Democrats as a donkey in other cartoons, and that is the animal that stuck." }
   ],
   big: "Both animals stuck: the elephant is still the Republicans’ symbol and the donkey the Democrats’. And the third-term scare? No president served more than two terms until Franklin D. Roosevelt won four. Since 1951, the Constitution lets a president be elected only twice."
@@ -5380,9 +5400,9 @@ const LC_COUNTY = lookStep({
   credit: "George Caleb Bingham, <i>The County Election</i>, 1852, oil on canvas. Saint Louis Art Museum, public domain.",
   lead: "What do you notice first? Tap through four details.",
   spots: [
-    { t: "The banner", r: [[0.555, 0.215, 0.07, 0.08]], z: 3, c: "The little banner on the pole reads “The Will of the People the Supreme Law.” Keep that in mind." },
+    { t: "The banner", r: [[0.555, 0.215, 0.07, 0.08]], z: 3, c: "The little banner on the pole reads “The Will of the People the Supreme Law.” As you look at the other details, ask who counted as “the people.”" },
     { t: "Voting out loud", r: [[0.59, 0.28, 0.18, 0.22]], c: "At the top of the steps, a judge swears in a voter, an Irish immigrant: he has not voted anywhere else. Then he calls out his choices for everyone to hear. Missouri had no secret ballot." },
-    { t: "Party tickets", r: [[0.53, 0.34, 0.10, 0.26]], z: 2.2, c: "A man in a top hat hands out a printed party ticket. Politicians worked the crowd right at the polls." },
+    { t: "Party tickets", r: [[0.53, 0.34, 0.10, 0.26]], z: 2.2, c: "A man in a top hat hands out a printed party ticket, a list of his party’s candidates. Parties ran much of election day, right at the polls." },
     { t: "The cider table", r: [[0.0, 0.38, 0.25, 0.50]], c: "Free drink flows at the left. The man pouring is Black and was most likely enslaved. Missouri was a slave state, and only white men could vote." }
   ],
   big: "Look across the whole crowd: only white men. The banner says the people rule, yet most of the people of Missouri had no vote. The next step shows how that changed, one group at a time."
@@ -5398,7 +5418,7 @@ const LC_AWAKE = lookStep({
   lead: "Why is half the map white and half dark? Tap through three details.",
   spots: [
     { t: "The white West", r: [[0.13, 0.43, 0.48, 0.48]], c: "The white states are the ones where women already voted on equal terms with men: eleven states, all in the West. Wyoming led the way, in 1869, while it was still a territory." },
-    { t: "The torch-bearer", r: [[0.03, 0.0, 0.46, 0.84]], c: "A figure like the Statue of Liberty, draped in a “Votes for Women” banner, strides east with her torch." },
+    { t: "The torch-bearer", r: [[0.03, 0.0, 0.46, 0.84]], c: "A figure like the Statue of Liberty, draped in a “Votes for Women” banner, strides east with her torch. She carries the vote from the West to the rest of the country." },
     { t: "The dark East", r: [[0.44, 0.34, 0.52, 0.65]], c: "In the dark states, crowds of women reach out to her. There, most women still could not vote." }
   ],
   big: "This is how change often happens in America: a few states go first, and the rest follow, or are made to. Women won the vote in every state with the 19th Amendment in 1920."
@@ -7157,6 +7177,167 @@ paintMachine = (f => function (root, justDone) {
   };
   requestAnimationFrame(step);
 })(paintMachine);
+
+/* ---- v57: continue where you stopped; how far off a guess was; your guesses; weak guesses removed; draw the cloture curve; page one of the Constitution ---- */
+(() => {
+  /* guesses students have no basis for: show the content without a gate */
+  delete REVIEW.guess; REVIEW.body = REVIEW.body.replace(/\s*<strong>Guess first\.<\/strong>/, "");
+  delete S8_MAP.guess; S8_MAP.body = S8_MAP.body.replace("<strong>Guess first, then pick a law and compare two neighbors.</strong>", "<strong>Pick a law and compare two neighbors.</strong>");
+
+  /* how far off a guess was */
+  const plain = h => String(h).replace(/<br\s*\/?>/g, ", ").replace(/<[^>]+>/g, "");
+  const num = o => { const m = /^(?:About )?([\d,]+(?:\.\d+)?)(%?)$/.exec(plain(o).trim()); return m ? { v: +m[1].replace(/,/g, ""), pc: !!m[2] } : null; };
+  const FR = ["", "", "half", "a third", "a quarter", "a fifth", "a sixth", "a seventh", "an eighth", "a ninth", "a tenth"];
+  function offBy(g, j) {
+    const a = num(g.o[g.a]), m = num(g.o[j]); if (!a || !m || !g.o.every(num)) return null;
+    const noun = a.pc ? "share" : "number", mine = plain(g.o[j]).replace(/^About /, "about ");
+    if (a.v === 0) return `<b>You guessed ${mine}.</b>`;
+    const r = m.v / a.v;
+    if (r > 1) { const k = r < 1.25 ? "a little more than" : r < 1.75 ? "about one and a half times" : r < 2.5 ? "about twice" : `about ${Math.round(r)} times`; return `<b>You guessed ${mine},</b> ${k} the real ${noun}.`; }
+    const q = 1 / r, k = q < 1.25 ? "a little less than" : q < 1.75 ? "about two-thirds of" : q > 10.5 ? "less than a tenth of" : `about ${FR[Math.round(q)]} of`;
+    return `<b>You guessed ${mine},</b> ${k} the real ${noun}.`;
+  }
+  const fixWhy = (v, s) => {
+    const g = s.guess, j = (PROG.guess || {})[g.id], w = $(".gq-why", v); if (j === undefined || j === g.a || !w) return;
+    const off = offBy(g, j); if (off) w.innerHTML = `${off} ${g.why}`;
+  };
+  guessGate = (f => function (v, s) {
+    f.call(this, v, s);
+    fixWhy(v, s);
+    $$(".gq-o", v).forEach(b => b.addEventListener("click", () => fixWhy(v, s)));
+  })(guessGate);
+
+  /* your guesses, on a chapter's finished screen */
+  const GL = { course2: "Proposals that became law, 2023–24", veto: "Vetoes overridden since 1789", seats: "Garland in 2016, Barrett in 2020", senate: "Americans living in the 26 smallest states", fptp: "Perot’s electoral votes, 1992", funnel2: "Amendments passed by both chambers", funnel: "Amendments in the Constitution today" };
+  function guessesOnDone() {
+    const inner = $("#p-inner"); if (!cur || !inner || !$(".done-k", inner) || $(".yg", inner)) return;
+    const gs = cur.ch.steps.filter(s => s.guess && (PROG.guess || {})[s.guess.id] !== undefined).map(s => s.guess);
+    if (!gs.length) return;
+    const ok = gs.filter(g => PROG.guess[g.id] === g.a).length;
+    const li = gs.map(g => { const j = PROG.guess[g.id], lab = GL[g.id] || plain(g.q); return j === g.a ? `<li><b>${lab}:</b> you guessed ${plain(g.o[j])}. <i class="ok">Correct.</i></li>` : `<li><b>${lab}:</b> you guessed ${plain(g.o[j])}. It was ${plain(g.o[g.a])}.</li>`; }).join("");
+    const box = document.createElement("section"); box.className = "yg";
+    box.innerHTML = `<h3>Your guesses <span>· ${ok} of ${gs.length} right</span></h3><ul>${li}</ul>`;
+    const anchor = $(".cic", inner) || $(".learned", inner); if (!anchor) return;
+    anchor.after(box);
+  }
+
+  /* continue where you stopped */
+  PROG.at = PROG.at || {};
+  renderStep = (f => function () {
+    f.apply(this, arguments);
+    try {
+      if (!cur) return;
+      PROG.at = PROG.at || {};
+      const id = cur.ch.id, i = cur.i, n = cur.ch.steps.length;
+      if (PROG.done[id]) { delete PROG.at[id]; if (PROG.last === id) delete PROG.last; }
+      else if (i > 0) { PROG.at[id] = i === n - 1 ? Math.max(0, cur.ch.steps.findIndex(s => s.quizN)) : i; PROG.last = id; }
+      saveProg();
+      guessesOnDone();
+    } catch (e) {}
+  })(renderStep);
+  openChapter = (f => function (id, i) {
+    if (!i && PROG.at && PROG.at[id] && !PROG.done[id]) i = PROG.at[id];
+    return f.call(this, id, i);
+  })(openChapter);
+  const stepLine = id => { const c = CH.find(x => x.id === id); return c ? `step ${PROG.at[id] + 1} of ${c.steps.length}` : ""; };
+  renderHome = (f => function () {
+    f.apply(this, arguments);
+    try {
+      const sb = $("#start-btn"); if (!sb) return;
+      PROG.at = PROG.at || {};
+      const id = PROG.last, c = id && CH.find(x => x.id === id);
+      const ORDER = CH.filter(x => !x.bonus || x.closing), nx = ORDER.find(x => !PROG.done[x.id] && !x.soon);
+      if (c && PROG.at[id] && !PROG.done[id]) {
+        sb.innerHTML = `Continue: ${c.topic}, ${stepLine(id)} <span class="arr">→</span>`;
+        sb.onclick = () => openChapter(id, PROG.at[id]);
+      } else if (nx && ORDER.some(x => PROG.done[x.id])) {
+        sb.innerHTML = `Continue with chapter ${ORDER.indexOf(nx) + 1} <span class="arr">→</span>`;
+        sb.onclick = () => openChapter(nx.id, 0);
+      } else {
+        sb.innerHTML = `Start with chapter 1 <span class="arr">→</span>`;
+        sb.onclick = () => openChapter(CH[0].id, 0);
+      }
+      $$(".fp-row").forEach(row => {
+        const cid = row.dataset.id; if (!PROG.at[cid] || PROG.done[cid]) return;
+        const bt = $(".fp-t b", row); if (!bt) return;
+        const old = $(".fp-st", bt); if (old) old.remove();
+        const sl = stepLine(cid);
+        bt.insertAdjacentHTML("beforeend", `<span class="fp-st">${sl[0].toUpperCase() + sl.slice(1)}</span>`);
+      });
+      if (PROG.at.midterms && !PROG.done.midterms && $("#news-badge")) $("#news-badge").textContent = `You stopped at ${stepLine("midterms")}`;
+    } catch (e) {}
+  })(renderHome);
+
+  /* draw the cloture curve before the bars appear */
+  PROG.draw = PROG.draw || {};
+  FILI.body = FILI.body.replace("<strong>Tap a bar.</strong>", "<strong>Draw your guess on the chart first, then tap a bar.</strong>");
+  const FILI_R = FILI.render;
+  FILI.render = function (v) {
+    FILI_R.call(this, v);
+    const panel = $(".panel.chart", v), svg = panel && $("svg", panel), info = $("#clI", v); if (!svg || !info) return;
+    const vb = svg.viewBox.baseVal, W = vb.width, H = vb.height, L = 40, B = 30, max = 340, n = CLOT.length, bw = (W - L - 10) / n;
+    const yOf = c => H - B - c / max * (H - B - 16), vOf = y => Math.max(0, Math.min(max, (H - B - y) / (H - B - 16) * max));
+    const cx = k => L + k * bw + bw / 2;
+    const real = info.innerHTML, k118 = CLOT.findIndex(x => x[0] === 118);
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path"); path.setAttribute("class", "dr-me"); svg.appendChild(path);
+    const D = new Array(n).fill(null);
+    const drawPath = arr => { const pts = arr.map((y, k) => y == null ? null : `${cx(k).toFixed(1)} ${yOf(y).toFixed(1)}`); let d = "", pen = false; pts.forEach(p => { if (!p) { pen = false; return; } d += (pen ? " L" : " M") + p; pen = true; }); path.setAttribute("d", d.trim()); };
+    const fill = arr => { const out = arr.slice(), idx = out.map((x, k) => x == null ? -1 : k).filter(k => k >= 0); if (!idx.length) return out;
+      for (let k = 0; k < n; k++) if (out[k] == null) { const a = idx.filter(j => j < k).pop(), b = idx.find(j => j > k); out[k] = a == null ? out[b] : b == null ? out[a] : out[a] + (out[b] - out[a]) * (k - a) / (b - a); } return out; };
+    const after = arr => {
+      panel.classList.remove("dr-on", "dr-hide"); svg.classList.remove("dr-hide"); panel.classList.add("dr-done");
+      $$(".dr-row", panel).forEach(x => x.remove());
+      drawPath(arr); svg.appendChild(path);
+      const me = Math.round(arr[k118]), act = CLOT[k118][1];
+      info.innerHTML = `Your line reaches about ${me} motions in 2023–24. The real number was ${act}. ${real}`;
+      if (!$(".dr-key", panel)) info.insertAdjacentHTML("beforebegin", `<span class="dr-key"><i></i>Your guess</span>`);
+    };
+    PROG.draw = PROG.draw || {};
+    if (PROG.draw.fili && PROG.draw.fili.length === n) { after(PROG.draw.fili); return; }
+    panel.classList.add("dr-on"); svg.classList.add("dr-hide");
+    info.innerHTML = `<strong>Before you look:</strong> how often did senators try to end a filibuster, from 1917 to today? Drag across the chart to draw your guess.`;
+    info.insertAdjacentHTML("afterend", `<div class="dr-row"><button type="button" class="btn small" id="drGo" disabled>Show the real numbers</button><button type="button" class="dr-skip" id="drSkip">Skip</button></div>`);
+    const go = $("#drGo", panel), skip = $("#drSkip", panel);
+    let down = false, lastK = null;
+    const pt = e => { const m = svg.getScreenCTM(); if (!m) return null; const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse()); return p; };
+    const mark = e => {
+      const p = pt(e); if (!p) return;
+      const k = Math.max(0, Math.min(n - 1, Math.floor((p.x - L) / bw))), val = vOf(p.y);
+      if (lastK != null && Math.abs(k - lastK) > 1) { const a = lastK, va = D[a]; for (let j = Math.min(a, k) + 1; j < Math.max(a, k); j++) D[j] = va + (val - va) * (j - a) / (k - a); }
+      D[k] = val; lastK = k; drawPath(D);
+      if (D.filter(x => x != null).length >= n * .6) go.disabled = false;
+    };
+    svg.addEventListener("pointerdown", e => { if (!panel.classList.contains("dr-on")) return; down = true; lastK = null; try { svg.setPointerCapture(e.pointerId); } catch (x) {} mark(e); e.preventDefault(); });
+    svg.addEventListener("pointermove", e => { if (down && panel.classList.contains("dr-on")) mark(e); });
+    const up = () => { down = false; lastK = null; };
+    svg.addEventListener("pointerup", up); svg.addEventListener("pointercancel", up);
+    panel.addEventListener("click", e => { if (panel.classList.contains("dr-on") && svg.contains(e.target)) e.stopPropagation(); }, true);
+    go.onclick = () => { const f = fill(D).map(x => Math.round(x)); PROG.draw = PROG.draw || {}; PROG.draw.fili = f; saveProg(); SND.play("reveal"); after(f); };
+    skip.onclick = () => { panel.classList.remove("dr-on", "dr-hide"); svg.classList.remove("dr-hide"); $$(".dr-row", panel).forEach(x => x.remove()); path.remove(); info.innerHTML = real; };
+  };
+
+  /* Look closer: page one of the Constitution */
+  Object.assign(IMG, { lc_const1: { file: "img/lc_const1.jpg", w: 1600, h: 1937, url: "https://www.archives.gov/founding-docs/constitution" } });
+  Object.assign(SRC, { na14: ["National Archives, 14th Amendment (1868)", "https://www.archives.gov/milestone-documents/14th-amendment"] });
+  Object.assign(REF, { na14: { sa: "National Archives", a: "National Archives", y: "n.d.", t: "“14th Amendment to the U.S. Constitution: Civil Rights (1868).” Milestone Documents. Accessed November 17, 2026.", u: "https://www.archives.gov/milestone-documents/14th-amendment" } });
+  const LC_CONST = lookStep({
+    kicker: "Look closer · 1787", title: "Page one of the Constitution. Parts of it no longer apply.",
+    body: `<p>This is the first of the four parchment pages signed in Philadelphia in 1787. Amendments never rewrite the old text: they are added at the end. So the original words are still on the page, even where an amendment has overruled them.</p>`,
+    img: "lc_const1", sources: ["const", "na14", "sen17"],
+    alt: "The first page of the handwritten Constitution of 1787, opening with the words We the People in large script, followed by Article I on Congress",
+    credit: "The Constitution of the United States, page 1, 1787. National Archives. Public domain.",
+    lead: "Which words on this page have amendments changed? Tap through four details.",
+    spots: [
+      { t: "We the People", r: [[0.05, 0.035, 0.37, 0.075]], c: "The Constitution opens with “We the People of the United States.” The government’s power comes from the people, not from the states or a king. Who counted as “the people” has changed a great deal since." },
+      { t: "Congress comes first", r: [[0.03, 0.162, 0.50, 0.022]], c: "Article I, the longest, is about Congress: “All legislative Powers herein granted shall be vested in a Congress of the United States, which shall consist of a Senate and House of Representatives.” The president comes second, in Article II, and the courts third." },
+      { t: "Three fifths", r: [[0.04, 0.287, 0.27, 0.019]], c: "House seats were shared out by population, counting “free Persons” in full and “three fifths of all other Persons”: enslaved people. The word “slavery” appears nowhere in the original text. After the Civil War, the 14th Amendment (1868) replaced this rule." },
+      { t: "Who picks the senators", r: [[0.60, 0.199, 0.26, 0.017], [0.54, 0.386, 0.20, 0.017]], c: "The House is chosen “by the People.” The two senators from each state are “chosen by the Legislature thereof”: by state politicians, not by voters. The 17th Amendment changed that in 1913." }
+    ],
+    big: "Nothing on this page has been erased. Amendments added at the end overruled the three-fifths rule and the choice of senators by state legislatures, and each of them needed two-thirds of Congress and three-quarters of the states."
+  });
+  const cc = CH.find(c => c.id === "constitution");
+  if (cc) { const k = cc.steps.findIndex(s => /^27 changes/.test(s.kicker || "")); if (k > 0) { cc.steps.splice(k + 1, 0, LC_CONST); cc.mins = estMins(cc); } }
+})();
 renderHome();
 route();
 </script>
