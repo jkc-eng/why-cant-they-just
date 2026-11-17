@@ -8,7 +8,7 @@ By Jens Kjeldgaard-Christiansen, Department of English and American Studies Cent
 
 ## What it is
 
-Nine short chapters on how the United States is governed, each about 10 minutes, with things to tap, drag or guess and a short founding text. Some chapters add a brief comparison with Denmark where it helps. Every chapter ends with a short answer and a quiz. The ninth, a closing chapter, puts the pieces together. A short route takes students through nine hands-on stops, and a special chapter covers the 2026 midterms.
+Nine short chapters on how the United States is governed, each about 10 minutes, with things to tap, drag or guess and a short founding text. Some chapters add a brief comparison with Denmark where it helps. Every chapter ends with a short answer and a quiz. The ninth, a closing chapter, puts the pieces together. A special chapter covers the 2026 midterms.
 
 **The three branches**
 

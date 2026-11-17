@@ -1933,7 +1933,6 @@ details.dk>p{padding:0 14px 12px}
     <div class="wrap fp-body">
       <div><p class="byline">By <b>Jens Kjeldgaard-Christiansen</b><span>Department of English and American Studies Center Aarhus, Aarhus University</span></p><p class="lede">Each chapter starts from one question. You work out the answer yourself, with real maps, votes and documents.</p><div class="cta-row">
           <button class="btn" id="start-btn">Start with chapter 1 <span class="arr">→</span></button>
-          <button class="btn ghost" id="route-btn" type="button">Short on time? Take the short route</button>
         </div><p class="fp-cap fp-credit">Photos: Carol M. Highsmith, Library of Congress.</p></div>
     </div>
   </section>
@@ -6719,7 +6718,7 @@ closePlayer = (f => function (x) { routeEnd = false; $("#player").classList.remo
 renderHome = (f => function () {
   f();
   const h = $("#mc-head"), tx = $("#mc-text");
-  if (PROG.routeDone && h && h.textContent === "Nothing lit up yet.") { h.textContent = "Short route done."; if (tx) tx.textContent = "Now finish a whole chapter to light up its part of the map."; }
+  if (false && PROG.routeDone && h && h.textContent === "Nothing lit up yet.") { h.textContent = "Short route done."; if (tx) tx.textContent = "Now finish a whole chapter to light up its part of the map."; }
 })(renderHome);
 
 /* the word list becomes a glossary: every term open and searchable from the start */
