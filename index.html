@@ -1916,13 +1916,13 @@ details.dk>p{padding:0 14px 12px}
 .gpop{z-index:42}
 @media (min-width:521px){.gpop.sheet{left:50%!important;right:auto;top:50%!important;bottom:auto;transform:translate(-50%,-50%);width:min(460px,calc(100vw - 32px));border-radius:12px;padding:18px 20px 20px;animation:none;max-height:85vh;overflow:auto}}
 .mc-route{pointer-events:none}
-.mc-route .rt{fill:none;stroke:var(--mark);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.mc-route .rt{fill:none;stroke:var(--mark);stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;opacity:0}
 .mc-route .rt-l{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:700;letter-spacing:.08em;opacity:0}
 .rt-dot{pointer-events:none;fill:var(--mark);stroke:var(--ink);stroke-width:2.5;opacity:0}
 .mc-route.done .rt,.mc-route.done .rt-l{opacity:1}
 .mc-tile[data-p=route]{grid-column:1/-1}
 @media (max-width:400px){.mc-tile{padding:10px 8px;gap:6px}.mc-tile b{font-size:.9rem}}
-svg.wired .mc-wire{stroke:var(--mark);stroke-width:3.5;transition:stroke .6s}
+svg.wired .mc-wire{stroke:var(--mark);stroke-width:4;transition:stroke .6s}
 </style>
 
 <header class="top">
@@ -5428,7 +5428,7 @@ function machineSVG() {
     </g>
     <path class="mc-wire" d="M165 444 V318 M400 444 V318 M165 230 V190 M400 230 V190 M480 125 H500 M235 70 V56 H600 V70"/>
     <text class="mc-label" x="252" y="50">SENATE CONFIRMS JUDGES</text>
-    <g class="mc-route" aria-hidden="true"><path class="rt" d="M360 446 V373 H165 V130 H595 V274"/><text class="rt-l" x="350" y="428" text-anchor="end">2010 HEALTH LAW</text><circle class="rt-dot" r="9" cx="360" cy="446"/></g>
+    <g class="mc-route" aria-hidden="true"><path class="rt" d="M165 444 V125 H595 V274"/><circle class="rt-dot" r="9" cx="360" cy="446"/></g>
         <g class="mc-piece" data-p="cong" tabindex="0" role="button" aria-label="Congress">
       <rect x="30" y="70" width="270" height="120" rx="8"/>
       <text x="165" y="104" text-anchor="middle">Congress</text>
@@ -5515,7 +5515,7 @@ function renderHome() {
   { const cl = CH.find(c => c.closing);
     if (cl && !nxt && n === MAIN.length) {
       const mb0 = $("#mc-next");
-      if (PROG.done[cl.id]) { $("#mc-head").textContent = "The whole map is in place."; $("#mc-text").textContent = "You have finished all nine chapters. The yellow line is the route the 2010 health care law took."; }
+      if (PROG.done[cl.id]) { $("#mc-head").textContent = "The whole map is in place."; $("#mc-text").textContent = "You have finished all nine chapters. Every part is now wired together."; }
       else { $("#mc-head").textContent = `All ${n} pieces in place.`; $("#mc-text").textContent = "Chapter 9, Putting it together, lights the route one law took through them."; }
       if (!PROG.done[cl.id]) { mb0.hidden = false; mb0.innerHTML = `Open chapter 9 <span class="arr">→</span>`; mb0.onclick = () => openChapter(cl.id, 0); }
     } }
