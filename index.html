@@ -1922,6 +1922,7 @@ details.dk>p{padding:0 14px 12px}
 .mc-route.done .rt,.mc-route.done .rt-l{opacity:1}
 .mc-tile[data-p=route]{grid-column:1/-1}
 @media (max-width:400px){.mc-tile{padding:10px 8px;gap:6px}.mc-tile b{font-size:.9rem}}
+svg.wired .mc-wire{stroke:var(--mark);stroke-width:3.5;transition:stroke .6s}
 </style>
 
 <header class="top">
@@ -7141,6 +7142,7 @@ paintMachine = (f => function (root, justDone) {
   const g = root && root.querySelector(".mc-route"); if (!g) return;
   const on = !!PROG.done.together;
   g.classList.toggle("done", on);
+  if (g.ownerSVGElement) g.ownerSVGElement.classList.toggle("wired", on);
   if (!on || justDone !== "together") return;
   const path = g.querySelector(".rt"), dot = g.querySelector(".rt-dot"), L = path.getTotalLength();
   if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
