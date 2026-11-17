@@ -6285,7 +6285,7 @@ const CONTROL = {
       <p class="info" id="pgI" aria-live="polite"></p><p class="pgc-sum" id="pgS"></p></div>`;
     const PN = { D: "Democrats", R: "Republicans" }, P1 = { D: "Democrat", R: "Republican" }, nm = (x, one) => x.split("/").map(y => (one ? P1 : PN)[y] || "another party").join(", then ");
     const show = j => {
-      const c = PARTYGOV[j]; $("#pgCur", v).setAttribute("x", j * CW); $("#pgR", v).value = j;
+      const c = PARTYGOV[j]; $("#pgCur", v).setAttribute("x", j * CW); const rg = $("#pgR", v); rg.value = j; rg.style.setProperty("--p", (100 * j / (N - 1)) + "%");
       const st = c.st === "U" ? "One party held all three." : c.st === "M" ? "Control changed during this Congress." : "Control was divided.";
       $("#pgI", v).innerHTML = `<strong>${c.y0}–${c.y1}</strong>${c.new ? " (elected November 2026)" : ""} · President: ${c.pn} (${nm(c.p, 1)}) · Senate: ${nm(c.s)} · House: ${nm(c.h)}. ${st}`;
     };
@@ -6293,6 +6293,7 @@ const CONTROL = {
     svg.addEventListener("click", e => { const r = svg.getBoundingClientRect(), j = Math.floor((e.clientX - r.left) / r.width * N); if (j >= 0 && j < N) { SND.play("tap"); show(j); } });
     const pre = PARTYGOV.slice(0, ix69), post = PARTYGOV.slice(ix69), u = a => a.filter(x => x.st === "U").length;
     $("#pgS", v).textContent = `From 1857 to 1968, one party held all three in ${u(pre)} of ${pre.length} Congresses. Since 1969, it has happened in only ${u(post)} of ${post.length}, counting the Congress elected in November 2026.`;
+    $("#pgR", v).oninput = e => show(+e.target.value);
     show(N - 1);
   }
 };
