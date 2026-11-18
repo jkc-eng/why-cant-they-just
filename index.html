@@ -1943,6 +1943,21 @@ svg.wired .mc-wire{stroke:var(--mark);stroke-width:4;transition:stroke .6s}
 .dr-skip{font:inherit;font-size:.9rem;background:none;border:0;padding:6px 2px;color:var(--ink-2);text-decoration:underline;cursor:pointer}
 .dr-key{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--ink-2);margin-top:6px}
 .dr-key i{display:inline-block;width:22px;border-top:3.5px dashed var(--mark)}
+
+/* v60: tap a map part to see what it can do */
+#mc-count{display:none!important}
+.mc-piece.sel rect,.mc-piece.sel path.shape{stroke:var(--mark)!important;stroke-width:4.5!important;stroke-dasharray:none!important}
+.mc-tile.sel{border:2px solid var(--mark)!important;box-shadow:0 0 0 2px var(--mark)}
+.mc-info{margin:0 0 22px}
+.mc-info .mi-hint{margin:0;color:var(--ink-3);font-size:.95rem}
+.mc-info .mi-card{background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--mark);border-radius:8px;padding:16px 18px;box-shadow:var(--shadow);position:relative}
+.mc-info .mi-k{margin:0 0 4px;color:var(--ink-3)}
+.mc-info h4{font-family:var(--f-display);font-stretch:78%;font-weight:800;font-size:1.6rem;line-height:1.05;margin:0 0 10px;padding-right:28px}
+.mc-info ul{list-style:none;padding:0;margin:0 0 14px;display:grid;gap:8px}
+.mc-info li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:6px;font-size:.97rem;line-height:1.45}
+.mc-info li::before{content:"→";font-family:var(--f-mono);color:var(--ink-3)}
+.mc-info .mi-x{position:absolute;right:8px;top:6px;border:0;background:transparent;font-size:1.4rem;line-height:1;cursor:pointer;color:var(--ink-3);padding:6px 8px}
+@media (max-width:900px){.mc-info{margin-top:4px}}
 </style>
 
 <header class="top">
@@ -1993,12 +2008,13 @@ svg.wired .mc-wire{stroke:var(--mark);stroke-width:4;transition:stroke .6s}
     <div class="wrap">
       <div class="sec-head">
         <h2 class="display">Your map of the system</h2>
-        <p>Chapters 1 to 8 each explain one part of the machine. Finish one and its part lights up. Chapter 9 lights the route one law took through all of them. Tap any part to go there.</p>
+        <p>Chapters 1 to 8 each explain one part of the machine. Finish one and its part lights up. Chapter 9 lights the route one law took through all of them. Tap any part to see what it can do to the others.</p>
       </div>
       <div class="machine-wrap">
         <div class="machine" id="machine"></div>
         <div class="machine-side">
-          <p class="big-count" id="mc-count">0<small> / 8</small></p>
+          <div class="mc-info" id="mc-info" aria-live="polite"></div>
+          <p class="big-count" id="mc-count" hidden>0<small> / 8</small></p>
           <h3 id="mc-head">Nothing lit up yet.</h3>
           <p id="mc-text">Start with Congress.</p>
           <button class="btn small" id="mc-next">Open chapter 1 <span class="arr">→</span></button>
@@ -3482,8 +3498,7 @@ const S5_DRAW = {
         <div class="gm-tools" id="gmTools" hidden><button type="button" class="btn ghost small" id="gmUndo">↶ Undo</button><button type="button" class="btn ghost small" id="gmClear">Start over</button><button type="button" class="btn ghost small" id="gmShow">Show me a way</button></div>
         <div class="gm-tally" id="gmS" aria-live="polite"></div>
         <p class="info" id="gmI" aria-live="polite"></p>
-        <p class="hint">Each label shows who wins the district and its vote, winner first. The 2026 midterms chapter shows the real ‘map war’ of 2025–26.</p></div>
-      ${fig("gerrymander1812", "<b>The original ‘Gerry-mander’</b>, Boston Gazette, 1812. Governor Elbridge Gerry’s party drew a Massachusetts district so twisted that a cartoonist turned it into a salamander. Public domain.", "Cartoon of a voting district drawn as a winged monster")}`;
+        <p class="hint">Each label shows who wins the district and its vote, winner first. The 2026 midterms chapter shows the real ‘map war’ of 2025–26.</p></div>`;
     const svg = $("#gmSvg", v), F = $$("#gmF rect", v), L = $("#gmL", v), C = $("#gmC", v), T_ = $("#gmT", v), G = $("#gmG", v), I = $("#gmI", v), S_ = $("#gmS", v), tools = $("#gmTools", v), finger = $("#gmFinger", v);
     let run = 0, mode = "fair";
     /* ---------- shared drawing helpers ---------- */
@@ -4775,9 +4790,10 @@ function introStep(c, n) {
   const d = INTRO[c.id];
   return { intro: true, d, n, q: c.q };
 }
+function hxL(k) { return /^(hx2_count1961|hx_white|hx2_capitol|hx2_court|hx_wyo|hx_conv1964|hx_const|hx2_stateline|hx_vote2026)$/.test(k) ? `, img/${k}_l.jpg 3200w` : ""; }
 var introHTML = function (s) {
   const d = s.d, src = `img/${d.img}.jpg`;
-  const srcset = d.lo ? "" : ` srcset="img/${d.img}_s.jpg 1000w, ${src} 2000w" sizes="(max-width: 900px) 100vw, 1200px"`;
+  const srcset = d.lo ? "" : ` srcset="img/${d.img}_s.jpg 1000w, ${src} 2000w${hxL(d.img)}" sizes="(max-width: 900px) 100vw, 1200px"`;
   return `<article class="step ix">
     <figure class="ix-fig"><img src="${src}"${srcset} alt="${d.alt}" style="object-position:${d.pos}" decoding="async" fetchpriority="high"></figure>
     <div class="ix-over"><p class="ix-k">${typeof s.n === "number" ? "Chapter " + s.n : s.n} · ${s.q || "First, the basics"}</p><h2 class="ix-h">${d.h}</h2></div>
@@ -4787,7 +4803,7 @@ var introHTML = function (s) {
   </article>`;
 }
 /* warm the browser cache for an opener as soon as a chapter card is pointed at */
-function preIntro(id) { const d = INTRO[id]; if (!d || d.pre) return; d.pre = 1; const i = new Image(); i.decoding = "async"; if (!d.lo) { i.sizes = "(max-width: 900px) 100vw, 1200px"; i.srcset = `img/${d.img}_s.jpg 1000w, img/${d.img}.jpg 2000w`; } i.src = `img/${d.img}.jpg`; }
+function preIntro(id) { const d = INTRO[id]; if (!d || d.pre) return; d.pre = 1; const i = new Image(); i.decoding = "async"; if (!d.lo) { i.sizes = "(max-width: 900px) 100vw, 1200px"; i.srcset = `img/${d.img}_s.jpg 1000w, img/${d.img}.jpg 2000w${hxL(d.img)}`; } i.src = `img/${d.img}.jpg`; }
 
 ["pointerover", "focusin", "touchstart"].forEach(ev => document.addEventListener(ev, e => { const a = e.target.closest && e.target.closest("[data-id]"); if (a && INTRO[a.dataset.id]) preIntro(a.dataset.id); }, { passive: true }));
 (window.requestIdleCallback || (f => setTimeout(f, 1500)))(() => preIntro(CH[0].id));
@@ -5014,7 +5030,80 @@ const ARG_JUDGES = argStep({
   note: "In 2010, Iowa voters removed three state supreme court justices who had joined a unanimous ruling allowing same-sex marriage.",
   dk: "Danish judges are appointed, on the advice of an independent council that recommends a candidate for each post."
 });
-CH[0].steps = [STEP_PUZZLE, STEP_538, STEP_WTA, STEP_MAP, STEP_BONUS, STEP_FIVE, STEP_WHY, ARG_EC, quizStep(QUIZ1)];
+
+/* ---- v61: cartoon tours (patch78) ---- */
+Object.assign(IMG, {
+  lc_truce: { file: "img/lc_truce.jpg", w: 2000, h: 1382, url: "https://www.loc.gov/item/93510088/" },
+  lc_fili1928: { file: "img/lc_fili1928.jpg", w: 1600, h: 1700, url: "https://www.loc.gov/item/2010717203/" },
+  lc_gerry: { file: "img/lc_gerry.jpg", w: 1764, h: 1847, url: "https://commons.wikimedia.org/wiki/File:The_Gerry-Mander_Edit.png" },
+  lc_court1937: { file: "img/lc_court1937.jpg", w: 1536, h: 1383, url: "https://www.loc.gov/item/2016679118/" },
+  exit1895: { file: "img/exit1895.jpg", w: 1600, h: 1297, url: "https://www.loc.gov/item/2016679841/", credit: "George Y. Coffin, “Exit! Income Taxes,” <i>Washington Post</i>, May 21, 1895. Library of Congress." }
+});
+
+const LC_TRUCE = lookStep({
+  kicker: "Look closer · 1877", title: "What if nobody accepts the count?",
+  body: `<p>Thomas Nast drew this for <i>Harper’s Weekly</i> in February 1877. Three months after the election of 1876, nobody knew who the next president would be.</p>`,
+  img: "lc_truce", tone: "print", sources: ["locTruce", "house"],
+  alt: "Thomas Nast cartoon: a hand with a U.S. cuff link presses down on another hand gripping a revolver, which lies on papers reading Tilden or Blood and Civil War; posters on the wall behind",
+  credit: "Thomas Nast, “A Truce—Not a Compromise, but a Chance for High-Toned Gentlemen to Retire Gracefully from Their Very Civil Declarations of War,” <i>Harper’s Weekly</i>, February 17, 1877. Library of Congress.",
+  lead: "Who is holding the gun, and who is holding it down? Tap through four details.",
+  spots: [
+    { t: "“Tilden or blood”", r: [[0.02, 0.33, 0.31, 0.50]], c: "The Democrat Samuel Tilden won the most votes, but 20 electoral votes were disputed. Some on his side threatened to fight for them. The slip above asks “Are you ready for civil war?” and is signed “Goode, Dem. of Virginia.”" },
+    { t: "More threats", r: [[0.36, 0.60, 0.50, 0.35], [0.72, 0.42, 0.27, 0.46]], c: "“Civil war.” “Not elect Tilden, this is anarchy, it is revolution.” “Bayonets will again gleam in Washington.” “Have Tilden or a fight.” Nast backed the Republicans, and he laid the angriest lines from Tilden’s side right under the gun." },
+    { t: "The hands", r: [[0.19, 0.30, 0.64, 0.55]], c: "A hand with a “U.S.” cuff link presses down on the hand that holds a loaded revolver. The gun is not taken away, only held down. Hence the title: “A truce—not a compromise.”" },
+    { t: "The posters", r: [[0.40, 0.02, 0.25, 0.28]], c: "“We the people are tired of war, intimidation, assassination, bull-dozing …” To bulldoze then meant to beat or threaten Black voters to keep them from the polls. Next to it: slavery, civil war, Reconstruction, “and next?” Below: “K.K.K.”" }
+  ],
+  big: "The commission gave all 20 disputed votes to the Republican, Rutherford B. Hayes, 8 to 7, along party lines. He was declared the winner on March 2, 1877, days before he took office. In April he pulled federal troops back from the statehouses of South Carolina and Louisiana, and the last Republican governments in the South fell. Reconstruction was over. Congress wrote rules for counting electoral votes in 1887 and rewrote them in 2022."
+});
+
+const LC_FILI1928 = lookStep({
+  kicker: "Look closer · 1928", title: "What does a filibuster look like?",
+  body: `<p>John T. McCutcheon drew this for the <i>Chicago Tribune</i> in May 1928, as the Senate’s session ran out of time. His caption: “The closing days of the Senate present their customary arguments in favor of a revision of the Senate rules.”</p>`,
+  img: "lc_fili1928", tone: "print", sources: ["locFili28", "senFil"],
+  alt: "John T. McCutcheon cartoon of the Senate chamber late at night: one senator reads from a stack of books and a speech marked Filibuster while the others sleep at their desks, the presiding officer has his feet up, and two cleaners sweep under a clock",
+  credit: "John T. McCutcheon, “The Closing Days of the Senate Present Their Customary Arguments in Favor of a Revision of the Senate Rules,” <i>Chicago Tribune</i>, May 26, 1928. Library of Congress.",
+  lead: "Who is working here, and who is not? Tap through four details.",
+  spots: [
+    { t: "The speaker", r: [[0.50, 0.55, 0.43, 0.27]], c: "One senator reads on, from a pile of books and a speech marked “Filibuster.” While he holds the floor, nothing else can come to a vote." },
+    { t: "Everyone else", r: [[0.20, 0.80, 0.21, 0.18], [0.74, 0.81, 0.25, 0.18], [0.22, 0.47, 0.22, 0.18], [0.63, 0.24, 0.37, 0.08]], c: "The rest of the Senate is asleep: slumped in chairs, face down on desks, stretched out across the back rows." },
+    { t: "The chair", r: [[0.0, 0.19, 0.20, 0.30]], c: "Top left, even the senator presiding over the debate has put his feet up on the desk." },
+    { t: "The clock", r: [[0.0, 0.0, 1.0, 0.12], [0.30, 0.11, 0.10, 0.08], [0.43, 0.20, 0.18, 0.10]], c: "The clock says three. The public galleries are empty, and the cleaners have come in to sweep." }
+  ],
+  big: "In 1928 the Senate could end a debate only if two-thirds of the senators voting agreed. Since 1975 it takes 60. Today nobody has to read all night: the threat of a filibuster is enough."
+});
+
+const LC_GERRY = lookStep({
+  kicker: "Look closer · 1812", title: "Where does the word “gerrymander” come from?",
+  body: `<p>In March 1812 the <i>Boston Gazette</i> printed this map of a new state Senate district in Massachusetts. Governor Elbridge Gerry’s party, the Republicans (Thomas Jefferson’s party, not today’s), had drawn it. With a head, wings and claws added, the district became the “Gerry-mander.” The drawing is usually credited to Elkanah Tisdale.</p>`,
+  img: "lc_gerry", tone: "print", sources: ["smithGerry"],
+  alt: "The 1812 Gerry-mander: a map of a long, twisting Massachusetts district drawn as a winged monster with claws and a head, the town names written along its body",
+  credit: "“The Gerry-Mander,” <i>Boston Gazette</i>, March 26, 1812; usually credited to Elkanah Tisdale. Public domain. Wikimedia Commons.",
+  lead: "Follow the district from tail to head. Tap through four details.",
+  spots: [
+    { t: "The tail", r: [[0.17, 0.60, 0.50, 0.38]], c: "The district starts on the coast north of Boston, in Chelsea, Lynn, Salem and Marblehead." },
+    { t: "The neck", r: [[0.24, 0.05, 0.58, 0.20]], c: "Then it climbs inland and runs along the county’s northern edge, town by town: Methuen, Haverhill, Amesbury." },
+    { t: "The head", r: [[0.78, 0.08, 0.16, 0.22]], c: "It ends at Salisbury, the northern tip of the state. The white towns in the middle, such as Rowley and Ipswich, are left out." },
+    { t: "The monster", r: [[0.08, 0.04, 0.22, 0.62], [0.53, 0.60, 0.13, 0.20]], c: "The wings and claws are the artist’s. The shape is the district’s." }
+  ],
+  big: "It worked. In the 1812 state Senate election, Gerry’s party won 29 of the 40 seats, although the Federalists won more votes statewide. Gerry himself lost the governor’s race that spring. He said his name with a hard G, like “Gary”; the word is now usually said “jerry-mander.”"
+});
+
+const LC_COURT1937 = lookStep({
+  kicker: "Look closer · 1937", title: "Can a president add justices?",
+  body: `<p>The Supreme Court had struck down several of President Franklin Roosevelt’s New Deal laws against the Great Depression. In March 1937 he went on the radio to defend a plan to add up to six new justices: “This plan of mine is no attack on the Court.” Three days later Clifford Berryman drew this, with that line in pencil along the bottom.</p>`,
+  img: "lc_court1937", tone: "print", sources: ["locCourt37", "fdr37"],
+  alt: "Clifford Berryman cartoon: six big guns labeled Ridicule, Reactionaries, Destroyers of Democracy, Obstructionists, Old Age and Crisis fire clouds of smoke at the Supreme Court Building",
+  credit: "Clifford K. Berryman, “This Plan of Mine Is No Attack on the Court,” drawing, March 12, 1937. Library of Congress.",
+  lead: "Does the picture agree with the president? Tap through four details.",
+  spots: [
+    { t: "The target", r: [[0.40, 0.17, 0.37, 0.29]], c: "The Supreme Court’s new building, finished in 1935, with “Equal Justice Under Law” carved over its columns." },
+    { t: "Six guns", r: [[0.0, 0.44, 0.44, 0.50], [0.38, 0.50, 0.24, 0.48]], c: "And yet six big guns fire at the Court, labeled with words from the fight: “Ridicule,” “Reactionaries,” “Destroyers of Democracy,” “Obstructionists.”" },
+    { t: "“Old age”", r: [[0.56, 0.55, 0.13, 0.42]], c: "The plan rested on age. Six justices were over 70. For each one who did not retire, the president could add a new, younger justice, up to 15 in all." },
+    { t: "“Crisis”", r: [[0.67, 0.50, 0.25, 0.36]], c: "Roosevelt told listeners the country faced “a quiet crisis”: a Court that kept blocking what Congress had passed." }
+  ],
+  big: "The plan failed. In July 1937 the Senate, run by Roosevelt’s own party, sent it back to committee, where it died. But within weeks of the radio talk the Court began upholding New Deal laws, and retirements soon let Roosevelt appoint a majority. The Court has had nine seats since 1869. Plans to add seats are still called “court packing.”"
+});
+CH[0].steps = [STEP_PUZZLE, STEP_538, STEP_WTA, STEP_MAP, STEP_BONUS, STEP_FIVE, LC_TRUCE, STEP_WHY, ARG_EC, quizStep(QUIZ1)];
 CH[0].steps.push(doneStep(CH[0]));
 const MTC = CH.find(c => c.id === "midterms");
 MTC.steps = [MT_CLOCK, MT_SCORE, MT_HOUSE, MT_STATES, MT_RACES, MT_WHY, MT_WHO, MT_MAPS, MT_HISTORY, MT_NEXT, quizStep(QUIZ_MT)];
@@ -5423,8 +5512,8 @@ const LC_AWAKE = lookStep({
   ],
   big: "This is how change often happens in America: a few states go first, and the rest follow, or are made to. Women won the vote in every state with the 19th Amendment in 1920."
 });
-[["president", [CHECKS, LC_KING, NC, CAL, VETO, ALONE, ARG_PRES, quizStep(QUIZ2)]], ["congress", [CHAMBERS, LC_BOSSES, COURSE, FILI, SEN60, SHUT, ARG_FILI, quizStep(QUIZ3)]], ["court", [REVIEW, NINE, WARS, ROE, CASES, ARG_COURT, quizStep(QUIZ4)]],
- ["represented", [S5_SENATE, S5_WEIGHT, S5_DRAW, S5_LEFT, LC_COUNTY, S5_VOTE, ARG_LINES, quizStep(QUIZ5)]], ["parties", [LC_PANIC, S6_FPTP, S6_SPOIL, S6_PRIM, S6_MAP, S6_POLAR, ARG_PARTY, quizStep(QUIZ6)]], ["constitution", [S7_FUNNEL, S7_BLOCK, S7_TL, S7_GUNS, ARG_CONST, quizStep(QUIZ7)]], ["states", [S8_WHO, S8_MAP, S8_BALLOT, LC_AWAKE, S8_LAB, S8_CLASH, ARG_JUDGES, quizStep(QUIZ8)]]
+[["president", [CHECKS, LC_KING, NC, CAL, VETO, ALONE, ARG_PRES, quizStep(QUIZ2)]], ["congress", [CHAMBERS, LC_BOSSES, COURSE, FILI, LC_FILI1928, SEN60, SHUT, ARG_FILI, quizStep(QUIZ3)]], ["court", [REVIEW, NINE, LC_COURT1937, WARS, ROE, CASES, ARG_COURT, quizStep(QUIZ4)]],
+ ["represented", [S5_SENATE, S5_WEIGHT, LC_GERRY, S5_DRAW, S5_LEFT, LC_COUNTY, S5_VOTE, ARG_LINES, quizStep(QUIZ5)]], ["parties", [LC_PANIC, S6_FPTP, S6_SPOIL, S6_PRIM, S6_MAP, S6_POLAR, ARG_PARTY, quizStep(QUIZ6)]], ["constitution", [S7_FUNNEL, S7_BLOCK, S7_TL, S7_GUNS, ARG_CONST, quizStep(QUIZ7)]], ["states", [S8_WHO, S8_MAP, S8_BALLOT, LC_AWAKE, S8_LAB, S8_CLASH, ARG_JUDGES, quizStep(QUIZ8)]]
 ].forEach(([id, st]) => { const c = CH.find(x => x.id === id); c.steps = st; c.steps.push(doneStep(c)); });
 CH.filter(c => !c.bonus && INTRO[c.id]).forEach((c, i) => c.steps.unshift(introStep(c, i + 1)));
 { const mt = CH.find(c => c.id === "midterms"); if (mt && INTRO.midterms) mt.steps.unshift(introStep(mt, "Special")); }
@@ -5803,7 +5892,7 @@ Object.assign(INTRO.midterms, { pos: "50% 50%", ppos: "40% 50%" });
 const ixChapter = s => CH.find(c => c.steps.includes(s)) || {};
 introHTML = function (s) {
   const d = s.d, src = `img/${d.img}.jpg`, c = ixChapter(s), main = CH.filter(x => !x.bonus || x.closing).length;
-  const srcset = d.lo ? "" : ` srcset="img/${d.img}_s.jpg 1000w, ${src} 2000w" sizes="100vw"`;
+  const srcset = d.lo ? "" : ` srcset="img/${d.img}_s.jpg 1000w, ${src} 2000w${hxL(d.img)}" sizes="100vw"`;
   const k = c.bonus ? "Special chapter" : typeof s.n === "number" ? `Chapter ${CH.indexOf(c) + 1} of ${main}` : s.n;
   return `<article class="step ix">
     <div class="ix-stage"><figure class="ix-fig"><img src="${src}"${srcset} alt="${d.alt}" style="--pos:${d.pos};--ppos:${d.ppos || d.pos}" decoding="async" fetchpriority="high"></figure>
@@ -5889,6 +5978,14 @@ document.addEventListener("keydown", e => { const w = e.target.closest && e.targ
 
 /* ---- v27d: Chicago references, References page ---- */
 Object.assign(REF, {"house": {"sa": "Office of the Historian", "a": "Office of the Historian, U.S. House of Representatives", "y": "n.d.", "t": "“Electoral College Fast Facts.” History, Art & Archives. Accessed November 12, 2026.", "u": "https://history.house.gov/Institution/Electoral-College/Electoral-College/"}, "madison": {"sa": "Madison", "a": "Madison, James", "y": "1787", "t": "“Thursday, July 19.” In <em>Notes on the Debates in the Federal Convention</em>. The Avalon Project, Yale Law School. Accessed November 12, 2026.", "u": "https://avalon.law.yale.edu/18th_century/debates_719.asp"}, "cbsSen": {"sa": "CBS News", "a": "CBS News", "y": "2026", "t": "“2026 Senate Midterm Election Results as Democrats Win Control, Schumer Vows ‘Legislative Razor Wire’ against Trump.” Live updates, November 7. Accessed November 12, 2026.", "u": "https://www.cbsnews.com/live-updates/senate-election-results-2026/"}, "cbsOpen": {"sa": "CBS News", "a": "CBS News", "y": "2026", "t": "“These House and Senate Midterm Races Don’t Have Winners Yet.” November 9. Accessed November 12, 2026.", "u": "https://www.cbsnews.com/news/2026-midterm-election-house-senate-projections-toss-up/"}, "cbsLive": {"sa": "CBS News", "a": "CBS News", "y": "2026", "t": "“2026 Midterm Election Updates as Trump Says U.S. Took a ‘Giant Step Back in History.’” Live updates, November 8–9. Accessed November 12, 2026.", "u": "https://www.cbsnews.com/live-updates/midterm-election-results-2026-democrats-house-senate-trump/"}, "cbsExit": {"sa": "De Pinto", "a": "De Pinto, Jennifer", "y": "2026", "t": "“See CBS News Exit Poll Results for the 2026 Midterm Elections.” CBS News, November 3. Republished by Yahoo News. Accessed November 14, 2026.", "u": "https://www.yahoo.com/news/politics/articles/see-cbs-news-exit-poll-222800225.html"}, "yahoo": {"sa": "Romano", "a": "Romano, Andrew", "y": "2026", "t": "“Democrats’ 2026 Midterm Rout Was Big—Really Big. Here Are the Numbers That Prove It.” Yahoo News, November 4. Accessed November 12, 2026.", "u": "https://www.yahoo.com/news/politics/article/democrats-2026-midterm-rout-was-big--really-big-here-are-the-numbers-that-prove-it-225923613.html"}, "caToday": {"sa": "California Today", "a": "California Today", "y": "2026", "t": "“2026 Midterm Election Results Master Guide: All 35 Senate Races; 36 Governor Races; Every House Seat That Flipped.” November 9. Accessed November 12, 2026.", "u": "https://californiatoday.com/guides/elections/2026-midterm-election-results-master-guide/"}, "t270": {"sa": "270toWin", "a": "270toWin", "y": "2026", "t": "“One Week Later: Uncalled Races from the 2026 Midterm Election.” November 10. Accessed November 14, 2026.", "u": "https://www.270towin.com/news/2026/11/10/uncalled-races-one-week-after-midterm-election_1848.html"}, "apMS": {"sa": "Associated Press", "a": "Associated Press", "y": "2026", "t": "“Mississippi Elects Democrat Scott Colom as State’s First Black US Senator since Reconstruction.” November 11. Republished by WRDW. Accessed November 14, 2026.", "u": "https://www.wrdw.com/2026/11/11/mississippi-elects-democrat-scott-colom-states-first-black-us-senator-since-reconstruction/"}, "scWin": {"sa": "Associated Press", "a": "Associated Press", "y": "2026", "t": "“Democrat Annie Andrews Wins US Senate Election in South Carolina over Republican Darline Graham.” November 3. Republished by WRDW. Accessed November 12, 2026.", "u": "https://www.wrdw.com/2026/11/03/south-carolina-senate-race-gets-unexpectedly-close-after-lindsey-grahams-sister-darline-stumbles/"}, "appMid": {"sa": "American Presidency Project", "a": "American Presidency Project", "y": "n.d.", "t": "“Seats in Congress Gained/Lost by the President’s Party in Mid-Term Elections.” University of California, Santa Barbara. Accessed November 12, 2026.", "u": "https://presidency.ucsb.edu/statistics/data/seats-congress-gainedlost-the-presidents-party-mid-term-elections"}, "app1912": {"sa": "American Presidency Project", "a": "American Presidency Project", "y": "n.d.", "t": "“1912.” Presidential Election Statistics. University of California, Santa Barbara. Accessed November 12, 2026.", "u": "https://www.presidency.ucsb.edu/statistics/elections/1912"}, "app1992": {"sa": "American Presidency Project", "a": "American Presidency Project", "y": "n.d.", "t": "“1992.” Presidential Election Statistics. University of California, Santa Barbara. Accessed November 12, 2026.", "u": "https://www.presidency.ucsb.edu/statistics/elections/1992"}, "app1976": {"sa": "American Presidency Project", "a": "American Presidency Project", "y": "n.d.", "t": "“1976.” Presidential Election Statistics. University of California, Santa Barbara. Accessed November 12, 2026.", "u": "https://www.presidency.ucsb.edu/statistics/elections/1976"}, "app1996": {"sa": "American Presidency Project", "a": "American Presidency Project", "y": "n.d.", "t": "“1996.” Presidential Election Statistics. University of California, Santa Barbara. Accessed November 12, 2026.", "u": "https://www.presidency.ucsb.edu/statistics/elections/1996"}, "ucsbVeto": {"sa": "American Presidency Project", "a": "American Presidency Project", "y": "n.d.", "t": "“Presidential Vetoes.” University of California, Santa Barbara. Accessed November 12, 2026.", "u": "https://www.presidency.ucsb.edu/statistics/data/presidential-vetoes"}, "brookings": {"sa": "Kamarck and Galston", "a": "Kamarck, Elaine, and William A. Galston", "y": "2026", "t": "“How Democrats Won Big, and Why 2028 Remains an Open Question.” Brookings Institution, November 6. Accessed November 12, 2026.", "u": "https://www.brookings.edu/articles/how-democrats-won-big-and-why-2028-remains-an-open-question/"}, "ncslMaps": {"sa": "National Conference of State Legislatures", "a": "National Conference of State Legislatures", "y": "n.d.", "t": "“Changing the Maps: Tracking Mid-Decade Redistricting.” Accessed November 14, 2026.", "u": "https://www.ncsl.org/redistricting-and-census/changing-the-maps-tracking-mid-decade-redistricting"}, "ncslComm": {"sa": "National Conference of State Legislatures", "a": "National Conference of State Legislatures", "y": "n.d.", "t": "“Redistricting Commissions: Congressional Plans.” Accessed November 14, 2026.", "u": "https://www.ncsl.org/redistricting-and-census/redistricting-commissions-congressional-plans"}, "ncslInit": {"sa": "National Conference of State Legislatures", "a": "National Conference of State Legislatures", "y": "n.d.", "t": "“Initiative and Referendum Overview and Resources.” Accessed November 14, 2026.", "u": "https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-overview-and-resources"}, "multistate": {"sa": "MultiState", "a": "MultiState", "y": "2026", "t": "“Governors: 2026 State Election Results.” November 4. Accessed November 12, 2026.", "u": "https://www.multistate.us/resources/governors-2026-state-election-results"}, "nbcGov": {"sa": "NBC News", "a": "NBC News", "y": "2026", "t": "“Democrats Clinch a Majority of Governorships for First Time in 16 Years.” November. Accessed November 12, 2026.", "u": "https://www.nbcnews.com/politics/2026-election/democrats-flip-governorships-extending-party-inroads-red-states-rcna607010"}, "senCloture": {"sa": "U.S. Senate", "a": "U.S. Senate", "y": "n.d.", "t": "“Cloture Motions.” Accessed November 12, 2026.", "u": "https://www.senate.gov/legislative/cloture/clotureCounts.htm"}, "senVP": {"sa": "U.S. Senate", "a": "U.S. Senate", "y": "n.d.", "t": "“Votes to Break Ties in the Senate.” Accessed November 12, 2026.", "u": "https://www.senate.gov/legislative/TieVotes.htm"}, "senBosses": {"sa": "U.S. Senate", "a": "U.S. Senate", "y": "n.d.", "t": "“The Bosses of the Senate.” Art & History. Accessed November 12, 2026.", "u": "https://www.senate.gov/art-artifacts/historical-images/political-cartoons-caricatures/38_00392_001.htm"}, "senRes": {"sa": "<em>Congressional Record</em>", "a": "<em>Congressional Record</em>", "y": "2025", "t": "“Résumé of Congressional Activity, Second Session of the One Hundred Eighteenth Congress.” Daily Digest. Accessed November 12, 2026.", "u": "https://www.senate.gov/reference/resources/pdf/Resumes/118_2.pdf"}, "nara118": {"sa": "Office of the Federal Register", "a": "Office of the Federal Register, National Archives", "y": "n.d.", "t": "“118th Congress, Second Session.” Public Laws. Accessed November 12, 2026.", "u": "https://www.archives.gov/federal-register/laws/118-second-session"}, "crsGaps": {"sa": "Congressional Research Service", "a": "Congressional Research Service", "y": "2025", "t": "“Federal Funding Gaps: A Brief Overview.” RS20348. Updated December 18. Accessed November 14, 2026.", "u": "https://www.congress.gov/crs-product/RS20348"}, "crsByrd": {"sa": "Congressional Research Service", "a": "Congressional Research Service", "y": "n.d.", "t": "“The Budget Reconciliation Process: The Senate’s ‘Byrd Rule.’” RL30862. Accessed November 12, 2026.", "u": "https://www.congress.gov/crs-product/RL30862"}, "conan17": {"sa": "Congressional Research Service", "a": "Congressional Research Service", "y": "2017", "t": "“Acts of Congress Held Unconstitutional in Whole or in Part by the Supreme Court of the United States.” In <em>The Constitution of the United States of America: Analysis and Interpretation</em>, 2017 ed. Washington, DC: Government Publishing Office. Accessed November 14, 2026.", "u": "https://www.govinfo.gov/content/pkg/GPO-CONAN-2017/pdf/GPO-CONAN-2017-11.pdf"}, "conanFail": {"sa": "Congressional Research Service", "a": "Congressional Research Service", "y": "1992", "t": "“Proposed Amendments Not Ratified by the States.” In <em>The Constitution of the United States of America: Analysis and Interpretation</em>, 1992 ed. Washington, DC: Government Printing Office. Accessed November 12, 2026.", "u": "https://www.govinfo.gov/content/pkg/GPO-CONAN-1992/html/GPO-CONAN-1992-8.htm"}, "chds": {"sa": "Center for Homeland Defense and Security", "a": "Center for Homeland Defense and Security, Naval Postgraduate School", "y": "2026", "t": "“Early 2026 Government Shutdowns.” Timeline. Accessed November 14, 2026.", "u": "https://www.chds.us/c/timeline/early-2026-government-shutdowns/"}, "kff": {"sa": "KFF", "a": "KFF", "y": "2026", "t": "“Policy Tracker: Exceptions to State Abortion Bans and Early Gestational Limits.” Updated October 16. Accessed November 12, 2026.", "u": "https://www.kff.org/womens-health-policy/dashboard/exceptions-in-state-abortion-bans-and-early-gestational-limits/"}, "kffAbort": {"sa": "KFF", "a": "KFF", "y": "2026", "t": "“Status of Abortion Bans in the United States.” Chart, as of August 10. Accessed November 12, 2026.", "u": "https://datawrapper.dwcdn.net/Q43DW/162/"}, "kffBallot": {"sa": "KFF", "a": "KFF", "y": "2026", "t": "“The Status of Abortion-Related State Ballot Initiatives since Dobbs.” Updated November 4. Accessed November 14, 2026.", "u": "https://www.kff.org/womens-health-policy/ballot-tracker-status-of-abortion-related-state-constitutional-amendment-measures/"}, "gutt26": {"sa": "Guttmacher Institute", "a": "Guttmacher Institute", "y": "2026", "t": "“Abortion Rights Win in Three out of Four States in 2026.” November 4. Accessed November 12, 2026.", "u": "https://www.guttmacher.org/fact-sheet/abortion-rights-win-three-out-four-states-2026"}, "dkAbort": {"sa": "Lovguiden", "a": "Lovguiden", "y": "2025", "t": "“Danmark hæver abortgrænsen til 18 uger fra 1. juni 2025.” April 25. Accessed November 12, 2026.", "u": "https://lovguiden.dk/det-offentlige/venstre-danmarks-liberale-parti/2025-04-25-danmark-haever-abortgraensen-til-18-uger-fra-1-juni-2025"}, "censusRes": {"sa": "U.S. Census Bureau", "a": "U.S. Census Bureau", "y": "2021", "t": "“Table 2. Resident Population for the 50 States, the District of Columbia, and Puerto Rico: 2020 Census.” Accessed November 12, 2026.", "u": "https://www2.census.gov/programs-surveys/decennial/2020/data/apportionment/apportionment-2020-table02.xlsx"}, "dkGuide": {"sa": "Ministry of the Interior and Health", "a": "Ministry of the Interior and Health", "y": "2011", "t": "<em>The Parliamentary Electoral System in Denmark: Guide to the Danish Electoral System</em>. Copenhagen. Accessed November 14, 2026.", "u": "https://www.elections.im.dk/media/15737/parliamentary-system-dk.pdf"}, "houseReps": {"sa": "U.S. House of Representatives", "a": "U.S. House of Representatives", "y": "n.d.", "t": "“Directory of Representatives.” Accessed November 14, 2026.", "u": "https://www.house.gov/representatives"}, "vra": {"sa": "National Archives", "a": "National Archives", "y": "n.d.", "t": "“Voting Rights Act (1965).” Milestone Documents. Accessed November 12, 2026.", "u": "https://www.archives.gov/milestone-documents/voting-rights-act"}, "sen17": {"sa": "National Archives", "a": "National Archives", "y": "n.d.", "t": "“17th Amendment to the U.S. Constitution: Direct Election of U.S. Senators (1913).” Milestone Documents. Accessed November 12, 2026.", "u": "https://www.archives.gov/milestone-documents/17th-amendment"}, "naraData": {"sa": "National Archives", "a": "National Archives", "y": "n.d.", "t": "“Amending America: Proposed Amendments to the United States Constitution, 1787 to 2014.” Dataset. Accessed November 12, 2026.", "u": "https://www.archives.gov/open/dataset-amendments"}, "naraEra": {"sa": "National Archives", "a": "National Archives", "y": "2024", "t": "“Statement on the Equal Rights Amendment Ratification Process.” Press release, December 17. Accessed November 12, 2026.", "u": "https://www.archives.gov/press/press-releases/2025/nr25-004"}, "wySOS": {"sa": "Wyoming Secretary of State", "a": "Wyoming Secretary of State", "y": "2022", "t": "“Statewide Candidates Official Summary: 2022 Primary Election.” August. Accessed November 14, 2026.", "u": "https://sos.wyo.gov/Elections/Docs/2022/Results/Primary/2022_Statewide_Candidates_Summary.pdf"}, "cbs2022": {"sa": "Linton and Watson", "a": "Linton, Caroline, and Kathryn Watson", "y": "2022", "t": "“Here’s How 10 House Republicans Who Voted to Impeach Trump Fared in the 2022 Primary Season.” CBS News, August 17. Accessed November 14, 2026.", "u": "https://www.cbsnews.com/news/liz-cheney-house-republicans-who-voted-to-impeach-trump-fates-primaries-2022"}, "hc2021": {"sa": "Clerk of the House", "a": "Clerk of the U.S. House of Representatives", "y": "2021", "t": "“Roll Call 17: H. Res. 24, On Agreeing to the Resolution.” January 13. Accessed November 14, 2026.", "u": "https://clerk.house.gov/Votes/2021017"}, "voteview": {"sa": "Lewis et al.", "a": "Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin, and Luke Sonnet", "y": "2026", "t": "<em>Voteview: Congressional Roll-Call Votes Database</em>. Accessed November 12, 2026.", "u": "https://voteview.com/about"}, "karp": {"sa": "Karp", "a": "Karp, Aaron", "y": "2018", "t": "“Estimating Global Civilian-Held Firearms Numbers.” Briefing paper. Geneva: Small Arms Survey, June. Accessed November 14, 2026.", "u": "https://www.smallarmssurvey.org/sites/default/files/resources/SAS-BP-Civilian-Firearms-Numbers.pdf"}, "rbgPR": {"sa": "Supreme Court of the United States", "a": "Supreme Court of the United States", "y": "2020", "t": "“Press Release.” September 18. Accessed November 12, 2026.", "u": "https://www.supremecourt.gov/publicinfo/press/pressreleases/pr_09-18-20"}, "mrSmith": {"sa": "Library of Congress", "a": "Library of Congress", "y": "2022", "t": "“From the National Film Registry: <em>Mr. Smith Goes to Washington</em> (1939).” <em>Now See Hear!</em> (blog), October. Accessed November 12, 2026.", "u": "https://blogs.loc.gov/now-see-hear/2022/10/from-the-national-film-registry-mr-smith-goes-to-washington-1939/"}, "locKing": {"sa": "Library of Congress", "a": "Library of Congress", "y": "n.d.", "t": "“King Andrew the First.” Prints and Photographs Online Catalog. Accessed November 12, 2026.", "u": "https://www.loc.gov/item/2008661753/"}, "locNast": {"sa": "Library of Congress", "a": "Library of Congress", "y": "n.d.", "t": "“The Third-Term Panic.” Prints and Photographs Online Catalog. Accessed November 12, 2026.", "u": "https://hdl.loc.gov/loc.pnp/ppmsca.15785"}, "locAwake": {"sa": "Library of Congress", "a": "Library of Congress", "y": "n.d.", "t": "“The Awakening.” Prints and Photographs Online Catalog. Accessed November 12, 2026.", "u": "https://hdl.loc.gov/loc.pnp/ds.12369"}, "fed70": {"sa": "Hamilton", "a": "Hamilton, Alexander", "y": "1788", "t": "“The Federalist No. 70.” Federalist Papers: Primary Documents in American History. Library of Congress. Accessed November 12, 2026.", "u": "https://guides.loc.gov/federalist-papers/text-61-70"}, "lincoln1": {"sa": "Lincoln", "a": "Lincoln, Abraham", "y": "1861", "t": "“First Inaugural Address.” The Avalon Project, Yale Law School. Accessed November 12, 2026.", "u": "https://avalon.law.yale.edu/19th_century/lincoln1.asp"}, "nprZombie": {"sa": "NPR", "a": "NPR", "y": "2018", "t": "“The Zombie Amendments to the Constitution You’ve Probably Never Heard Of.” March 10. Accessed November 12, 2026.", "u": "https://www.npr.org/2018/03/10/591758259/the-zombie-amendments-to-the-co"}, "biden24": {"sa": "Biden", "a": "Biden, Joseph R., Jr.", "y": "2024", "t": "“Op-Ed by the President: My Plan to Reform the Supreme Court and Ensure No President Is Above the Law.” July 29. The American Presidency Project. Accessed November 14, 2026.", "u": "https://www.presidency.ucsb.edu/node/373801"}, "brennanIowa": {"sa": "Brennan Center for Justice", "a": "Brennan Center for Justice", "y": "2010", "t": "“Buying Time 2010: Iowa.” September 14. Accessed November 14, 2026.", "u": "https://www.brennancenter.org/our-work/research-reports/buying-time-2010-iowa"}, "brennanJudges": {"sa": "Brennan Center for Justice", "a": "Brennan Center for Justice", "y": "n.d.", "t": "“Significant Figures in Judicial Selection.” Accessed November 12, 2026.", "u": "https://www.brennancenter.org/our-work/research-reports/judicial-selection-significant-figures"}, "hava": {"sa": "U.S. Election Assistance Commission", "a": "U.S. Election Assistance Commission", "y": "n.d.", "t": "“Help America Vote Act.” Accessed November 12, 2026.", "u": "https://www.eac.gov/about_the_eac/help_america_vote_act.aspx"}, "mppLegal": {"sa": "Marijuana Policy Project", "a": "Marijuana Policy Project", "y": "2026", "t": "“2026 Cannabis Policy Reform Legislation and Voter Measures.” Accessed November 12, 2026.", "u": "https://www.mpp.org/issues/legislation/key-marijuana-policy-reform/"}, "afsCannabis": {"sa": "ArentFox Schiff", "a": "ArentFox Schiff", "y": "2026", "t": "“Holding the Line: Voters Protect Legal Cannabis in the 2026 Midterms as the Next Fight Moves to Statehouses.” Alert, November 9. Accessed November 12, 2026.", "u": "https://www.afslaw.com/perspectives/alerts/holding-the-line-voters-protect-legal-cannabis-the-2026-midterms-the-next-fight"}, "dpiState": {"sa": "Death Penalty Information Center", "a": "Death Penalty Information Center", "y": "2026", "t": "“State by State.” Updated November 5. Accessed November 12, 2026.", "u": "https://deathpenaltyinfo.org/state-and-federal-info/state-by-state"}, "pewSSM": {"sa": "Pew Research Center", "a": "Pew Research Center", "y": "2015", "t": "“Same-Sex Marriage, State by State.” June 26. Accessed November 14, 2026.", "u": "https://www.pewresearch.org/religion/2015/06/26/same-sex-marriage-state-by-state-1/"}, "npsLR": {"sa": "National Park Service", "a": "National Park Service", "y": "n.d.", "t": "“Crisis Timeline.” Little Rock Central High School National Historic Site. Accessed November 14, 2026.", "u": "https://www.nps.gov/chsc/learn/historyculture/timeline.htm"}, "slamCounty": {"sa": "Saint Louis Art Museum", "a": "Saint Louis Art Museum", "y": "n.d.", "t": "“The County Election.” Collection. Accessed November 12, 2026.", "u": "https://www.slam.org/collection/objects/29775/"}, "cpCounty": {"sa": "<em>Commonplace</em>", "a": "<em>Commonplace: The Journal of Early American Life</em>", "y": "n.d.", "t": "“Black Work at the Polling Place.” Accessed November 12, 2026.", "u": "https://commonplace.online/?p=5456"}, "fvViva": {"sa": "University of Virginia", "a": "University of Virginia", "y": "n.d.", "t": "“Viva Voce Voting.” <em>Before the Secret Ballot</em>. Accessed November 12, 2026.", "u": "https://firstvote.iath.virginia.edu/viva_voce_voting.php"}, "heller": {"s": "District of Columbia v. Heller 2008", "r": "<em>District of Columbia v. Heller</em>, 554 U.S. 570 (2008). Legal Information Institute, Cornell Law School. Accessed November 12, 2026.", "u": "https://www.law.cornell.edu/supremecourt/text/07-290"}, "mcdonald": {"s": "McDonald v. City of Chicago 2010", "r": "<em>McDonald v. City of Chicago</em>, 561 U.S. 742 (2010). Legal Information Institute, Cornell Law School. Accessed November 12, 2026.", "u": "https://www.law.cornell.edu/supremecourt/text/08-1521"}, "bruen": {"s": "New York State Rifle & Pistol Association v. Bruen 2022", "r": "<em>New York State Rifle &amp; Pistol Association v. Bruen</em>, No. 20-843 (U.S. June 23, 2022). Supreme Court of the United States. Accessed November 12, 2026.", "u": "https://www.supremecourt.gov/opinions/21pdf/20-843_7j80.pdf"}, "rahimi": {"s": "United States v. Rahimi 2024", "r": "<em>United States v. Rahimi</em>, No. 22-915 (U.S. June 21, 2024). Supreme Court of the United States. Accessed November 12, 2026.", "u": "https://www.supremecourt.gov/opinions/23pdf/22-915_8o6b.pdf"}, "nixon": {"s": "United States v. Nixon 1974", "r": "<em>United States v. Nixon</em>, 418 U.S. 683 (1974). Legal Information Institute, Cornell Law School. Accessed November 12, 2026.", "u": "https://www.law.cornell.edu/supremecourt/text/418/683"}, "windsor": {"s": "United States v. Windsor 2013", "r": "<em>United States v. Windsor</em>, 570 U.S. 744 (2013). Legal Information Institute, Cornell Law School. Accessed November 12, 2026.", "u": "https://www.law.cornell.edu/supremecourt/text/12-307"}, "obergefell": {"s": "Obergefell v. Hodges 2015", "r": "<em>Obergefell v. Hodges</em>, 576 U.S. 644 (2015). Legal Information Institute, Cornell Law School. Accessed November 12, 2026.", "u": "https://www.law.cornell.edu/supremecourt/text/14-556"}, "usc3": {"s": "3 U.S.C. § 1", "r": "3 U.S.C. § 1. United States Code, title 3, section 1, “Time of Appointing Electors.” Legal Information Institute, Cornell Law School. Accessed November 12, 2026.", "u": "https://www.law.cornell.edu/uscode/text/3/1"}, "usc158": {"s": "23 U.S.C. § 158", "r": "23 U.S.C. § 158. United States Code, title 23, section 158, “National Minimum Drinking Age.” Legal Information Institute, Cornell Law School. Accessed November 14, 2026.", "u": "https://www.law.cornell.edu/uscode/text/23/158"}});
+Object.assign(REF, {
+  "locTruce": {"sa": "Library of Congress", "a": "Library of Congress", "y": "n.d.", "t": "“A Truce—Not a Compromise.” Prints and Photographs Online Catalog. Accessed November 18, 2026.", "u": "https://www.loc.gov/item/93510088/"},
+  "locFili28": {"sa": "Library of Congress", "a": "Library of Congress", "y": "n.d.", "t": "“The Closing Days of the Senate Present Their Customary Arguments in Favor of a Revision of the Senate Rules.” Prints and Photographs Online Catalog. Accessed November 18, 2026.", "u": "https://www.loc.gov/item/2010717203/"},
+  "locCourt37": {"sa": "Library of Congress", "a": "Library of Congress", "y": "n.d.", "t": "“This Plan of Mine Is No Attack on the Court.” Prints and Photographs Online Catalog. Accessed November 18, 2026.", "u": "https://www.loc.gov/item/2016679118/"},
+  "locExit": {"sa": "Library of Congress", "a": "Library of Congress", "y": "n.d.", "t": "“Exit! Income Taxes.” Prints and Photographs Online Catalog. Accessed November 18, 2026.", "u": "https://www.loc.gov/item/2016679841/"},
+  "fdr37": {"sa": "Roosevelt", "a": "Roosevelt, Franklin D.", "y": "1937", "t": "“Fireside Chat.” March 9, 1937. The American Presidency Project, University of California, Santa Barbara. Accessed November 18, 2026.", "u": "https://www.presidency.ucsb.edu/documents/fireside-chat-17"},
+  "smithGerry": {"sa": "Trickey", "a": "Trickey, Erick", "y": "2017", "t": "“Where Did the Term ‘Gerrymander’ Come From?” <i>Smithsonian Magazine</i>. Accessed November 18, 2026.", "u": "https://www.smithsonianmag.com/history/where-did-term-gerrymander-come-180964118/"}
+});
 const REF_ALIAS = {"fec24": ["fec2024"], "fec16": ["fec2016"], "fec00": ["fec2000"], "census": ["census-app"], "senVeto": ["sen-vetoes"], "senFil": ["sen-cloture"], "senNuclear": ["sen-cloture"], "senRecon": ["crsByrd"], "senScotus": ["sen-noms"], "compromise": ["sen-compromise"], "senAmend": ["sen-amend"], "naraAmend": ["ofr-amend"], "amends": ["amend"], "amend23": ["amend"], "amendList": ["conanFail"], "tenth": ["bor"], "brandeis": ["liebmann"], "jud1869": ["scotus-faq"], "dolState": ["dol-state"], "constArt": ["const"], "justia": ["marbury", "brown", "roe", "dobbs"], "grundlov": ["dkconst"], "grundlov3": ["dkconst"], "grundlov88": ["dkconst"], "landsting": ["dkconst"], "dk2026": ["dst2026"], "dkElect": ["dkGuide"], "dkValg": ["dkGuide"], "shut": ["crsGaps"], "jrev": ["conan17"], "guns": ["karp"], "drink21": ["usc158"], "ssmTable": ["pewSSM"], "lr9": ["npsLR"], "bidenCourt": ["biden24"], "iowa2010": ["brennanIowa"], "redist": ["ncslComm"], "bpInit": ["ncslInit"], "bpAbort": ["kffBallot"], "wy22": ["wySOS"], "fte10": ["hc2021", "cbs2022"], "ballot": ["ncslMaps"], "delegates": ["houseReps"], "newsweek": ["t270"], "apHouse": ["t270"], "forbes": [], "ft": [], "ftPub": [], "statgl": [], "hagstova": [], "valgret": [], "dk1939": [], "hr70": [], "dkSsm": [], "lexAbort": [], "dkJudges": [], "turnout": []}, DKSRC = new Set(["dkconst", "dst2026", "tvind", "dkAbort", "dkGuide", "lexreg"]);
 CH.forEach(c => c.steps.forEach(s => { if (!s.sources) return;
   s.sources = [...new Set(s.sources.flatMap(k => REF_ALIAS[k] || [k]))].filter(k => REF[k] && (s.dk || !DKSRC.has(k))); }));
@@ -7354,6 +7451,74 @@ route = function () {
     if (!PROG.done[id]) { PROG.at[id] = keep; PROG.last = last; saveProg(); }
   } else openChapter(id, i);
 };
+
+/* ---- v60: the home map answers "who can do what to whom?" ---- */
+const MC_SAYS = {
+  cong: ["Passes the laws. The House and the Senate must both pass the same bill before it goes to the president.",
+         "Can override a president’s veto with a two-thirds vote in both chambers.",
+         "Can remove a president or a judge: the House impeaches, and the Senate holds the trial."],
+  pres: ["Signs or vetoes the bills Congress passes.",
+         "Names the Supreme Court’s justices, but the Senate must confirm them.",
+         "Runs the federal government, but cannot pass a law alone."],
+  court: ["Can strike down a law or a president’s action that breaks the Constitution.",
+          "Its nine justices serve for life, so no election can remove them.",
+          "Its reading of the Constitution stands until a later Court changes it or the Constitution is amended."],
+  dist: ["Voters elect the 435 members of the House in districts, shared out among the states by population.",
+         "Every state gets two senators, whether it is Wyoming or California.",
+         "In most states, the state legislature draws the House districts."],
+  ec: ["Voters choose the president state by state, through electors, not in one national count.",
+       "In 48 states and D.C., whoever wins the state’s popular vote takes all its electors.",
+       "A candidate needs 270 of the 538 electoral votes to win."],
+  states: ["Make most of the laws people meet every day: on crime, schools, marriage and, since 2022, abortion.",
+           "Run all elections, including those for president and Congress.",
+           "Must approve any change to the Constitution: three-quarters of them, 38 states."],
+  parties: ["Choose their candidates in primaries, where the party’s own voters decide.",
+            "Winner-take-all elections leave room for only two big parties.",
+            "The party with a majority in the House or Senate decides which bills get a vote there."],
+  const: ["Sets the rules for every other part: who holds which power, and how each can stop the others.",
+          "Changing it usually takes two-thirds of both chambers of Congress, then three-quarters of the states.",
+          "It has been amended only 27 times, most recently in 1992."]
+};
+let mcSel = null;
+function mcInfo() {
+  const box = $("#mc-info"); if (!box) return;
+  $$("#machine .mc-piece, #machine .mc-tile").forEach(g => g.classList.toggle("sel", !!mcSel && g.dataset.p === mcSel));
+  const c = mcSel && CH.find(x => x.piece === mcSel);
+  if (!c || !MC_SAYS[mcSel]) { box.innerHTML = `<p class="mi-hint">Tap a part of the map to see what it can do to the others.</p>`; return; }
+  const n = CH.indexOf(c) + 1, done = !!PROG.done[c.id];
+  box.innerHTML = `<div class="mi-card"><button type="button" class="mi-x" aria-label="Close">×</button>
+    <p class="mi-k mono">Chapter ${n}${done ? " · finished ✓" : ""}</p><h4>${PIECE_NAME[mcSel]}</h4>
+    <ul>${MC_SAYS[mcSel].map(t => `<li>${t}</li>`).join("")}</ul>
+    <button type="button" class="btn small" id="mi-open">${done ? "Open" : "Start"} chapter ${n}: ${c.topic} <span class="arr">→</span></button></div>`;
+  $("#mi-open", box).onclick = () => openChapter(c.id, 0);
+  $(".mi-x", box).onclick = () => { const p = mcSel; mcSel = null; mcInfo(); const g = $(`#machine [data-p="${p}"]`); if (g && g.focus) g.focus(); };
+}
+paintMachine = (f => function (root) {
+  f.apply(this, arguments);
+  if (!root || root.id !== "machine") return;
+  $$(".mc-piece, .mc-tile", root).forEach(g => {
+    if (!MC_SAYS[g.dataset.p]) return;
+    const pick = () => {
+      mcSel = mcSel === g.dataset.p ? null : g.dataset.p; mcInfo();
+      const box = $("#mc-info"); if (mcSel && box && box.getBoundingClientRect().top > innerHeight - 120) box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    };
+    g.onclick = pick;
+    g.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } };
+  });
+  mcInfo();
+})(paintMachine);
+renderHome = (f => function () {
+  f.apply(this, arguments);
+  const h = $("#mc-head"); if (!h) return;
+  const MAIN8 = CH.filter(c => !c.bonus), n = MAIN8.filter(c => PROG.done[c.id]).length;
+  if (/^(One piece|\d+ pieces) in place\.$/.test(h.textContent)) h.textContent = `${n} of ${MAIN8.length} pieces in place.`;
+})(renderHome);
+/* ---- v61 (patch78): Two parties header gets the sharp srcset; the Court's power to say no shows the 1895 income-tax cartoon ---- */
+INTRO.parties.lo = false;
+REVIEW.render = function (v) {
+  v.innerHTML = fig("exit1895", "<b>“Exit! Income Taxes,”</b> by George Y. Coffin, <i>Washington Post</i>, May 21, 1895. The day before, the Supreme Court struck down the federal income tax Congress had passed in 1894. The dog runs from the Court with the decision tied to its tail, while Benton McMillin, the congressman who wrote the tax, throws up his hands. It took the 16th Amendment, in 1913, to bring the tax back.", "Cartoon: a dog labeled Income Tax runs from the Supreme Court with a can marked Decision Supreme Court tied to its tail, while a congressman raises his hands");
+};
+REVIEW.sources = REVIEW.sources.concat("locExit");
 renderHome();
 route();
 </script>
