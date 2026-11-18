@@ -1962,7 +1962,7 @@ svg.wired .mc-wire{stroke:var(--mark);stroke-width:4;transition:stroke .6s}
     </div>
     <div class="wrap fp-body">
       <div><p class="byline">By <b>Jens Kjeldgaard-Christiansen</b><span>Department of English and American Studies Center Aarhus, Aarhus University</span></p><p class="lede">Each chapter starts from one question. You work out the answer yourself, with real maps, votes and documents.</p><div class="cta-row">
-          <button class="btn" id="start-btn">Start with chapter 1 <span class="arr">→</span></button>
+          <button class="btn" id="start-btn">Start chapter 1: Congress <span class="arr">→</span></button>
         </div><p class="fp-cap fp-credit">Photos: Carol M. Highsmith, Library of Congress.</p></div>
     </div>
   </section>
@@ -7253,10 +7253,10 @@ paintMachine = (f => function (root, justDone) {
         sb.innerHTML = `Continue: ${c.topic}, ${stepLine(id)} <span class="arr">→</span>`;
         sb.onclick = () => openChapter(id, PROG.at[id]);
       } else if (nx && ORDER.some(x => PROG.done[x.id])) {
-        sb.innerHTML = `Continue with chapter ${ORDER.indexOf(nx) + 1} <span class="arr">→</span>`;
+        sb.innerHTML = `Continue with chapter ${ORDER.indexOf(nx) + 1}: ${nx.topic} <span class="arr">→</span>`;
         sb.onclick = () => openChapter(nx.id, 0);
       } else {
-        sb.innerHTML = `Start with chapter 1 <span class="arr">→</span>`;
+        sb.innerHTML = `Start chapter 1: ${CH[0].topic} <span class="arr">→</span>`;
         sb.onclick = () => openChapter(CH[0].id, 0);
       }
       $$(".fp-row").forEach(row => {
