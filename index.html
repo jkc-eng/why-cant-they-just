@@ -1943,6 +1943,21 @@ svg.wired .mc-wire{stroke:var(--mark);stroke-width:4;transition:stroke .6s}
 .dr-skip{font:inherit;font-size:.9rem;background:none;border:0;padding:6px 2px;color:var(--ink-2);text-decoration:underline;cursor:pointer}
 .dr-key{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--ink-2);margin-top:6px}
 .dr-key i{display:inline-block;width:22px;border-top:3.5px dashed var(--mark)}
+
+/* v60: tap a map part to see what it can do */
+#mc-count{display:none!important}
+.mc-piece.sel rect,.mc-piece.sel path.shape{stroke:var(--mark)!important;stroke-width:4.5!important;stroke-dasharray:none!important}
+.mc-tile.sel{border:2px solid var(--mark)!important;box-shadow:0 0 0 2px var(--mark)}
+.mc-info{margin:0 0 22px}
+.mc-info .mi-hint{margin:0;color:var(--ink-3);font-size:.95rem}
+.mc-info .mi-card{background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--mark);border-radius:8px;padding:16px 18px;box-shadow:var(--shadow);position:relative}
+.mc-info .mi-k{margin:0 0 4px;color:var(--ink-3)}
+.mc-info h4{font-family:var(--f-display);font-stretch:78%;font-weight:800;font-size:1.6rem;line-height:1.05;margin:0 0 10px;padding-right:28px}
+.mc-info ul{list-style:none;padding:0;margin:0 0 14px;display:grid;gap:8px}
+.mc-info li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:6px;font-size:.97rem;line-height:1.45}
+.mc-info li::before{content:"→";font-family:var(--f-mono);color:var(--ink-3)}
+.mc-info .mi-x{position:absolute;right:8px;top:6px;border:0;background:transparent;font-size:1.4rem;line-height:1;cursor:pointer;color:var(--ink-3);padding:6px 8px}
+@media (max-width:900px){.mc-info{margin-top:4px}}
 </style>
 
 <header class="top">
@@ -1993,12 +2008,13 @@ svg.wired .mc-wire{stroke:var(--mark);stroke-width:4;transition:stroke .6s}
     <div class="wrap">
       <div class="sec-head">
         <h2 class="display">Your map of the system</h2>
-        <p>Chapters 1 to 8 each explain one part of the machine. Finish one and its part lights up. Chapter 9 lights the route one law took through all of them. Tap any part to go there.</p>
+        <p>Chapters 1 to 8 each explain one part of the machine. Finish one and its part lights up. Chapter 9 lights the route one law took through all of them. Tap any part to see what it can do to the others.</p>
       </div>
       <div class="machine-wrap">
         <div class="machine" id="machine"></div>
         <div class="machine-side">
-          <p class="big-count" id="mc-count">0<small> / 8</small></p>
+          <div class="mc-info" id="mc-info" aria-live="polite"></div>
+          <p class="big-count" id="mc-count" hidden>0<small> / 8</small></p>
           <h3 id="mc-head">Nothing lit up yet.</h3>
           <p id="mc-text">Start with Congress.</p>
           <button class="btn small" id="mc-next">Open chapter 1 <span class="arr">→</span></button>
@@ -7354,6 +7370,68 @@ route = function () {
     if (!PROG.done[id]) { PROG.at[id] = keep; PROG.last = last; saveProg(); }
   } else openChapter(id, i);
 };
+
+/* ---- v60: the home map answers "who can do what to whom?" ---- */
+const MC_SAYS = {
+  cong: ["Passes the laws. The House and the Senate must both pass the same bill before it goes to the president.",
+         "Can override a president’s veto with a two-thirds vote in both chambers.",
+         "Can remove a president or a judge: the House impeaches, and the Senate holds the trial."],
+  pres: ["Signs or vetoes the bills Congress passes.",
+         "Names the Supreme Court’s justices, but the Senate must confirm them.",
+         "Runs the federal government, but cannot pass a law alone."],
+  court: ["Can strike down a law or a president’s action that breaks the Constitution.",
+          "Its nine justices serve for life, so no election can remove them.",
+          "Its reading of the Constitution stands until a later Court changes it or the Constitution is amended."],
+  dist: ["Voters elect the 435 members of the House in districts, shared out among the states by population.",
+         "Every state gets two senators, whether it is Wyoming or California.",
+         "In most states, the state legislature draws the House districts."],
+  ec: ["Voters choose the president state by state, through electors, not in one national count.",
+       "In 48 states and D.C., whoever wins the state’s popular vote takes all its electors.",
+       "A candidate needs 270 of the 538 electoral votes to win."],
+  states: ["Make most of the laws people meet every day: on crime, schools, marriage and, since 2022, abortion.",
+           "Run all elections, including those for president and Congress.",
+           "Must approve any change to the Constitution: three-quarters of them, 38 states."],
+  parties: ["Choose their candidates in primaries, where the party’s own voters decide.",
+            "Winner-take-all elections leave room for only two big parties.",
+            "The party with a majority in the House or Senate decides which bills get a vote there."],
+  const: ["Sets the rules for every other part: who holds which power, and how each can stop the others.",
+          "Changing it usually takes two-thirds of both chambers of Congress, then three-quarters of the states.",
+          "It has been amended only 27 times, most recently in 1992."]
+};
+let mcSel = null;
+function mcInfo() {
+  const box = $("#mc-info"); if (!box) return;
+  $$("#machine .mc-piece, #machine .mc-tile").forEach(g => g.classList.toggle("sel", !!mcSel && g.dataset.p === mcSel));
+  const c = mcSel && CH.find(x => x.piece === mcSel);
+  if (!c || !MC_SAYS[mcSel]) { box.innerHTML = `<p class="mi-hint">Tap a part of the map to see what it can do to the others.</p>`; return; }
+  const n = CH.indexOf(c) + 1, done = !!PROG.done[c.id];
+  box.innerHTML = `<div class="mi-card"><button type="button" class="mi-x" aria-label="Close">×</button>
+    <p class="mi-k mono">Chapter ${n}${done ? " · finished ✓" : ""}</p><h4>${PIECE_NAME[mcSel]}</h4>
+    <ul>${MC_SAYS[mcSel].map(t => `<li>${t}</li>`).join("")}</ul>
+    <button type="button" class="btn small" id="mi-open">${done ? "Open" : "Start"} chapter ${n}: ${c.topic} <span class="arr">→</span></button></div>`;
+  $("#mi-open", box).onclick = () => openChapter(c.id, 0);
+  $(".mi-x", box).onclick = () => { const p = mcSel; mcSel = null; mcInfo(); const g = $(`#machine [data-p="${p}"]`); if (g && g.focus) g.focus(); };
+}
+paintMachine = (f => function (root) {
+  f.apply(this, arguments);
+  if (!root || root.id !== "machine") return;
+  $$(".mc-piece, .mc-tile", root).forEach(g => {
+    if (!MC_SAYS[g.dataset.p]) return;
+    const pick = () => {
+      mcSel = mcSel === g.dataset.p ? null : g.dataset.p; mcInfo();
+      const box = $("#mc-info"); if (mcSel && box && box.getBoundingClientRect().top > innerHeight - 120) box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    };
+    g.onclick = pick;
+    g.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } };
+  });
+  mcInfo();
+})(paintMachine);
+renderHome = (f => function () {
+  f.apply(this, arguments);
+  const h = $("#mc-head"); if (!h) return;
+  const MAIN8 = CH.filter(c => !c.bonus), n = MAIN8.filter(c => PROG.done[c.id]).length;
+  if (/^(One piece|\d+ pieces) in place\.$/.test(h.textContent)) h.textContent = `${n} of ${MAIN8.length} pieces in place.`;
+})(renderHome);
 renderHome();
 route();
 </script>
