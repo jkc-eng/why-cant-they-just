@@ -8,7 +8,7 @@ By Jens Kjeldgaard-Christiansen, Department of English and American Studies Cent
 
 ## What it is
 
-Nine short chapters on how the United States is governed, each about 10 minutes, with things to tap, drag or guess and a short founding text. Some chapters add a brief comparison with Denmark where it helps. Every chapter ends with a short answer and a quiz. The ninth, a closing chapter, puts the pieces together. A special chapter covers the 2026 midterms.
+Ten short chapters on how the United States is governed, each about 10 minutes, with things to tap, drag or guess and a short founding text. Some chapters add a brief comparison with Denmark where it helps. Every chapter ends with a short answer and a quiz. The tenth, a closing chapter, puts the pieces together. A special chapter covers the 2026 midterms.
 
 **The three branches**
 
@@ -27,9 +27,13 @@ Nine short chapters on how the United States is governed, each about 10 minutes,
 7. Fifty states: Why is it legal in one state and a crime in the next?
 8. The Constitution: Why can’t they just change the Constitution?
 
+**The public**
+
+9. A divided public: Why can’t they just compromise?
+
 **Closing chapter**
 
-9. Putting it together: Why can’t one side just govern?
+10. Putting it together: Why can’t one side just govern?
 
 It works on phones and laptops, in light and dark mode. There is no sign-in, and progress is saved only in the student’s own browser.
 
