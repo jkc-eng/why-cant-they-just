@@ -4790,7 +4790,7 @@ function introStep(c, n) {
   const d = INTRO[c.id];
   return { intro: true, d, n, q: c.q };
 }
-function hxL(k) { return /^(hx2_count1961|hx_white|hx2_capitol|hx2_court|hx_wyo|hx_conv1964|hx_const|hx2_stateline|hx_vote2026)$/.test(k) ? `, img/${k}_l.jpg 3200w` : ""; }
+function hxL(k) { return /^(hx2_count1961|hx_white|hx2_capitol|hx2_court|hx_wyo|hx_conv1964|hx_const|hx2_stateline|hx_vote2026|hx3_joint)$/.test(k) ? `, img/${k}_l.jpg 3200w` : ""; }
 var introHTML = function (s) {
   const d = s.d, src = `img/${d.img}.jpg`;
   const srcset = d.lo ? "" : ` srcset="img/${d.img}_s.jpg 1000w, ${src} 2000w${hxL(d.img)}" sizes="(max-width: 900px) 100vw, 1200px"`;
@@ -6299,12 +6299,12 @@ docHTML = (f => function (d) { const h = f(d), tg = docTarget(d); if (!tg) retur
 
 /* ---- v27f: closing chapter "Putting it together" ---- */
 Object.assign(REF, {"hc2009": {"sa": "Clerk of the House", "a": "Clerk of the U.S. House of Representatives", "y": "2009", "t": "“Roll Call 887: H.R. 3962, On Passage.” November 7.", "u": "https://clerk.house.gov/Votes/2009887"}, "rc2010": {"sa": "U.S. Senate", "a": "U.S. Senate", "y": "2010", "t": "“Roll Call Vote, 111th Congress, 2nd Session, Vote Number 105: On Passage of the Bill (H.R. 4872 as Amended).” March 25.", "u": "https://www.senate.gov/legislative/LIS/roll_call_votes/vote1112/vote_111_2_00105.xml"}, "rc2017": {"sa": "U.S. Senate", "a": "U.S. Senate", "y": "2017", "t": "“Roll Call Vote, 115th Congress, 1st Session, Vote Number 179: On the Amendment (McConnell Amdt. No. 667).” July 28.", "u": "https://www.senate.gov/legislative/LIS/roll_call_votes/vote1151/vote_115_1_00179.xml"}, "senParty": {"sa": "U.S. Senate", "a": "U.S. Senate", "y": "n.d.", "t": "“Party Division.” Accessed November 14, 2026.", "u": "https://www.senate.gov/about/parties-leadership/party-division.htm"}, "housePartyDiv": {"sa": "Office of the Historian", "a": "Office of the Historian, U.S. House of Representatives", "y": "n.d.", "t": "“Party Divisions of the House of Representatives, 1789 to Present.” Accessed November 14, 2026.", "u": "https://history.house.gov/Institution/Party-Divisions/Party-Divisions/"}, "obamaLib": {"sa": "Barack Obama Presidential Library", "a": "Barack Obama Presidential Library", "y": "n.d.", "t": "“Signing of the Patient Protection and Affordable Care Act.” Timeline. National Archives. Accessed November 14, 2026.", "u": "https://obamalibrary.archives.gov/timeline/signing-patient-protection-and-affordable-care-act"}, "kffMed": {"sa": "KFF", "a": "KFF", "y": "2026", "t": "“Status of State Action on the Medicaid Expansion Decision.” State Health Facts. As of November 2026. Accessed November 14, 2026.", "u": "https://www.kff.org/affordable-care-act/state-indicator/state-activity-around-expanding-medicaid-under-the-affordable-care-act/"}});
-IMG.hx2_joint = { file: "img/hx2_joint_s.jpg", credit: "President Barack Obama addresses a joint session of Congress on health care reform, September 9, 2009. Photo: Lawrence Jackson, White House. Public domain.", url: "https://commons.wikimedia.org/wiki/File:Obama_Health_Care_Speech_to_Joint_Session_of_Congress.jpg" };
+IMG.hx3_joint = { file: "img/hx3_joint_s.jpg", credit: "President Barack Obama steps to the podium to address a joint session of Congress on health care, September 9, 2009. Photo: Pete Souza, White House. Public domain.", url: "https://commons.wikimedia.org/wiki/File:P090909PS-0690_(4455915557).jpg" };
 IMG.hx2_aca = { file: "img/hx2_aca.jpg", credit: "President Obama signs the Affordable Care Act, March 23, 2010. Photo: Pete Souza, White House. Public domain.", url: "https://commons.wikimedia.org/wiki/File:Obama_signs_health_care-20100323.jpg" };
 
-INTRO.together = { h: "Putting it together", img: "hx2_joint", pos: "50% 34%", ppos: "42% 40%",
-  alt: "The full House chamber during a joint session of Congress, with President Barack Obama speaking from the rostrum",
-  cap: "<b>President Barack Obama asks a joint session of Congress to pass health care reform, September 9, 2009.</b> Members of the House and the Senate fill the House chamber. Photo: Lawrence Jackson, White House. Public domain.",
+INTRO.together = { h: "Putting it together", img: "hx3_joint", pos: "50% 36%", ppos: "60% 40%",
+  alt: "President Barack Obama at the rostrum of the House chamber, members of Congress applauding behind him and Speaker Nancy Pelosi clapping at right",
+  cap: "<b>President Barack Obama asks a joint session of Congress to pass health care reform, September 9, 2009.</b> Members of the House and the Senate applaud as he steps to the podium; Speaker Nancy Pelosi is at right. Photo: Pete Souza, White House. Public domain.",
   url: "https://commons.wikimedia.org/wiki/File:Obama_Health_Care_Speech_to_Joint_Session_of_Congress.jpg",
   lead: "Each chapter showed one part of the system. Put together, the parts share one design: power is split among bodies that are elected separately, at different times, by different voters, and most decisions need several of them to agree. That makes it hard for any one side to govern alone. It is meant to be: the framers feared power gathered in one place.",
   facts: [["3", "separate elections: House, Senate, president"], ["60", "senators to end debate on most bills"], ["⅔", "of both chambers to override a veto"]] };
@@ -6450,7 +6450,7 @@ const QUIZ_TOG = [
     why: "Voters choose the House, the Senate and the president separately, at different times. Most laws need all three, and the courts can still strike them down." }
 ];
 
-const TOG = { id: "together", piece: "route", bonus: true, closing: true, topic: "Putting it together", q: "Why can’t one side just govern?", img: "hx2_joint", mins: 7,
+const TOG = { id: "together", piece: "route", bonus: true, closing: true, topic: "Putting it together", q: "Why can’t one side just govern?", img: "hx3_joint", mins: 7,
   teaser: "The 2010 health care law, step by step, and how rarely one party has held the House, the Senate and the presidency at once.",
   learned: ["Power is split among the House, the Senate and the president, each elected separately, and the courts can strike down what they pass.",
     "To pass a law alone, a party needs the House, 60 senators and the president. That rarely happens.",
