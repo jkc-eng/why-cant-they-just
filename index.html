@@ -2063,6 +2063,17 @@ svg.wired .mc-wire{stroke:var(--mark);stroke-width:4;transition:stroke .6s}
 .mc-pub.done .pub-r .mc-voter{fill:var(--rep-soft)}
 .mc-tile[data-p=public]{grid-column:1/-1}
 @media (prefers-reduced-motion:reduce){.mc-pub .pub-l,.mc-pub .pub-r{transition:none}}
+
+/* v67: outside-review fixes */
+.r-list a{word-break:normal;overflow-wrap:anywhere}
+@media (max-width:520px){.lc-dots{flex-wrap:nowrap}.lc-dots button{width:20px}}
+#jrN{background:var(--mark);color:var(--mark-ink)}
+.ix-stage.deep .ix-over{background:linear-gradient(to bottom,rgba(6,9,15,0),rgba(6,9,15,.66) 35%,rgba(6,9,15,.9))}
+.p-title.tight span{display:none}
+.g-th-out{transform-box:fill-box;transform-origin:50% 100%;animation:gThDrop 3.6s ease infinite}
+@keyframes gThDrop{0%,20%{transform:scaleY(2)}55%,100%{transform:scaleY(1)}}
+.g-wall{stroke:var(--rep);stroke-width:2.5;stroke-dasharray:5 4}
+.g-cl-dk{fill:var(--ink-3)}
 </style>
 
 <header class="top">
@@ -4128,7 +4139,7 @@ Object.assign(SRC, {
 
 /* Guess first: one per chapter, shown before the step's visual */
 VETO.body = `<p>Every bill that passes both chambers of Congress lands on the president’s desk. The president can sign it, or ${T("veto", "veto")} it. If the president does neither, it becomes law after ten days (Sundays not counted) without a signature, unless Congress has adjourned in the meantime. To override a veto, two-thirds of the House and two-thirds of the Senate must vote for the bill again.</p><p>How often does Congress pull that off? <strong>Guess first, then tap a president.</strong></p>`;
-VETO.guess = { id: "veto", q: "Since 1789, presidents have vetoed 2,599 bills. How many times did Congress override the veto?", o: ["12", "112", "612", "1,212"], a: 1,
+VETO.guess = { id: "veto2", q: "Since 1789, presidents have vetoed 2,599 bills. How many times did Congress override the veto?", o: ["12", "42", "112", "612"], a: 2,
   why: "112 times, about one veto in 23. Two-thirds of both chambers is a very high bar." };
 
 COURSE.body = `<p>Members of Congress introduce thousands of bills, and every one of them faces the same obstacle course. <strong>Guess first.</strong></p><p>Then try it yourself. From January 2027 Democrats will run both chambers, but Trump is still president. <strong>Can they pass a bill he opposes?</strong></p>`;
@@ -6003,7 +6014,7 @@ INTRO.divided = { h: "A divided public", img: "hx_divided", lo: false, pos: "50%
   cap: "<b>Supporters of Joe Biden and of Donald Trump at one small, loud gathering in Little Rock, Arkansas, November 7, 2020,</b> four days after Election Day. Trump won Arkansas but lost the election. Two photos by Carol M. Highsmith, placed side by side. Library of Congress. No known restrictions.",
   url: "https://www.loc.gov/item/2020741854/", url2: "https://www.loc.gov/item/2020741850/",
   lead: "The earlier chapters showed a system that needs compromise. A law must pass the House, the Senate and the president, and in the Senate it usually needs 60 votes, so unless one party holds the House, the presidency and 60 Senate seats, the two parties have to deal. This chapter asks why those deals have become so hard to strike. It looks at how Americans feel about the other party, where they get their news, and the money that pays for campaigns.",
-  facts: [["24", "out of 100: how partisans rated the other party in 2024. 50 is neutral."], ["$3,500", "the most one person may give a candidate per election. Spending on ads has no limit."], ["1987", "the year regulators dropped the rule that broadcasters air both sides"]] };
+  facts: [["57%", "of Republicans regularly get news from Fox News. Democrats spread across many sources."], ["$3,500", "the most one person may give a candidate per election. Spending on ads has no limit."], ["1987", "the year regulators dropped the rule that broadcasters air both sides"]] };
 
 /* step 1: the feeling thermometer */
 const DV_TH = { y: [1978, 1980, 1982, 1984, 1986, 1988, 1990, 1992, 1994, 1996, 1998, 2000, 2004, 2008, 2012, 2016, 2024],
@@ -6012,9 +6023,9 @@ const DV_TH = { y: [1978, 1980, 1982, 1984, 1986, 1988, 1990, 1992, 1994, 1996, 
 const DV_FEEL = {
   kicker: "Feelings, not just views",
   title: "Since 1978, Americans have turned far colder toward the other party.",
-  body: `<p>Chapter 6 showed that the parties in Congress no longer overlap. Voters have split too, and not only over policy. Political scientists call it ${T("affpol", "affective polarization")}: disliking and distrusting the other side.</p><p>Since 1978 the American National Election Studies have asked voters to rate each party on a “feeling thermometer” from 0, very cold, to 100, very warm. 50 means neither. <strong>Drag through the years.</strong></p>`,
+  body: `<p>Chapter 6 showed that the parties in Congress no longer overlap. Voters have split too, and not only over policy. Political scientists call it ${T("affpol", "affective polarization")}: disliking and distrusting the other side.</p><p>Since 1978 the American National Election Studies have asked voters to rate each party on a “feeling thermometer” from 0, very cold, to 100, very warm. 50 means neither. <strong>Guess first, then drag through the years.</strong></p>`,
   sources: ["anesCum", "sides2025", "pew2022"],
-  guess: { id: "therm", q: "In 1978, Democrats and Republicans gave the other party 48 out of 100 on average, close to neutral. What was the rating in 2024?", o: ["14", "24", "38", "48"], a: 1,
+  guess: { id: "therm2", q: "In 1978, Democrats and Republicans gave the other party 48 out of 100 on average, close to neutral. What was the rating in 2024?", o: ["6", "12", "18", "24"], a: 3,
     why: "24, half the 1978 rating. Democrats gave Republicans 27, and Republicans gave Democrats 22." },
   render(v) {
     const D = DV_TH, PH = phone(), W = PH ? 360 : 640, H = PH ? 240 : 270, L = PH ? 28 : 34, R = 12, Tp = 12, B = 26, n = D.y.length, k = D.y.indexOf(2016);
@@ -6104,7 +6115,7 @@ function dvSort(v, intro, items, labs, end) {
     $$(".chip", c).forEach(b => b.onclick = () => {
       const j = +b.dataset.j;
       $$(".chip", c).forEach(x => { x.disabled = true; if (+x.dataset.j === it[1]) x.classList.add("ds-right"); else if (x === b) x.classList.add("ds-wrong"); });
-      const w = $(".ds-w", c); w.hidden = false; w.innerHTML = `<b>${labs[it[1]]}.</b> ${it[2]}`; c.classList.add("done");
+      const w = $(".ds-w", c); w.hidden = false; w.innerHTML = `<b>${j === it[1] ? "Correct." : "Incorrect."}</b> ${labs[it[1]]}. ${it[2]}`; c.classList.add("done");
       SND.play(j === it[1] ? "right" : "reveal");
       if (--left === 0) { const e = $(".ds-end", v); e.hidden = false; }
     }); });
@@ -6289,7 +6300,7 @@ introHTML = function (s) {
   const srcset = d.lo ? "" : ` srcset="img/${d.img}_s.jpg 1000w, ${src} 2000w${hxL(d.img)}" sizes="100vw"`;
   const k = c.bonus ? "Special chapter" : typeof s.n === "number" ? `Chapter ${CH.indexOf(c) + 1} of ${main}` : s.n;
   return `<article class="step ix">
-    <div class="ix-stage"><figure class="ix-fig"><img src="${src}"${srcset} alt="${d.alt}" style="--pos:${d.pos};--ppos:${d.ppos || d.pos}" decoding="async" fetchpriority="high"></figure>
+    <div class="ix-stage${d.deep ? " deep" : ""}"><figure class="ix-fig"><img src="${src}"${srcset} alt="${d.alt}" style="--pos:${d.pos};--ppos:${d.ppos || d.pos}" decoding="async" fetchpriority="high"></figure>
       <div class="ix-over"><div class="wrap"><p class="ix-k">${k}</p><h2 class="ix-h">${d.h}</h2><p class="ix-q">${s.q || ""}</p>${c.mins ? `<p class="ix-m">About ${c.mins} minutes</p>` : ""}</div></div></div>
     <p class="ix-cap">${d.cap} <a href="${d.url}" target="_blank" rel="noopener">Source</a></p>
     <div class="ix-body"><p class="ix-lead">${d.lead}</p>
@@ -6838,7 +6849,7 @@ const PARTYGOV = [{"c":35,"y0":1857,"y1":1859,"h":"D","s":"D","p":"D","pn":"Buch
 const CONTROL = {
   kicker: "Who held power, 1857–2029",
   title: "Since 1969, split control has been the normal state of affairs.",
-  body: `<p>Each column is one two-year Congress. The rows show which party held the presidency, the Senate and the House. A black mark below a column means one party held all three, and could in principle govern alone.</p><p><strong>Tap a column</strong>, or move the slider, to see who held what.</p>`,
+  body: `<p>Each column is one two-year Congress. The rows show which party held the presidency, the Senate and the House. A black mark below a column means one party held all three, and could in principle govern alone.</p><p><strong>Move the slider</strong>, or tap a column, to see who held what.</p>`,
   sources: ["house-partygov", "t270"],
   render(v) {
     const N = PARTYGOV.length, CW = 10, RH = 26, UH = 16, H = 3 * RH + UH, rows = [["President", "p"], ["Senate", "s"], ["House", "h"]];
@@ -6856,7 +6867,7 @@ const CONTROL = {
     const PN = { D: "Democrats", R: "Republicans" }, P1 = { D: "Democrat", R: "Republican" }, nm = (x, one) => x.split("/").map(y => (one ? P1 : PN)[y] || "another party").join(", then ");
     const show = j => {
       const c = PARTYGOV[j]; $("#pgCur", v).setAttribute("x", j * CW); const rg = $("#pgR", v); rg.value = j; rg.style.setProperty("--p", (100 * j / (N - 1)) + "%");
-      const st = c.st === "U" ? "One party held all three." : c.st === "M" ? "Control changed during this Congress." : "Control was divided.";
+      const st = c.new ? (c.st === "U" ? "One party will hold all three." : "Control will be divided.") : c.st === "U" ? "One party held all three." : c.st === "M" ? "Control changed during this Congress." : "Control was divided.";
       $("#pgI", v).innerHTML = `<strong>${c.y0}–${c.y1}</strong>${c.new ? " (elected November 2026)" : ""} · President: ${c.pn} (${nm(c.p, 1)}) · Senate: ${nm(c.s)} · House: ${nm(c.h)}. ${st}`;
     };
     const svg = $("svg", v);
@@ -6898,7 +6909,7 @@ TOG.steps.push({
   render(v) {
     if (!PROG.done.together && !quizPassed(TOG)) {
       const qi = TOG.steps.findIndex(s => s.quizN);
-      v.innerHTML = `<div class="done-wrap"><div><p class="almost-k">Almost there</p><h2>${TOG.topic}</h2><p class="almost">Get 3 of the 4 quick questions right to finish the closing chapter.</p><div class="cta-row"><button class="btn" id="d-quiz">Go to the questions <span class="arr">→</span></button></div></div><div class="machine">${machineSVG()}${machineTiles()}</div></div>`;
+      v.innerHTML = `<div class="done-wrap"><div><p class="almost-k">Almost there</p><h2>${TOG.topic}</h2><p class="almost">Get 3 of the 4 quick questions right to finish the closing chapter.</p><div class="cta-row"><button class="btn" id="d-quiz">← Back to the questions</button></div></div><div class="machine">${machineSVG()}${machineTiles()}</div></div>`;
       paintMachine(v); $("#d-quiz", v).onclick = () => go(qi); return;
     }
     v.innerHTML = `<div class="done-wrap"><div><p class="almost-k done-k">Closing chapter finished</p><h2>${TOG.topic}</h2>
@@ -7574,8 +7585,8 @@ S5_LEFT.render = (f => function (v) { f.call(this, v); const p = $(".panel.lo", 
   NC.body = `<p>Sometimes Congress turns against the president: a scandal, a lost midterm, a law the two sides cannot agree on. <strong>Predict what happens</strong> in three situations.</p>`;
   if (/^The term is fixed at four years\. /.test(PREDICT[0].why)) PREDICT[0].why = PREDICT[0].why.replace(/^The term is fixed at four years\. /, "The president and Congress are elected separately, for fixed terms, and neither can dismiss the other. "); else miss.push("PREDICT[0].why");
   /* A2: ask what students cannot know yet */
-  Object.assign(S7_FUNNEL.guess, { id: "funnel2", q: "Since 1789, members of Congress have proposed about 11,985 amendments. How many of them passed both chambers of Congress?",
-    o: ["11", "33", "330", "1,100"], a: 1, why: "33. Of those, the states ratified 27, the last in 1992." });
+  Object.assign(S7_FUNNEL.guess, { id: "funnel3", q: "Since 1789, members of Congress have proposed about 11,985 amendments. How many of them passed both chambers of Congress?",
+    o: ["7", "15", "33", "110"], a: 2, why: "33. Of those, the states ratified 27, the last in 1992." });
   /* A3: Recount asks who had the last word */
   for (const c of CH) for (const s of c.steps) if (s.film && s.film.id === "recount") Object.assign(s.film, {
     scene: "<em>Recount</em> (HBO, 2008) dramatizes the 36-day fight over Florida’s votes in 2000, from the first recount to the final ruling.",
@@ -7743,7 +7754,7 @@ paintMachine = (f => function (root, justDone) {
   }
   const fixWhy = (v, s) => {
     const g = s.guess, j = (PROG.guess || {})[g.id], w = $(".gq-why", v); if (j === undefined || j === g.a || !w) return;
-    const off = g.id === "therm" ? (d => `<b>You guessed ${plain(g.o[j])},</b> ${Math.abs(d)} points ${d > 0 ? "above" : "below"} the real rating.`)(+plain(g.o[j]) - +plain(g.o[g.a])) : offBy(g, j); if (off) w.innerHTML = `${off} ${g.why}`;
+    const off = g.id === "therm2" ? (d => `<b>You guessed ${plain(g.o[j])},</b> ${Math.abs(d)} points ${d > 0 ? "above" : "below"} the real rating.`)(+plain(g.o[j]) - +plain(g.o[g.a])) : offBy(g, j); if (off) w.innerHTML = `${off} ${g.why}`;
   };
   guessGate = (f => function (v, s) {
     f.call(this, v, s);
@@ -7752,7 +7763,7 @@ paintMachine = (f => function (root, justDone) {
   })(guessGate);
 
   /* your guesses, on a chapter's finished screen */
-  const GL = { therm: "Rating of the other party, 2024", course2: "Proposals that became law, 2023–24", veto: "Vetoes overridden since 1789", seats: "Garland in 2016, Barrett in 2020", senate: "Americans living in the 26 smallest states", fptp: "Perot’s electoral votes, 1992", funnel2: "Amendments passed by both chambers", funnel: "Amendments in the Constitution today" };
+  const GL = { therm2: "Rating of the other party, 2024", veto2: "Vetoes overridden since 1789", funnel3: "Amendments passed by both chambers", course2: "Proposals that became law, 2023–24", veto: "Vetoes overridden since 1789", seats: "Garland in 2016, Barrett in 2020", senate: "Americans living in the 26 smallest states", fptp: "Perot’s electoral votes, 1992", funnel2: "Amendments passed by both chambers", funnel: "Amendments in the Constitution today" };
   function guessesOnDone() {
     const inner = $("#p-inner"); if (!cur || !inner || !$(".done-k", inner) || $(".yg", inner)) return;
     const gs = cur.ch.steps.filter(s => s.guess && (PROG.guess || {})[s.guess.id] !== undefined).map(s => s.guess);
@@ -7990,6 +8001,17 @@ addPic(DV_PUBLIC, "g_lbj1967", "<b>President Lyndon B. Johnson signs the Public 
 
 renderHome();
 route();
+
+/* ---- v67 (patch83): outside-review fixes ---- */
+INTRO.midterms.deep = true;
+GLOSS.affpol.ill = () => `<svg viewBox="0 0 260 110" class="g-svg" aria-hidden="true">${[[80, "OWN PARTY", 70, "g-mark", ""], [180, "OTHER PARTY", 24, "g-cl-dk", " g-th-out"]].map(([x, l, t, k, c]) => `<rect x="${x - 9}" y="10" width="18" height="70" rx="9" class="g-paper"/><circle cx="${x}" cy="86" r="13" class="${k}"/><rect x="${x - 4}" y="${78 - t * .62}" width="8" height="${t * .62 + 4}" rx="2" class="${k}${c}"/><text x="${x + 18}" y="${84 - t * .62}" class="g-yr">${t}</text><text x="${x}" y="108" class="g-cap" text-anchor="middle">${l}</text>`).join("")}<line x1="56" x2="204" y1="${78 - 50 * .62}" y2="${78 - 50 * .62}" class="g-arrow" stroke-dasharray="3 3"/><text x="52" y="${81 - 50 * .62}" class="g-cap" text-anchor="end">50</text></svg>`;
+GLOSS.superpac.ill = () => `<svg viewBox="0 0 260 110" class="g-svg" aria-hidden="true"><text x="34" y="14" class="g-cap" text-anchor="middle">DONORS</text>${[0, 1, 2].map(i => `<text x="34" y="${36 + i * 18}" class="g-yr" text-anchor="middle">$</text>`).join("")}<text x="34" y="96" class="g-cap" text-anchor="middle">NO LIMIT</text><path d="M54 48 h38" class="g-arrow"/><path d="M86 43 l6 5 l-6 5" class="g-arrow"/><rect x="96" y="30" width="80" height="36" rx="4" class="g-ink"/><text x="136" y="52" class="g-cap" text-anchor="middle" style="fill:var(--paper)">SUPER PAC</text><path d="M178 48 h28" class="g-arrow"/><path d="M200 43 l6 5 l-6 5" class="g-arrow"/><text x="230" y="52" class="g-txt" text-anchor="middle">Ads</text><line x1="92" x2="180" y1="76" y2="76" class="g-wall"/><rect x="96" y="84" width="80" height="22" rx="4" class="g-paper"/><text x="136" y="99" class="g-cap" text-anchor="middle">CAMPAIGN</text><text x="230" y="80" class="g-cap" text-anchor="middle">MAY NOT</text><text x="230" y="92" class="g-cap" text-anchor="middle">COORDINATE</text></svg>`;
+GLOSS.fairness.ill = () => `<svg viewBox="0 0 260 110" class="g-svg" aria-hidden="true"><path d="M34 74 L44 20 L54 74 M38 52 h12 M36 63 h16" class="g-arrow" style="stroke:var(--ink)"/><circle cx="44" cy="18" r="3.5" class="g-ink"/><path d="M30 12 a18 18 0 0 0 0 14 M58 12 a18 18 0 0 1 0 14" class="g-arrow"/><text x="44" y="90" class="g-cap" text-anchor="middle">TV + RADIO</text>${[["SIDE A", 14], ["SIDE B", 44]].map(([t, y], i) => `<rect x="${96 + i * 22}" y="${y}" width="96" height="24" rx="12" class="g-paper g-pop" style="animation-delay:${i * .5}s"/><text x="${144 + i * 22}" y="${y + 16}" class="g-cap" text-anchor="middle">${t}</text>`).join("")}<line x1="96" x2="240" y1="88" y2="88" class="g-axis"/><text x="96" y="104" class="g-cap">1949</text><text x="240" y="104" class="g-cap" text-anchor="end">1987: DROPPED</text></svg>`;
+renderStep = (f => function () {
+  f.apply(this, arguments);
+  try { const t = $("#p-title"); if (t) { t.classList.remove("tight"); if (t.scrollWidth > t.clientWidth + 1) t.classList.add("tight"); } } catch (e) {}
+})(renderStep);
+addEventListener("resize", () => { const t = $("#p-title"); if (!t || !cur) return; t.classList.remove("tight"); if (t.scrollWidth > t.clientWidth + 1) t.classList.add("tight"); });
 </script>
 
 </body>
